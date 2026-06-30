@@ -175,11 +175,10 @@
     .chairman-sig small{font-weight:500;color:var(--muted);font-size:12px;display:block}
 
     /* Animated Gallery — 3D scroll-driven grid */
-    .gallery-section{padding:90px 0 0;background:#fff}
+    .gallery-section{padding:90px 0 60px;background:#fff;overflow:hidden}
     .ag-scroll-wrap{position:relative;width:100%}
     .ag-sticky{
       height:100vh;width:100%;
-      perspective:1000px;perspective-origin:center top;
     }
     .ag-grid{
       display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
@@ -508,7 +507,7 @@
     </div>
   </div>
 
-  <!-- 300vh tall wrapper — sticky child stays in view while parent scrolls -->
+  <!-- GSAP pins agSticky and adds ~280% scroll space via pin spacer -->
   <div class="ag-scroll-wrap" id="agScrollWrap">
     <div class="ag-sticky" id="agSticky">
       <div class="ag-grid" id="agGrid">
@@ -947,10 +946,10 @@
     const col3=document.getElementById('agCol3');
     if(!agSticky||!grid||!col1||!col2||!col3) return;
 
-    /* Col 2 sits lower at start so all 3 columns feel staggered */
-    gsap.set(col1,{yPercent:8});
-    gsap.set(col2,{yPercent:30});
-    gsap.set(col3,{yPercent:8});
+    /* Col 2 sits lower at start so all 3 columns feel staggered (max 18% to avoid bleed) */
+    gsap.set(col1,{yPercent:5});
+    gsap.set(col2,{yPercent:18});
+    gsap.set(col3,{yPercent:5});
 
     /* GSAP pins the gallery container and drives the whole animation via scrub */
     const tl=gsap.timeline({
@@ -964,19 +963,20 @@
       }
     });
 
-    /* Phase 1 — grid rotates from flat-on-table tilt to face-on view */
+    /* Phase 1 — grid rotates from flat-on-table tilt to face-on view
+       transformPerspective is set on the element itself (NOT on parent via CSS) to avoid double-perspective */
     if(!rm){
       tl.fromTo(grid,
-        {rotateX:72,scale:1.15,transformPerspective:1000,transformOrigin:'50% 0%'},
+        {rotateX:72,scale:1.15,transformPerspective:900,transformOrigin:'50% 0%'},
         {rotateX:0,scale:1,ease:'none',duration:1}
       );
     }
 
     /* Phase 2 — all three columns float upward at different speeds */
     const p2=rm?0:'>';
-    tl.to(col1,{yPercent:-32,ease:'none',duration:1.8},p2);
-    tl.to(col2,{yPercent:-2,ease:'none',duration:1.8},'<');
-    tl.to(col3,{yPercent:-32,ease:'none',duration:1.8},'<');
+    tl.to(col1,{yPercent:-28,ease:'none',duration:1.8},p2);
+    tl.to(col2,{yPercent:-5,ease:'none',duration:1.8},'<');
+    tl.to(col3,{yPercent:-28,ease:'none',duration:1.8},'<');
 
     /* Lightbox */
     const cards=[...document.querySelectorAll('.ag-card')];
