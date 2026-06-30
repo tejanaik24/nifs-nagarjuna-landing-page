@@ -256,14 +256,70 @@
       .rq-ph-name{font-size:7.5px}
     }
 
-    /* Certify */
-    .certify-section{padding:60px 0;background:#fff;border-top:1px solid #f0f0f0}
-    .certify-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px;margin-top:32px}
-    .certify-badge{display:flex;align-items:center;gap:8px;background:var(--light);border:1.5px solid #e0e0e0;padding:10px 20px;border-radius:6px;font-weight:700;font-size:13px;color:var(--navy);transition:border-color .25s,box-shadow .25s}
-    .certify-badge:hover{border-color:var(--yellow);box-shadow:var(--shadow-sm)}
-    .certify-badge i{color:var(--teal);font-size:15px}
-    .certify-badge.highlight{background:var(--navy);color:#fff;border-color:var(--navy)}
-    .certify-badge.highlight i{color:var(--yellow)}
+    /* ─── Certify Section — Upgraded ─── */
+    .certify-section{padding:72px 0;background:var(--light);border-top:1px solid rgba(0,0,0,.06)}
+    .certify-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:40px}
+    .certify-card{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid rgba(0,51,78,.08);padding:14px 22px;border-radius:12px;font-weight:700;font-size:13px;color:var(--navy);box-shadow:0 2px 8px rgba(0,0,0,.05);transition:border-color .25s,box-shadow .25s,transform .25s}
+    .certify-card:hover{border-color:var(--yellow);box-shadow:0 6px 20px rgba(253,189,0,.2);transform:translateY(-3px)}
+    .certify-card i{font-size:15px;color:var(--teal)}
+    .certify-card.featured{background:linear-gradient(135deg,var(--navy),#005a7a);color:#fff;border-color:transparent;box-shadow:0 8px 28px rgba(0,51,78,.3);padding:16px 28px;font-size:14px}
+    .certify-card.featured i{color:var(--yellow)}
+    .certify-card.featured:hover{box-shadow:0 14px 40px rgba(0,51,78,.4);transform:translateY(-4px)}
+
+    /* ─── Scroll Progress Bar ─── */
+    .scroll-prog{position:fixed;top:0;left:0;height:3px;width:0%;z-index:99999;background:linear-gradient(90deg,var(--navy) 0%,var(--yellow) 50%,var(--teal) 100%);pointer-events:none;will-change:width}
+
+    /* ─── Directional Nav ─── */
+    .navigation-bar{transition:transform .36s cubic-bezier(.4,0,.2,1),background .3s,box-shadow .3s}
+    .navigation-bar.nav-hidden{transform:translateY(-100%)}
+
+    /* ─── Programs Section ─── */
+    .programs-section{padding:96px 0;background:var(--navy);position:relative;overflow:hidden}
+    .programs-section::before{
+      content:'';position:absolute;inset:0;pointer-events:none;
+      background:
+        radial-gradient(ellipse 65% 80% at 5% 50%,rgba(253,189,0,.07) 0%,transparent 65%),
+        radial-gradient(ellipse 55% 70% at 95% 50%,rgba(0,153,153,.05) 0%,transparent 65%),
+        repeating-linear-gradient(-45deg,transparent,transparent 50px,rgba(255,255,255,.013) 50px,rgba(255,255,255,.013) 51px);
+    }
+    .programs-section .container{position:relative;z-index:1}
+    .programs-section .section-overline{color:rgba(253,189,0,.8)}
+    .programs-section .section-title{color:#fff}
+    .programs-section .section-divider.center{background:var(--yellow)}
+    .prog-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:44px 38px;height:100%;position:relative;overflow:hidden;will-change:transform;transition:border-color .35s,box-shadow .35s}
+    .prog-card::after{content:'';position:absolute;inset:0;border-radius:20px;background:linear-gradient(135deg,rgba(253,189,0,.07) 0%,transparent 55%);opacity:0;transition:opacity .4s;pointer-events:none}
+    .prog-card:hover{border-color:rgba(253,189,0,.35);box-shadow:0 28px 72px rgba(0,0,0,.5)}
+    .prog-card:hover::after{opacity:1}
+    .prog-icon{width:60px;height:60px;border-radius:14px;margin-bottom:24px;background:rgba(253,189,0,.1);border:1px solid rgba(253,189,0,.22);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--yellow)}
+    .prog-type{display:inline-block;background:rgba(253,189,0,.12);color:rgba(253,189,0,.9);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.8px;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+    .prog-title{font-size:1.5rem;font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px}
+    .prog-sub{color:rgba(255,255,255,.45);font-size:12.5px;font-weight:600;margin-bottom:24px;letter-spacing:.3px}
+    .prog-features{list-style:none;padding:24px 0 0;margin:0 0 36px;display:flex;flex-direction:column;gap:11px;border-top:1px solid rgba(255,255,255,.07)}
+    .prog-features li{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.75);font-size:13.5px;font-weight:500}
+    .prog-features li i{color:var(--yellow);font-size:11px;width:14px;flex-shrink:0}
+    .prog-ctas{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .btn-prog{display:inline-flex;align-items:center;gap:7px;background:var(--yellow);color:#000;font-weight:800;font-size:13.5px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background .25s,transform .2s,box-shadow .25s}
+    .btn-prog:hover{background:#ffd700;transform:translateY(-2px);box-shadow:0 8px 24px rgba(253,189,0,.4);color:#000}
+    .btn-prog-ghost{display:inline-flex;align-items:center;gap:7px;background:transparent;color:rgba(255,255,255,.75);font-weight:700;font-size:13px;padding:11px 20px;border-radius:8px;border:1px solid rgba(255,255,255,.2);text-decoration:none;transition:border-color .25s,background .25s,color .25s}
+    .btn-prog-ghost:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.06);color:#fff}
+
+    /* ─── Why Choose Us ─── */
+    .whyus-section{padding:90px 0;background:#fff;position:relative;overflow:hidden}
+    .whyus-section::before{content:'';position:absolute;top:0;right:0;width:45%;height:100%;background:radial-gradient(ellipse 80% 60% at 100% 50%,rgba(0,51,78,.033) 0%,transparent 70%);pointer-events:none}
+    .whyus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px;position:relative;z-index:1}
+    .whyus-card{padding:30px 26px;border-radius:16px;background:var(--light);border:1px solid rgba(0,51,78,.07);position:relative;overflow:hidden;transition:box-shadow .35s,transform .3s,border-color .35s}
+    .whyus-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--navy),var(--yellow));transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+    .whyus-card:hover{box-shadow:0 14px 44px rgba(0,51,78,.1);transform:translateY(-5px);border-color:rgba(0,51,78,.13)}
+    .whyus-card:hover::after{transform:scaleX(1)}
+    .whyus-icon{width:50px;height:50px;border-radius:12px;margin-bottom:18px;background:linear-gradient(135deg,rgba(0,51,78,.09),rgba(0,51,78,.04));border:1px solid rgba(0,51,78,.09);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--navy)}
+    .whyus-title{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:8px;line-height:1.3}
+    .whyus-desc{font-size:13px;color:#627080;line-height:1.72}
+    @media(max-width:991px){.whyus-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){
+      .prog-card{padding:30px 22px}.prog-title{font-size:1.25rem}
+      .whyus-grid{grid-template-columns:repeat(2,1fr);gap:14px}.whyus-card{padding:22px 18px}
+    }
+    @media(max-width:480px){.whyus-grid{grid-template-columns:1fr}}
 
     @media(max-width:768px){
       /* Info cards — vertical stack below hero on mobile; no overlap */
@@ -298,6 +354,7 @@
   </style>
 </head>
 <body id="top">
+<div class="scroll-prog" id="scrollProg"></div>
 
 <!-- ═══ LOCKED HEADER ═══ -->
 <div class="site-header-wrapper" id="siteHeader">
@@ -377,7 +434,7 @@
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <p class="hero-tagline">Acharya Nagarjuna University</p>
-        <h2 class="hero-title">Trained for the Frontline.<br>Ready for Industry.</h2>
+        <h1 class="hero-title">Trained for the Frontline.<br>Ready for Industry.</h1>
         <p class="hero-subtext">Hands-on training with real industrial equipment for real career outcomes.</p>
         <div>
           <a href="course-offered" class="btn-hero-primary">Explore Programs</a>
@@ -517,10 +574,103 @@
   <div class="stats-bg"></div>
   <div class="container">
     <div class="row g-4">
-      <div class="col-6 col-md-3"><div class="stat-card reveal-scale"><div class="stat-number" data-target="2025" data-from="2020" data-suffix="">2025</div><div class="stat-label">Year Established</div></div></div>
-      <div class="col-6 col-md-3"><div class="stat-card reveal-scale"><div class="stat-number" data-target="2" data-from="0" data-suffix="+">0</div><div class="stat-label">UG Programs</div></div></div>
-      <div class="col-6 col-md-3"><div class="stat-card reveal-scale"><div class="stat-number" data-target="85" data-from="0" data-suffix="+">0</div><div class="stat-label">NIFS Centers Nationally</div></div></div>
-      <div class="col-6 col-md-3"><div class="stat-card reveal-scale"><div class="stat-number" data-target="100" data-from="0" data-suffix="%">0</div><div class="stat-label">Placement Assistance</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-card stat-flip"><div class="stat-number">Est. 2025</div><div class="stat-label">Year Established</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-card stat-flip"><div class="stat-number" data-target="2" data-from="0" data-suffix="+">0</div><div class="stat-label">UG Programs</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-card stat-flip"><div class="stat-number" data-target="85" data-from="0" data-suffix="+">0</div><div class="stat-label">NIFS Centers Nationally</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-card stat-flip"><div class="stat-number" data-target="100" data-from="0" data-suffix="%">0</div><div class="stat-label">Placement Assistance</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Programs Offered -->
+<section class="programs-section" id="programsSection">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="section-overline">Academic Programs</span>
+      <h2 class="section-title">Programs Offered</h2>
+      <div class="section-divider center"></div>
+      <p style="color:rgba(255,255,255,.55);max-width:560px;margin:12px auto 0;font-size:15px">Industry-aligned degrees designed to produce world-class safety professionals.</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-5 col-md-6">
+        <div class="prog-card reveal-3d">
+          <div class="prog-icon"><i class="fas fa-fire-extinguisher"></i></div>
+          <span class="prog-type">3-Year Program</span>
+          <h3 class="prog-title">B.Sc. Fire &amp; Industrial Safety</h3>
+          <p class="prog-sub">6 Semesters &nbsp;·&nbsp; Self-Supporting Mode &nbsp;·&nbsp; ANU Affiliated</p>
+          <ul class="prog-features">
+            <li><i class="fas fa-check-circle"></i>NSDC-certified safety curriculum</li>
+            <li><i class="fas fa-check-circle"></i>Real industrial equipment training</li>
+            <li><i class="fas fa-check-circle"></i>85+ NIFS centres for internship</li>
+            <li><i class="fas fa-check-circle"></i>100% placement assistance</li>
+          </ul>
+          <div class="prog-ctas">
+            <a href="course-offered" class="btn-prog btn-magnetic"><i class="fas fa-arrow-right"></i> Learn More</a>
+            <a href="contact" class="btn-prog-ghost">Apply Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 col-md-6">
+        <div class="prog-card reveal-3d">
+          <div class="prog-icon"><i class="fas fa-shield-alt"></i></div>
+          <span class="prog-type">4-Year Honours</span>
+          <h3 class="prog-title">B.Sc. (Hons) Fire &amp; Industrial Safety</h3>
+          <p class="prog-sub">8 Semesters &nbsp;·&nbsp; Research Track &nbsp;·&nbsp; Leadership Focus</p>
+          <ul class="prog-features">
+            <li><i class="fas fa-check-circle"></i>Advanced research modules</li>
+            <li><i class="fas fa-check-circle"></i>NEBOSH &amp; IOSH readiness training</li>
+            <li><i class="fas fa-check-circle"></i>Industry internship pathway</li>
+            <li><i class="fas fa-check-circle"></i>Leadership &amp; management track</li>
+          </ul>
+          <div class="prog-ctas">
+            <a href="course-offered" class="btn-prog btn-magnetic"><i class="fas fa-arrow-right"></i> Learn More</a>
+            <a href="contact" class="btn-prog-ghost">Apply Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="whyus-section">
+  <div class="container">
+    <div class="text-center mb-2 reveal">
+      <span class="section-overline">Our Advantage</span>
+      <h2 class="section-title">Why Choose ANU Fire &amp; Safety?</h2>
+      <div class="section-divider center"></div>
+    </div>
+    <div class="whyus-grid">
+      <div class="whyus-card">
+        <div class="whyus-icon"><i class="fas fa-star"></i></div>
+        <div class="whyus-title">NAAC A+ Accredited University</div>
+        <div class="whyus-desc">Acharya Nagarjuna University holds India's highest NAAC grade — 3.46 score, first in the state in Dual Mode category.</div>
+      </div>
+      <div class="whyus-card">
+        <div class="whyus-icon"><i class="fas fa-network-wired"></i></div>
+        <div class="whyus-title">85+ NIFS Centres Nationally</div>
+        <div class="whyus-desc">NIFS operates 85+ training centres across India — giving students an unmatched network for internships, mentorship, and placement.</div>
+      </div>
+      <div class="whyus-card">
+        <div class="whyus-icon"><i class="fas fa-hard-hat"></i></div>
+        <div class="whyus-title">Real Equipment, Real Training</div>
+        <div class="whyus-desc">Hands-on practice with industrial fire safety equipment — extinguishers, sprinkler systems, hazmat gear — from day one.</div>
+      </div>
+      <div class="whyus-card">
+        <div class="whyus-icon"><i class="fas fa-briefcase"></i></div>
+        <div class="whyus-title">100% Placement Assistance</div>
+        <div class="whyus-desc">Dedicated placement cell with strong ties to Adani, L&amp;T, ONGC, Tata Projects, and 10+ more corporations hiring our graduates.</div>
+      </div>
+      <div class="whyus-card">
+        <div class="whyus-icon"><i class="fas fa-certificate"></i></div>
+        <div class="whyus-title">Government Recognised Credentials</div>
+        <div class="whyus-desc">UGC-recognised, NSDC &amp; Skill India affiliated, ISO 9001:2015 certified — your degree is accepted by industry and government alike.</div>
+      </div>
+      <div class="whyus-card">
+        <div class="whyus-icon"><i class="fas fa-globe-asia"></i></div>
+        <div class="whyus-title">Global Safety Standards</div>
+        <div class="whyus-desc">Curriculum aligned with NEBOSH, IOSH, and ISO 45001 — preparing you for Indian industries and global safety roles alike.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -643,14 +793,14 @@
       <h2 class="section-title">Recognised &amp; Certified By</h2>
       <div class="section-divider center"></div>
     </div>
-    <div class="certify-row">
-      <div class="certify-badge highlight reveal"><i class="fas fa-star"></i> NAAC A+</div>
-      <div class="certify-badge reveal"><i class="fas fa-certificate"></i> NSDC</div>
-      <div class="certify-badge reveal"><i class="fas fa-award"></i> Skill India</div>
-      <div class="certify-badge reveal"><i class="fas fa-graduation-cap"></i> SBTET</div>
-      <div class="certify-badge reveal"><i class="fas fa-shield-alt"></i> ISO 9001:2015 (DNV-GL)</div>
-      <div class="certify-badge reveal"><i class="fas fa-medal"></i> QCFI</div>
-      <div class="certify-badge reveal"><i class="fas fa-university"></i> UGC Recognised</div>
+    <div class="certify-grid">
+      <div class="certify-card featured reveal"><i class="fas fa-star"></i> NAAC A+ Accredited</div>
+      <div class="certify-card reveal"><i class="fas fa-certificate"></i> NSDC Certified</div>
+      <div class="certify-card reveal"><i class="fas fa-flag"></i> Skill India</div>
+      <div class="certify-card reveal"><i class="fas fa-graduation-cap"></i> SBTET</div>
+      <div class="certify-card reveal"><i class="fas fa-shield-alt"></i> ISO 9001:2015 (DNV-GL)</div>
+      <div class="certify-card reveal"><i class="fas fa-medal"></i> QCFI</div>
+      <div class="certify-card reveal"><i class="fas fa-university"></i> UGC Recognised</div>
     </div>
   </div>
 </section>
@@ -671,27 +821,31 @@
       <h3>Quick Links</h3>
       <ul class="footer-links">
         <li><a href="./">Home</a></li>
-        <li><a href="profile">About Department</a></li>
-        <li><a href="faculty">People</a></li>
+        <li><a href="profile">Department Profile</a></li>
+        <li><a href="course-offered">Courses Offered</a></li>
+        <li><a href="faculty">Faculty</a></li>
+        <li><a href="contact">Contact Us</a></li>
       </ul>
     </div>
     <div class="footer-column">
-      <h3>Popular Links</h3>
+      <h3>Academics</h3>
       <ul class="footer-links">
-        <li><a href="./">Home</a></li>
-        <li><a href="profile">About Department</a></li>
-        <li><a href="faculty">People</a></li>
+        <li><a href="vision-mission">Vision &amp; Mission</a></li>
+        <li><a href="images/syllabus.pdf" target="_blank" rel="noopener">Syllabus (PDF)</a></li>
+        <li><a href="https://nagarjunauniversity.ac.in" target="_blank" rel="noopener">ANU Main Website</a></li>
+        <li><a href="#programsSection">B.Sc. Programs</a></li>
+        <li><a href="contact">Apply Now</a></li>
       </ul>
     </div>
     <div class="footer-column">
       <h3>Newsletter</h3>
       <div class="newsletter-form">
-        <input type="email" placeholder="Your Email Address">
-        <button type="button">Sign Up</button>
+        <input type="email" id="nlEmail" placeholder="Your Email Address">
+        <button type="button" onclick="(function(){var v=document.getElementById('nlEmail').value;if(!v||!v.includes('@')){alert('Please enter a valid email');return;}window.location='mailto:anusafetydept@gmail.com?subject=Newsletter%20Subscription&body=Please%20subscribe%20me%3A%20'+encodeURIComponent(v);})()">Sign Up</button>
       </div>
       <span class="social-title">Follow Us</span>
       <div class="social-icons">
-        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon" aria-label="Twitter / X"><i class="fab fa-twitter"></i></a>
         <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
         <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
         <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -970,8 +1124,9 @@
   }
 
   /* Stat counters */
-  document.querySelectorAll('.stat-number').forEach(el=>{
+  document.querySelectorAll('.stat-number[data-target]').forEach(el=>{
     const tgt=parseInt(el.dataset.target),frm=parseInt(el.dataset.from||0),sfx=el.dataset.suffix||'';
+    if(isNaN(tgt)) return;
     if(rm){el.textContent=tgt+sfx;return;}
     ScrollTrigger.create({trigger:el,start:'top 80%',once:true,onEnter:()=>{
       gsap.to({v:frm},{v:tgt,duration:2,ease:'power2.out',
@@ -1127,6 +1282,107 @@
 
   /* Back to top */
   document.querySelector('.back-to-top').addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});
+
+  /* ── Scroll progress bar ── */
+  (function(){
+    const bar = document.getElementById('scrollProg');
+    if(!bar) return;
+    window.addEventListener('scroll',()=>{
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? window.scrollY / max * 100 : 0) + '%';
+    },{passive:true});
+  })();
+
+  /* ── Directional nav hide/show ── */
+  (function(){
+    const nav = document.querySelector('.navigation-bar');
+    if(!nav) return;
+    let lastY = window.scrollY, ticking = false;
+    window.addEventListener('scroll',()=>{
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(()=>{
+        const y = window.scrollY;
+        if(nav.classList.contains('stuck')){
+          if(y > lastY + 10) nav.classList.add('nav-hidden');
+          else if(y < lastY - 5) nav.classList.remove('nav-hidden');
+        } else {
+          nav.classList.remove('nav-hidden');
+        }
+        lastY = y; ticking = false;
+      });
+    },{passive:true});
+  })();
+
+  /* ── Stats 3D flip entrance ── */
+  if(!rm){
+    gsap.utils.toArray('.stat-flip').forEach((el,i)=>{
+      gsap.fromTo(el,
+        {rotateY:90,opacity:0},
+        {rotateY:0,opacity:1,duration:.8,ease:'back.out(1.1)',
+          delay:i*.13,
+          scrollTrigger:{trigger:'.stats-section',start:'top 78%',toggleActions:'play none none none'}
+        }
+      );
+    });
+  } else {
+    gsap.utils.toArray('.stat-flip').forEach(el=>gsap.set(el,{opacity:1}));
+  }
+
+  /* ── Why Choose Us stagger ── */
+  if(!rm){
+    gsap.utils.toArray('.whyus-card').forEach((el,i)=>{
+      gsap.fromTo(el,
+        {opacity:0,y:36},
+        {opacity:1,y:0,duration:.65,ease:'power3.out',
+          delay:i*.08,
+          scrollTrigger:{trigger:'.whyus-grid',start:'top 82%',toggleActions:'play none none none'}
+        }
+      );
+    });
+  }
+
+  /* ── Program cards entrance ── */
+  if(!rm){
+    gsap.utils.toArray('.prog-card').forEach((el,i)=>{
+      gsap.fromTo(el,
+        {opacity:0,y:40},
+        {opacity:1,y:0,duration:.7,ease:'power3.out',
+          delay:i*.15,
+          scrollTrigger:{trigger:'#programsSection',start:'top 80%',toggleActions:'play none none none'}
+        }
+      );
+    });
+  }
+
+  /* ── Program cards 3D hover tilt (desktop only) ── */
+  if(window.matchMedia('(pointer:fine)').matches){
+    document.querySelectorAll('.prog-card').forEach(card=>{
+      card.addEventListener('mousemove',e=>{
+        const r = card.getBoundingClientRect();
+        const dx = (e.clientX-(r.left+r.width/2))/(r.width/2);
+        const dy = (e.clientY-(r.top+r.height/2))/(r.height/2);
+        gsap.to(card,{rotationX:-dy*5,rotationY:dx*6,transformPerspective:900,duration:.3,ease:'power2.out',overwrite:'auto'});
+      });
+      card.addEventListener('mouseleave',()=>{
+        gsap.to(card,{rotationX:0,rotationY:0,duration:.55,ease:'power2.out',overwrite:'auto'});
+      });
+    });
+
+    /* ── Magnetic CTA buttons ── */
+    document.querySelectorAll('.btn-magnetic').forEach(btn=>{
+      btn.addEventListener('mousemove',e=>{
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width/2;
+        const y = e.clientY - r.top - r.height/2;
+        gsap.to(btn,{x:x*.28,y:y*.28,duration:.3,ease:'power2.out'});
+      });
+      btn.addEventListener('mouseleave',()=>{
+        gsap.to(btn,{x:0,y:0,duration:.55,ease:'elastic.out(1,.45)'});
+      });
+    });
+  }
+
 })();
 </script>
 </body>
