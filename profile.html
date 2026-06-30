@@ -1,728 +1,233 @@
-﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANU - DEPARTMENT OF FIRE AND INDUSTRIAL SAFETY</title>
-    <style>
-        /* CSS Reset & Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Department Profile – ANU Fire &amp; Industrial Safety</title>
+  <meta name="description" content="Learn about the Department of Fire and Industrial Safety at Acharya Nagarjuna University — established 2025, NSDC affiliated, offering B.Sc. programs.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/premium.css">
+  <style>
+    /* Page hero uses slide6 background */
+    .page-hero::before{background-image:url('images/slide6.jpg')}
 
-        body {
-            background-color: #ffffff;
-        }
+    /* Profile content */
+    .profile-section{padding:90px 0}
+    .profile-img{border-radius:var(--radius);box-shadow:var(--shadow-lg);width:100%;object-fit:cover;max-height:440px}
+    .description-text{color:#4a4a5a;font-size:15.5px;line-height:1.88;margin-bottom:16px;text-align:left}
 
-        /* 1. TOP BANNER - Navy & Yellow with Diagonal Slash */
-        .top-banner {
-            display: flex;
-            align-items: center;
-            height: 75px;
-            /* Creates the sharp angled transition from dark blue to yellow as seen in the image */
-            background: #ffc107; /* Fallback */
-            background: linear-gradient(62deg, #00334e 31%, #ffc107 31.2%);
-            padding: 0 20px;
-            color: white;
-            position: relative;
-        }
+    /* Highlight strip */
+    .highlight-strip{
+      background:linear-gradient(135deg,var(--navy),var(--teal));
+      padding:50px 0;margin:20px 0 70px;
+    }
+    .highlight-item{text-align:center;color:#fff;padding:0 20px}
+    .highlight-item i{font-size:2rem;color:var(--yellow);margin-bottom:12px;display:block}
+    .highlight-item strong{font-size:1.15rem;display:block;font-weight:700;margin-bottom:4px}
+    .highlight-item span{font-size:13px;opacity:.82}
 
-        .contact-info {
-            flex: 1;
-            font-size: 13px;
-            padding-left: 20px;
-            white-space: nowrap;
-        }
-
-        .contact-info span {
-            color: #ffffff;
-            font-weight: 500;
-        }
-
-        .contact-info .separator {
-            margin: 0 12px;
-            color: #ffffff;
-            opacity: 0.5;
-        }
-
-        .accreditation-box {
-            flex: 2;
-            text-align: center;
-            color: #000000;
-            font-weight: bold;
-            font-size: 19px;
-            line-height: 1.3;
-            padding: 0 10px;
-        }
-
-        .logos-right {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 8px;
-            padding-right: 20px;
-        }
-        .logos-right img {
-        /* Adjust these values to your liking */
-        max-height: 50px; /* Limits the height so it doesn't stretch the banner */
-        width: auto;      /* Maintains the original aspect ratio */
-        display: block;   /* Good practice for images in flex containers */
+    /* Objectives callout */
+    .objectives-section{padding:0 0 90px}
+    .objectives-card{
+      background:#fff;border-radius:var(--radius);
+      box-shadow:var(--shadow-lg);padding:52px;
+      border:1px solid #f0f0f0;
+    }
+    .obj-list{list-style:none;padding:0;margin:0}
+    .obj-list li{
+      position:relative;padding-left:36px;margin-bottom:18px;
+      line-height:1.75;color:#444;font-size:15px;
+    }
+    .obj-list li::before{
+      content:'\f14a';font-family:'Font Awesome 5 Free';font-weight:900;
+      color:var(--red);position:absolute;left:0;top:2px;font-size:17px;
     }
 
-        .mini-badge {
-            width: 35px;
-            height: 35px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
+    /* Timeline */
+    .timeline-section{padding:60px 0 80px;background:var(--light)}
+    .timeline{position:relative;padding-left:30px}
+    .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--yellow)}
+    .timeline-item{position:relative;margin-bottom:32px}
+    .timeline-dot{
+      position:absolute;left:-26px;top:4px;
+      width:16px;height:16px;border-radius:50%;
+      background:var(--navy);border:3px solid var(--yellow);
+    }
+    .timeline-date{font-size:12px;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+    .timeline-title{font-weight:700;color:var(--navy);margin-bottom:4px;font-size:15px}
+    .timeline-desc{color:var(--muted);font-size:14px;line-height:1.6}
 
-        /* 2. MAIN LOGO SECTION */
-        .main-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 40px;
-            background-color: #ffffff;
-        }
-
-        .univ-logo {
-            flex: 0 0 140px;
-        }
-        
-        .univ-logo img {
-            max-width: 100px;
-            height: auto;
-        }
-
-        .center-titles {
-            flex: 1;
-            text-align: center;
-        }
-
-        .telugu-header {
-            color: #d10000; /* Dark Red from screenshot */
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .english-header {
-            color: #005b7f; /* Teal/Blue from screenshot */
-            font-size: 38px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
-        }
-
-        .azadi-logo {
-            flex: 0 0 140px;
-            text-align: right;
-        }
-        
-        .azadi-logo img {
-            max-width: 120px;
-            height: auto;
-        }
-
-        /* 3. NAVIGATION BAR */
-        .navigation-bar {
-            background-color: #fdbd00;
-            border-top: 1px solid #e0a800;
-            border-bottom: 1px solid #e0a800;
-        }
-
-        .nav-list {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            padding: 12px 0;
-            font-weight: 700;
-        }
-
-        .nav-item {
-            margin: 0 20px;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #000000;
-            font-weight: bold;
-            font-size: 16px;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover {
-            color: #00334e;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 1024px) {
-            .english-header { font-size: 28px; }
-            .telugu-header { font-size: 24px; }
-            .top-banner { height: auto; padding: 10px; flex-direction: column; background: #ffc107; }
-            .contact-info, .accreditation-box, .logos-right { width: 100%; text-align: center; justify-content: center; padding: 5px 0; }
-        }
-        
-        /* Enable relative positioning for the parent items */
-.nav-item.dropdown {
-    position: relative;
-}
-
-/* Hide the dropdown menu by default */
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%; /* Positions it exactly below the nav bar */
-    left: 0;
-    background-color: #ffffff;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-    list-style: none;
-    padding: 10px 0;
-    z-index: 1000;
-    border-top: 3px solid var(--anu-blue); /* Visual indicator matching the theme */
-}
-
-/* Dropdown list items styling */
-.dropdown-menu li {
-    padding: 0;
-}
-
-.dropdown-menu li a {
-    color: #333;
-    padding: 10px 20px;
-    text-decoration: none;
-    display: block;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background 0.3s, color 0.3s;
-}
-
-/* Hover effects for dropdown items */
-.dropdown-menu li a:hover {
-    background-color: var(--anu-yellow);
-    color: #000;
-}
-
-/* Show the menu on hover of the parent .nav-item */
-.nav-item.dropdown:hover .dropdown-menu {
-    display: block;
-}
-
-/* Optional: Add a small arrow indicator to dropdown links */
-.dropdown-toggle::after {
-    content: ' ▼';
-    font-size: 10px;
-    vertical-align: middle;
-}
-    </style>
+    @media(max-width:768px){
+      .objectives-card{padding:28px 20px}
+      .profile-section{padding:50px 0}
+    }
+  </style>
 </head>
-<body>
+<body id="top">
+<div id="site-header-ph"></div>
 
-    <header class="top-banner">
-        <div class="contact-info">
-            Call Now : <span>83743 40999</span>
-            <span class="separator">|</span>
-            Email Now : <span>anusafetydept@gmail.com</span>
+<main>
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <span class="page-hero-badge">About Us</span>
+      <h1>Department Profile</h1>
+      <div class="page-hero-line"></div>
+    </div>
+  </div>
+
+  <!-- Profile content -->
+  <section class="profile-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7 reveal-left">
+          <span class="section-overline">Our Story</span>
+          <h2 class="section-title">Fire and Industrial Safety Department</h2>
+          <div class="section-divider"></div>
+          <p class="description-text">
+            The Department of Fire and Industrial Safety was established on <strong>18th September, 2025</strong> by the esteemed personalities
+            <strong>Sri. Dr. Gangadhara Rao Kancharla</strong>, I/c Vice Chancellor,
+            <strong>Smt. Prof. K. Ratna Shiela Mani garu</strong>, Rector [I/C],
+            <strong>Sri Prof. G. Simhachalam garu</strong>, Registrar [I/C], and
+            <strong>Sri Suneel Mahanty</strong>, C.E.O. and Chairman, offering Bachelor Degrees in Fire and Industrial Safety on a self-supporting mode.
+          </p>
+          <p class="description-text">
+            The department inaugurated two regular and on-campus courses: <strong>B.Sc. (Hons.) in Fire and Industrial Safety (4 years)</strong> and <strong>B.Sc. in Fire and Industrial Safety (3 years)</strong> for the academic year 2025-2026.
+          </p>
+          <p class="description-text">
+            The Department has been technically collaborated with the <strong>National Institute of Fire and Safety (NIFS)</strong>, one of the leading institutes in fire and industrial safety in India, operating 85+ centres across the country.
+          </p>
         </div>
-        
-        <div class="accreditation-box">
-            Accredited by NAAC with "A+ Grade (With 3.46 Outstanding<br>
-            Score in Dual Mode Category - First in the State & Country)"
+        <div class="col-lg-5 reveal-right">
+          <img src="images/slide7.jpg" class="profile-img" alt="ANU Department Facility" loading="lazy">
         </div>
+      </div>
 
-        <div class="logos-right">
-           <img src="images/logo-tags.png" alt="Azadi Ka Amrit Mahotsav">
+      <div class="row mt-5">
+        <div class="col-12 reveal">
+          <p class="description-text">
+            The department was established to meet industrial needs and enhance student employability through a standard academic framework, skill training under the <strong>National Skill Development Corporation (NSDC)</strong>, On the Job Training (OJT), practical exposure, and internships.
+          </p>
+          <p class="description-text">
+            The department provides many teaching-learning facilities such as sophisticated classrooms, fully equipped digital classrooms, and an advanced fire and industrial safety laboratory. The courses offered can enlighten the learner to achieve global standards and excellence in fire and industrial safety.
+          </p>
         </div>
-    </header>
+      </div>
+    </div>
+  </section>
 
-    <section class="main-header">
-        <div class="univ-logo">
-            <img src="images/logo-anu.png" alt="ANU Logo">
+  <!-- Highlights -->
+  <div class="highlight-strip">
+    <div class="container">
+      <div class="row g-4 text-center">
+        <div class="col-6 col-md-3 reveal-scale">
+          <div class="highlight-item"><i class="fas fa-calendar-check"></i><strong>Est. 2025</strong><span>Year of Inception</span></div>
         </div>
-        
-        <div class="center-titles">
-            <div class="telugu-header">ఆచార్య నాగార్జున విశ్వవిద్యాలయం</div>
-            <h1 class="english-header">DEPARTMENT OF FIRE AND INDUSTRIAL SAFETY</h1>
+        <div class="col-6 col-md-3 reveal-scale">
+          <div class="highlight-item"><i class="fas fa-graduation-cap"></i><strong>2 UG Programs</strong><span>B.Sc. Honours &amp; B.Sc.</span></div>
         </div>
-
-        <div class="azadi-logo">
-            <img src="images/75years.png" alt="Azadi Ka Amrit Mahotsav">
+        <div class="col-6 col-md-3 reveal-scale">
+          <div class="highlight-item"><i class="fas fa-network-wired"></i><strong>85+ NIFS Centres</strong><span>Pan-India Network</span></div>
         </div>
-    </section>
+        <div class="col-6 col-md-3 reveal-scale">
+          <div class="highlight-item"><i class="fas fa-briefcase"></i><strong>100% Placement</strong><span>Assistance Provided</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-   <nav class="navigation-bar">
-    <ul class="nav-list">
-        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-        
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle">About Department</a>
-            <ul class="dropdown-menu">
-                <li><a href="profile.html">Department Profile</a></li>
-                <li><a href="vision-mission.html">Vision & Mission</a></li>
-                
-            </ul>
-        </li>
+  <!-- Objectives -->
+  <section class="objectives-section">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <span class="section-overline">Course Objective</span>
+        <h2 class="section-title">Aims and Goals</h2>
+        <div class="section-divider center"></div>
+        <p style="color:var(--muted);max-width:700px;margin:0 auto;font-size:15px;line-height:1.75">
+          The objective of the B.Sc. (Hons.) in Fire and Industrial Safety is to equip students with comprehensive knowledge and practical skills in fire prevention, industrial safety management, risk assessment, disaster management, and environmental safety.
+        </p>
+      </div>
+      <div class="objectives-card reveal-3d">
+        <h5 class="fw-bold mb-4 text-center" style="color:var(--navy)">The programs aim to:</h5>
+        <ul class="obj-list">
+          <li>Develop competent professionals capable of identifying, evaluating, and controlling workplace hazards.</li>
+          <li>Provide in-depth understanding of fire science, safety engineering, occupational health, and emergency response systems.</li>
+          <li>Train students in the application of national and international safety standards, codes, and regulations.</li>
+          <li>Build leadership and decision-making skills to handle fire incidents, industrial accidents, and disaster situations effectively.</li>
+          <li>Promote a culture of safety, sustainability, and environmental responsibility in industries and organisations.</li>
+          <li>Prepare graduates for careers in oil &amp; gas, manufacturing, construction, aviation, chemical, and public safety sectors, as well as for higher studies and research.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle">Faculty</a>
-            <ul class="dropdown-menu">
-                <li><a href="faculty.html">Teaching</a></li>
-                
-            </ul>
-        </li>
+  <!-- Timeline -->
+  <section class="timeline-section">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <span class="section-overline">Milestones</span>
+        <h2 class="section-title">Department Journey</h2>
+        <div class="section-divider center"></div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-7">
+          <div class="timeline">
+            <div class="timeline-item reveal">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">September 2025</div>
+              <div class="timeline-title">Department Established</div>
+              <div class="timeline-desc">Fire and Industrial Safety Department inaugurated at ANU College of Sciences, Guntur.</div>
+            </div>
+            <div class="timeline-item reveal">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">October 2025</div>
+              <div class="timeline-title">NSDC Collaboration</div>
+              <div class="timeline-desc">Skill training partnership formalised with National Skill Development Corporation (NSDC) under Skill India Mission.</div>
+            </div>
+            <div class="timeline-item reveal">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">March 2026</div>
+              <div class="timeline-title">55th National Safety Day</div>
+              <div class="timeline-desc">Department successfully organised the 55th National Safety Day / Safety Month on March 4, 2026 under NSC guidelines.</div>
+            </div>
+            <div class="timeline-item reveal">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">April 2026</div>
+              <div class="timeline-title">Fire Services Week 2026</div>
+              <div class="timeline-desc">FSW 14–20 April organised to honour Victoria Dock Mumbai Port fire victims and promote fire safety awareness.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle">Academics</a>
-            <ul class="dropdown-menu">
-                <li><a href="course-offered.html">Course Offered</a></li>
-                
-                <li><a href="images/syllabus.pdf" target="_blank">Syllabus</a></li>
-                
-            </ul>
-        </li>
+<div id="site-footer-ph"></div>
 
-        <li class="nav-item"><a href="contact.html" class="nav-link">Contact us</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Back to main page</a></li>
-    </ul>
-</nav>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/shared.js"></script>
+<script>
+(function(){
+  const rm = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  gsap.registerPlugin(ScrollTrigger);
+  const selectors = ['.reveal','.reveal-left','.reveal-right','.reveal-3d','.reveal-scale'];
+  if(!rm){
+    gsap.utils.toArray('.reveal').forEach(el=>gsap.fromTo(el,{opacity:0,y:36},{opacity:1,y:0,duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 87%',toggleActions:'play none none none'}}));
+    gsap.utils.toArray('.reveal-left').forEach(el=>gsap.fromTo(el,{opacity:0,x:-48},{opacity:1,x:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'}}));
+    gsap.utils.toArray('.reveal-right').forEach(el=>gsap.fromTo(el,{opacity:0,x:48},{opacity:1,x:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'}}));
+    gsap.utils.toArray('.reveal-3d').forEach((el,i)=>gsap.fromTo(el,{opacity:0,rotateX:16,y:36,transformPerspective:800},{opacity:1,rotateX:0,y:0,duration:.9,ease:'power3.out',delay:i*.08,scrollTrigger:{trigger:el,start:'top 87%',toggleActions:'play none none none'}}));
+    gsap.utils.toArray('.reveal-scale').forEach((el,i)=>gsap.fromTo(el,{opacity:0,scale:.84},{opacity:1,scale:1,duration:.7,ease:'back.out(1.4)',delay:i*.1,scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'}}));
+    /* Page hero parallax */
+    const heroBg = document.querySelector('.page-hero::before');
+    ScrollTrigger.create({trigger:'.page-hero',start:'top top',end:'bottom top',scrub:true,onUpdate:s=>{document.querySelector('.page-hero').style.setProperty('--py',`${s.progress*40}px`);}});
+  } else {
+    document.querySelectorAll(selectors.join(',')).forEach(el=>{el.style.opacity='1';el.style.transform='none';});
+  }
+})();
+</script>
 </body>
 </html>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-<style>
-    /*ANU established palette */
-    :root {
-        --anu-yellow: #fdbd00;
-        --anu-blue: #00334e;
-        --anu-teal: #005b7f;
-    }
-
-    /* Page Header styling */
-    .profile-header hr {
-        border: none;
-        height: 4px;
-        background-color: #d10000;
-        width: 60px;
-        opacity: 1;
-        margin-top: 5px;
-    }
-
-    /* Main Title Styling */
-    .dept-main-title {
-        color: var(--anu-teal); /* Teal for that precise medical fidelity aesthetic */
-        font-weight: 800;
-        letter-spacing: -0.5px;
-    }
-
-    /* Description paragraph styling for readability */
-    .description-text {
-        color: #555;
-        font-size: 16px;
-        line-height: 1.8;
-        text-align: left; /* Changed from justify for better side-by-side readability */
-    }
-
-    /* Modernizing the objectives callout box */
-    .objective-callout {
-        background-color: #fffaf0; /* Super soft yellow background */
-        border-radius: 8px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Soft, professional shadow */
-        padding: 50px;
-        border: 1px solid #eee;
-    }
-
-    /* Sub-header in the callout box */
-    .objective-subtitle {
-        color: #cc0000;
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
-
-    /* List item styling for precision */
-    .objective-list {
-        list-style: none;
-        padding-left: 0;
-    }
-
-    .objective-list li {
-        position: relative;
-        padding-left: 35px;
-        margin-bottom: 18px;
-        line-height: 1.7;
-    }
-
-    /* Font Awesome check icon styling */
-    .objective-list li::before {
-        content: '\f14a'; /* FA Check-square-o */
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900;
-        color: #d10000;
-        position: absolute;
-        left: 0;
-        top: 2px;
-        font-size: 18px;
-    }
-</style>
-
-<div class="container profile-header pt-5 pb-3">
-    <div class="row">
-        <div class="col-12">
-            <h2 class="text-danger fw-bold mb-0">Profile</h2>
-            <hr>
-        </div>
-    </div>
-</div>
-
-<section class="pb-5">
-    <div class="container">
-        <div class="row align-items-center justify-content-center">
-            
-            <div class="col-md-8 pe-lg-5 mb-5 mb-md-0">
-                <h3 class="dept-main-title mb-4">FIRE AND INDUSTRIAL SAFETY DEPARTMENT</h3>
-                
-                <p class="description-text mb-3">
-                    The Department of Fire and Industrial Safety was established on 18th September, 2025 by the esteemed personalities 
-                    <strong>Sri. Dr. Gangadhara Rao Kancharla</strong>, I/c Vice Chancellor, 
-                    <strong>Smt. Prof. K. Ratna Shiela Mani garu</strong>, Rector [I/C], 
-                    <strong>Sri Prof. G. Simhachalam garu</strong>, Registrar [I/C], and 
-                    <strong>Sri Suneel Mahanty</strong>, C.E.O. and Chairman, and is offering Bachelor Degrees in Fire and Industrial Safety on a self-supporting mode.
-                </p>
-                
-                <p class="description-text">
-                    The department inaugurated two regular and on-campus courses i.e., Bachelor of Science (B.Sc.) Honors in Fire and Industrial Safety (4 years) and Bachelor of Science (B.Sc.) in Fire and Industrial Safety (3 years) for the academic year 2025-2026. The Department of Fire and Industrial Safety has been technically collaborated with the National Institute of Fire and Safety (NIFS), one of the leading institutes in fire and industrial safety in India.
-                </p>
-            </div>
-            
-            <div class="col-md-4">
-                <img src="images/slide7.jpg" 
-                     class="img-fluid rounded shadow-lg" 
-                     alt="ANU Campus Infrastructure"
-                     style="max-height: 450px; object-fit: cover; width: 100%;">
-            </div>
-        </div>
-        
-        <div class="row justify-content-center mt-5 mb-5">
-            <div class="col-lg-12">
-                <p class="description-text">
-                    The department was established to meet industrial needs and enhance student employability through a standard academic framework, skill training under the National Skill Development Corporation (NSDC), On the Job Training (OJT), practical exposure, and internships. The department provides many teaching-learning facilities such as sophisticated classrooms, fully equipped digital classrooms, and an advanced fire and industrial safety laboratory. The courses offered by the department of fire and safety can enlighten the learner to achieve global standards and excellence in fire and industrial safety.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="pb-5 mb-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                
-                <div class="objective-callout">
-                    <div class="text-center mb-5">
-                        <p class="objective-subtitle">OBJECTIVE OF THE COURSE</p>
-                        <h2 class="dept-main-title">Aims and Goals</h2>
-                        <div class="mx-auto mt-3" style="width: 60px; height: 3px; background-color: var(--anu-teal);"></div>
-                    </div>
-                    
-                    <p class="description-text mb-5 text-center mx-auto" style="max-width: 900px; color: #333; font-weight: 500;">
-                        The objective of the B.Sc. (Hons.) in Fire and Industrial Safety is to equip students with comprehensive knowledge and practical skills in the fields of fire prevention, industrial safety management, risk assessment, disaster management, and environmental safety.
-                    </p>
-                    
-                    <h5 class="fw-bold mb-4 text-center">The program aims to:</h5>
-                    
-                    <div class="row">
-                        <div class="col-md-11 mx-auto">
-                            <ul class="objective-list description-text">
-                                <li>Develop competent professionals capable of identifying, evaluating, and controlling workplace hazards.</li>
-                                <li>Provide in-depth understanding of fire science, safety engineering, occupational health, and emergency response systems.</li>
-                                <li>Train students in the application of national and international safety standards, codes, and regulations.</li>
-                                <li>Build leadership and decision-making skills to handle fire incidents, industrial accidents, and disaster situations effectively.</li>
-                                <li>Promote a culture of safety, sustainability, and environmental responsibility in industries and organizations.</li>
-                                <li>Prepare graduates for careers in industries such as oil & gas, manufacturing, construction, aviation, chemical, and public safety sectors, as well as for higher studies and research.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<style>
-    /* Footer Container */
-    .site-footer {
-        background-color: #061d36; /* Dark Navy Blue from screenshot */
-        color: #ffffff;
-        padding: 60px 0 0 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .footer-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        padding: 0 20px 40px 20px;
-        justify-content: space-between;
-    }
-
-    .footer-column {
-        flex: 1;
-        min-width: 250px;
-        margin-bottom: 30px;
-    }
-
-    .footer-column h3 {
-        color: #ffffff;
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 25px;
-        position: relative;
-    }
-
-    /* Column 1: Get In Touch */
-    .footer-logo {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .footer-logo i.fa-university {
-        font-size: 24px;
-        color: #ffffff;
-        margin-right: 10px;
-    }
-
-    .footer-logo span {
-        color: #ffc107; /* Yellow color from screenshot */
-        font-size: 24px;
-        font-weight: bold;
-    }
-
-    .contact-item {
-        display: flex;
-        align-items: flex-start;
-        margin-bottom: 12px;
-        font-size: 14px;
-        line-height: 1.6;
-        color: #d1d1d1;
-    }
-
-    .contact-item i {
-        margin-top: 4px;
-        margin-right: 10px;
-        width: 15px;
-        text-align: center;
-        color: #ffffff;
-    }
-
-    /* Columns 2 & 3: Links */
-    .footer-links {
-        list-style: none;
-        padding: 0;
-    }
-
-    .footer-links li {
-        margin-bottom: 12px;
-    }
-
-    .footer-links li a {
-        color: #d1d1d1;
-        text-decoration: none;
-        font-size: 15px;
-        display: flex;
-        align-items: center;
-        transition: color 0.3s;
-    }
-
-    .footer-links li a:hover {
-        color: #ffc107;
-    }
-
-    .footer-links li a::before {
-        content: '›';
-        margin-right: 10px;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    /* Column 4: Newsletter */
-    .newsletter-form {
-        display: flex;
-        margin-top: 10px;
-        margin-bottom: 20px;
-    }
-
-    .newsletter-form input {
-        padding: 12px 15px;
-        border: none;
-        width: 100%;
-        font-size: 14px;
-    }
-
-    .newsletter-form button {
-        background-color: #ffc107;
-        color: #000;
-        border: none;
-        padding: 0 20px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background 0.3s;
-        white-space: nowrap;
-    }
-
-    .newsletter-form button:hover {
-        background-color: #e0a800;
-    }
-
-    .social-title {
-        font-size: 16px;
-        font-weight: bold;
-        margin-bottom: 15px;
-        display: block;
-    }
-
-    .social-icons {
-        display: flex;
-        gap: 8px;
-    }
-
-    .social-icon {
-        width: 32px;
-        height: 32px;
-        border: 1px solid rgba(255,255,255,0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 14px;
-        transition: background 0.3s;
-    }
-
-    .social-icon:hover {
-        background-color: #ffc107;
-        color: #000;
-        border-color: #ffc107;
-    }
-
-    /* Bottom Bar */
-    .footer-bottom {
-        background-color: #041426; /* Darker navy for copyright */
-        padding: 20px 0;
-        border-top: 1px solid rgba(255,255,255,0.05);
-        position: relative;
-    }
-
-    .bottom-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-        font-size: 14px;
-        color: #ffffff;
-    }
-
-    .bottom-container span.highlight {
-        color: #ffc107;
-    }
-
-    /* Back to top button */
-    .back-to-top {
-        position: absolute;
-        right: 20px;
-        top: -20px;
-        background-color: #ffc107;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #000;
-        text-decoration: none;
-        font-size: 20px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    }
-</style>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-<footer class="site-footer">
-    <div class="footer-container">
-        <div class="footer-column">
-            <h3>Get In Touch</h3>
-            <div class="footer-logo">
-                <i class="fas fa-university"></i>
-                <span>ANU University</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>HOD, Fire and Industrial Safety Department, ANU College of Sciences,<br>
-                Nagarjuna Nagar, Guntur, Andhra<br>
-                Pradesh 522510.</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-phone-alt"></i>
-                <span>83743 40999</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <span>anusafetydept@gmail.com</span>
-            </div>
-        </div>
-
-        <div class="footer-column">
-            <h3>Quick Links</h3>
-            <ul class="footer-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Department</a></li>
-                <li><a href="#">People</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-column">
-            <h3>Popular Links</h3>
-            <ul class="footer-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Department</a></li>
-                <li><a href="#">People</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-column">
-            <h3>Newsletter</h3>
-            <div class="newsletter-form">
-                <input type="email" placeholder="Your Email Address">
-                <button type="submit">Sign Up</button>
-            </div>
-            
-            <span class="social-title">Follow Us</span>
-            <div class="social-icons">
-                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer-bottom">
-        <div class="bottom-container">
-            © <span class="highlight">Acharya Nagarjuna University</span>, All Right Reserved.
-        </div>
-        <a href="#" class="back-to-top">↑</a>
-    </div>
-</footer>

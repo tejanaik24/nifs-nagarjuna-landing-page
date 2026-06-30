@@ -1,760 +1,256 @@
-﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANU - DEPARTMENT OF FIRE AND INDUSTRIAL SAFETY</title>
-    <style>
-        /* CSS Reset & Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact Us – ANU Fire &amp; Industrial Safety</title>
+  <meta name="description" content="Contact the Department of Fire and Industrial Safety, Acharya Nagarjuna University, Guntur. Phone, email, and postal address.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/premium.css">
+  <style>
+    .page-hero::before{background-image:url('images/slide2.png')}
 
-        body {
-            background-color: #ffffff;
-        }
+    /* Contact section */
+    .contact-section{padding:90px 0;background:var(--light)}
 
-        /* 1. TOP BANNER - Navy & Yellow with Diagonal Slash */
-        .top-banner {
-            display: flex;
-            align-items: center;
-            height: 75px;
-            /* Creates the sharp angled transition from dark blue to yellow as seen in the image */
-            background: #ffc107; /* Fallback */
-            background: linear-gradient(62deg, #00334e 31%, #ffc107 31.2%);
-            padding: 0 20px;
-            color: white;
-            position: relative;
-        }
-
-        .contact-info {
-            flex: 1;
-            font-size: 13px;
-            padding-left: 20px;
-            white-space: nowrap;
-        }
-
-        .contact-info span {
-            color: #ffffff;
-            font-weight: 500;
-        }
-
-        .contact-info .separator {
-            margin: 0 12px;
-            color: #ffffff;
-            opacity: 0.5;
-        }
-
-        .accreditation-box {
-            flex: 2;
-            text-align: center;
-            color: #000000;
-            font-weight: bold;
-            font-size: 19px;
-            line-height: 1.3;
-            padding: 0 10px;
-        }
-
-        .logos-right {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 8px;
-            padding-right: 20px;
-        }
-        .logos-right img {
-        /* Adjust these values to your liking */
-        max-height: 50px; /* Limits the height so it doesn't stretch the banner */
-        width: auto;      /* Maintains the original aspect ratio */
-        display: block;   /* Good practice for images in flex containers */
+    /* HOD card */
+    .hod-banner{
+      background:linear-gradient(135deg,var(--navy),var(--teal));
+      border-radius:var(--radius);padding:36px 40px;
+      display:flex;align-items:center;gap:24px;
+      max-width:720px;margin:0 auto 60px;
+      box-shadow:var(--shadow-lg);
     }
+    .hod-icon-ring{
+      width:72px;height:72px;border-radius:50%;
+      background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);
+      display:flex;align-items:center;justify-content:center;
+      font-size:30px;color:var(--yellow);flex-shrink:0;
+    }
+    .hod-badge-text{color:var(--yellow);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
+    .hod-name{color:#fff;font-weight:800;font-size:1.6rem;margin-bottom:4px}
+    .hod-creds{color:rgba(255,255,255,.75);font-size:13.5px}
 
-        .mini-badge {
-            width: 35px;
-            height: 35px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
+    /* Contact cards */
+    .contact-cards-row{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-bottom:60px}
+    .contact-card{
+      flex:1;min-width:240px;max-width:320px;
+      background:#fff;border:1px solid #eee;border-radius:var(--radius);
+      padding:36px 24px;text-align:center;
+      transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition);
+    }
+    .contact-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:var(--teal)}
+    .cc-icon{font-size:26px;color:var(--teal);margin-bottom:18px}
+    .cc-title{font-weight:800;color:var(--navy);text-transform:uppercase;font-size:13px;letter-spacing:.5px;margin-bottom:12px}
+    .cc-info{color:#555;font-size:14.5px;line-height:1.85}
+    .cc-info a{color:inherit;font-weight:600;transition:color .2s}
+    .cc-info a:hover{color:var(--red)}
 
-        /* 2. MAIN LOGO SECTION */
-        .main-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 40px;
-            background-color: #ffffff;
-        }
+    /* Enquiry form */
+    .enquiry-section{padding:0 0 90px}
+    .enquiry-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:50px;border:1px solid #f0f0f0}
+    .form-label{font-weight:700;font-size:13px;color:var(--navy);margin-bottom:6px}
+    .form-control{border:1.5px solid #e5e7eb;border-radius:6px;padding:12px 14px;font-size:14px;transition:border-color .25s,box-shadow .25s}
+    .form-control:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,91,127,.12);outline:none}
+    .btn-submit{background:var(--navy);color:#fff;font-weight:800;padding:14px 36px;border:none;border-radius:4px;font-size:15px;cursor:pointer;transition:background .3s,transform .2s;width:100%}
+    .btn-submit:hover{background:var(--teal);transform:translateY(-2px)}
 
-        .univ-logo {
-            flex: 0 0 140px;
-        }
-        
-        .univ-logo img {
-            max-width: 100px;
-            height: auto;
-        }
+    /* Map placeholder */
+    .map-section{background:var(--light);padding:0 0 80px}
+    .map-placeholder{
+      background:linear-gradient(135deg,#eef1f6,#e0e6ee);
+      border-radius:var(--radius);height:300px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      border:2px dashed #c8d0dc;
+      color:var(--muted);font-size:15px;
+    }
+    .map-placeholder i{font-size:40px;margin-bottom:12px;color:var(--teal)}
 
-        .center-titles {
-            flex: 1;
-            text-align: center;
-        }
-
-        .telugu-header {
-            color: #d10000; /* Dark Red from screenshot */
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .english-header {
-            color: #005b7f; /* Teal/Blue from screenshot */
-            font-size: 38px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
-        }
-
-        .azadi-logo {
-            flex: 0 0 140px;
-            text-align: right;
-        }
-        
-        .azadi-logo img {
-            max-width: 120px;
-            height: auto;
-        }
-
-        /* 3. NAVIGATION BAR */
-        .navigation-bar {
-            background-color: #fdbd00;
-            border-top: 1px solid #e0a800;
-            border-bottom: 1px solid #e0a800;
-        }
-
-        .nav-list {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            padding: 12px 0;
-            font-weight: 700;
-        }
-
-        .nav-item {
-            margin: 0 20px;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #000000;
-            font-weight: bold;
-            font-size: 16px;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover {
-            color: #00334e;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 1024px) {
-            .english-header { font-size: 28px; }
-            .telugu-header { font-size: 24px; }
-            .top-banner { height: auto; padding: 10px; flex-direction: column; background: #ffc107; }
-            .contact-info, .accreditation-box, .logos-right { width: 100%; text-align: center; justify-content: center; padding: 5px 0; }
-        }
-        
-        /* Enable relative positioning for the parent items */
-.nav-item.dropdown {
-    position: relative;
-}
-
-/* Hide the dropdown menu by default */
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%; /* Positions it exactly below the nav bar */
-    left: 0;
-    background-color: #ffffff;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-    list-style: none;
-    padding: 10px 0;
-    z-index: 1000;
-    border-top: 3px solid var(--anu-blue); /* Visual indicator matching the theme */
-}
-
-/* Dropdown list items styling */
-.dropdown-menu li {
-    padding: 0;
-}
-
-.dropdown-menu li a {
-    color: #333;
-    padding: 10px 20px;
-    text-decoration: none;
-    display: block;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background 0.3s, color 0.3s;
-}
-
-/* Hover effects for dropdown items */
-.dropdown-menu li a:hover {
-    background-color: var(--anu-yellow);
-    color: #000;
-}
-
-/* Show the menu on hover of the parent .nav-item */
-.nav-item.dropdown:hover .dropdown-menu {
-    display: block;
-}
-
-/* Optional: Add a small arrow indicator to dropdown links */
-.dropdown-toggle::after {
-    content: ' ▼';
-    font-size: 10px;
-    vertical-align: middle;
-}
-    </style>
+    @media(max-width:768px){
+      .hod-banner{flex-direction:column;text-align:center;padding:28px 20px}
+      .contact-card{min-width:100%}
+      .enquiry-card{padding:28px 20px}
+    }
+  </style>
 </head>
-<body>
+<body id="top">
+<div id="site-header-ph"></div>
 
-    <header class="top-banner">
-        <div class="contact-info">
-            Call Now : <span>83743 40999</span>
-            <span class="separator">|</span>
-            Email Now : <span>anusafetydept@gmail.com</span>
+<main>
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <span class="page-hero-badge">Reach Us</span>
+      <h1>Contact Us</h1>
+      <div class="page-hero-line"></div>
+    </div>
+  </div>
+
+  <!-- Contact section -->
+  <section class="contact-section">
+    <div class="container">
+
+      <!-- HOD banner -->
+      <div class="hod-banner reveal-3d">
+        <div class="hod-icon-ring"><i class="fas fa-id-badge"></i></div>
+        <div>
+          <div class="hod-badge-text">Head of Department</div>
+          <div class="hod-name">Arun Kumar Panigrahi</div>
+          <div class="hod-creds">M.Tech., PGDHSE, I Dip. NEBOSH, DIS</div>
         </div>
-        
-        <div class="accreditation-box">
-            Accredited by NAAC with "A+ Grade (With 3.46 Outstanding<br>
-            Score in Dual Mode Category - First in the State & Country)"
+      </div>
+
+      <!-- Contact cards -->
+      <div class="contact-cards-row">
+        <div class="contact-card reveal-scale">
+          <div class="cc-icon"><i class="fas fa-map-marked-alt"></i></div>
+          <div class="cc-title">Postal Address</div>
+          <div class="cc-info">
+            Department of Fire &amp; Industrial Safety<br>
+            ANU College of Sciences<br>
+            Acharya Nagarjuna University<br>
+            Nagarjunanagar, Guntur – 522510<br>
+            Andhra Pradesh, India
+          </div>
         </div>
 
-        <div class="logos-right">
-           <img src="images/logo-tags.png" alt="Azadi Ka Amrit Mahotsav">
-        </div>
-    </header>
-
-    <section class="main-header">
-        <div class="univ-logo">
-            <img src="images/logo-anu.png" alt="ANU Logo">
-        </div>
-        
-        <div class="center-titles">
-            <div class="telugu-header">ఆచార్య నాగార్జున విశ్వవిద్యాలయం</div>
-            <h1 class="english-header">DEPARTMENT OF FIRE AND INDUSTRIAL SAFETY</h1>
+        <div class="contact-card reveal-scale">
+          <div class="cc-icon"><i class="fas fa-phone-square-alt"></i></div>
+          <div class="cc-title">Contact Numbers</div>
+          <div class="cc-info">
+            <a href="tel:8374340999">83743 40999</a><br>
+            <a href="tel:9246624868">92466 24868</a><br>
+            <a href="tel:7842911536">78429 11536</a>
+          </div>
         </div>
 
-        <div class="azadi-logo">
-            <img src="images/75years.png" alt="Azadi Ka Amrit Mahotsav">
+        <div class="contact-card reveal-scale">
+          <div class="cc-icon"><i class="fas fa-paper-plane"></i></div>
+          <div class="cc-title">Email Inquiries</div>
+          <div class="cc-info">
+            <span style="font-size:11px;font-weight:800;color:var(--muted)">DEPARTMENT:</span><br>
+            <a href="mailto:anusafetydept@gmail.com">anusafetydept@gmail.com</a><br>
+            <br>
+            <span style="font-size:11px;font-weight:800;color:var(--muted)">NIFS HEAD OFFICE:</span><br>
+            <a href="mailto:headoffice@nifsindia.com">headoffice@nifsindia.com</a><br>
+            <br>
+            <span style="font-size:11px;font-weight:800;color:var(--muted)">GUNTUR BRANCH:</span><br>
+            <a href="mailto:guntur@nifsindia.com">guntur@nifsindia.com</a>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-   <nav class="navigation-bar">
-    <ul class="nav-list">
-        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-        
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle">About Department</a>
-            <ul class="dropdown-menu">
-                <li><a href="profile.html">Department Profile</a></li>
-                <li><a href="vision-mission.html">Vision & Mission</a></li>
-                
-            </ul>
-        </li>
+  <!-- Enquiry Form + Map -->
+  <section class="enquiry-section">
+    <div class="container">
+      <div class="row g-5 align-items-start">
+        <div class="col-lg-6 reveal-left">
+          <span class="section-overline">Get In Touch</span>
+          <h2 class="section-title">Send Us a Message</h2>
+          <div class="section-divider"></div>
+          <div class="enquiry-card">
+            <form onsubmit="handleForm(event)">
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <label class="form-label" for="fname">First Name *</label>
+                  <input type="text" id="fname" class="form-control" placeholder="Your first name" required>
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="lname">Last Name</label>
+                  <input type="text" id="lname" class="form-control" placeholder="Your last name">
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="email">Email Address *</label>
+                  <input type="email" id="email" class="form-control" placeholder="you@example.com" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="phone">Phone Number</label>
+                  <input type="tel" id="phone" class="form-control" placeholder="+91 00000 00000">
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="subject">Subject</label>
+                  <select id="subject" class="form-control">
+                    <option value="">Select a topic...</option>
+                    <option>Admission Enquiry</option>
+                    <option>Course Information</option>
+                    <option>Placement Enquiry</option>
+                    <option>Fee Structure</option>
+                    <option>General Enquiry</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="message">Message *</label>
+                  <textarea id="message" class="form-control" rows="4" placeholder="How can we help you?" required style="resize:vertical"></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn-submit">Send Message <i class="fas fa-paper-plane ms-2"></i></button>
+                </div>
+              </div>
+            </form>
+            <div id="formSuccess" style="display:none;margin-top:20px;background:#f0fff4;border:1px solid #a3e6bd;border-radius:8px;padding:16px;color:#1a5c35;font-weight:600;text-align:center">
+              <i class="fas fa-check-circle me-2"></i>Thank you! We'll get back to you within 24 hours.
+            </div>
+          </div>
+        </div>
 
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle">Faculty</a>
-            <ul class="dropdown-menu">
-                <li><a href="faculty.html">Teaching</a></li>
-                
-            </ul>
-        </li>
+        <div class="col-lg-6 reveal-right">
+          <span class="section-overline">Location</span>
+          <h2 class="section-title">Find Us</h2>
+          <div class="section-divider"></div>
+          <div class="map-section" style="padding:0">
+            <div class="map-placeholder">
+              <i class="fas fa-map-marker-alt"></i>
+              <div style="font-weight:700;color:var(--navy);margin-bottom:4px">ANU College of Sciences</div>
+              <div>Nagarjunanagar, Guntur, Andhra Pradesh 522510</div>
+              <a href="https://maps.google.com/?q=Acharya+Nagarjuna+University+Guntur" target="_blank" rel="noopener" style="margin-top:16px;background:var(--navy);color:#fff;padding:10px 24px;border-radius:4px;font-weight:700;font-size:13px;display:inline-block">
+                <i class="fas fa-directions me-2"></i>Get Directions
+              </a>
+            </div>
+          </div>
 
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle">Academics</a>
-            <ul class="dropdown-menu">
-                <li><a href="course-offered.html">Course Offered</a></li>
-                
-                <li><a href="images/syllabus.pdf" target="_blank">Syllabus</a></li>
-                
-            </ul>
-        </li>
+          <div style="margin-top:28px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:28px;border:1px solid #eee">
+            <h5 style="color:var(--navy);font-weight:800;margin-bottom:16px">Office Hours</h5>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:14px;color:#555">
+              <span style="font-weight:600;color:var(--navy)">Monday – Friday</span><span>9:00 AM – 5:00 PM</span>
+              <span style="font-weight:600;color:var(--navy)">Saturday</span><span>9:00 AM – 1:00 PM</span>
+              <span style="font-weight:600;color:var(--navy)">Sunday</span><span style="color:var(--red)">Closed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
-        <li class="nav-item"><a href="contact.html" class="nav-link">Contact us</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Back to main page</a></li>
-    </ul>
-</nav>
+<div id="site-footer-ph"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/shared.js"></script>
+<script>
+function handleForm(e){
+  e.preventDefault();
+  document.getElementById('formSuccess').style.display='block';
+  e.target.reset();
+  setTimeout(()=>document.getElementById('formSuccess').style.display='none',6000);
+}
+(function(){
+  const rm = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  gsap.registerPlugin(ScrollTrigger);
+  if(!rm){
+    gsap.utils.toArray('.reveal,.reveal-left,.reveal-right').forEach(el=>{
+      const from = el.classList.contains('reveal-left') ? {opacity:0,x:-48} : el.classList.contains('reveal-right') ? {opacity:0,x:48} : {opacity:0,y:36};
+      gsap.fromTo(el,from,{opacity:1,x:0,y:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 87%'}});
+    });
+    gsap.utils.toArray('.reveal-3d').forEach((el,i)=>gsap.fromTo(el,{opacity:0,rotateX:16,y:36,transformPerspective:800},{opacity:1,rotateX:0,y:0,duration:.9,ease:'power3.out',delay:i*.1,scrollTrigger:{trigger:el,start:'top 87%'}}));
+    gsap.utils.toArray('.reveal-scale').forEach((el,i)=>gsap.fromTo(el,{opacity:0,scale:.84},{opacity:1,scale:1,duration:.7,ease:'back.out(1.4)',delay:i*.1,scrollTrigger:{trigger:el,start:'top 85%'}}));
+  } else {
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-3d,.reveal-scale').forEach(el=>{el.style.opacity='1';el.style.transform='none';});
+  }
+})();
+</script>
 </body>
 </html>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-<style>
-    :root {
-        --anu-blue: #00334e;
-        --anu-teal: #005b7f;
-        --anu-red: #d10000;
-        --anu-yellow: #fdbd00;
-    }
-
-    .contact-container-full {
-        background-color: #f8fafc;
-        padding: 60px 0 100px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    /* 1. HOD Centered Box */
-    .hod-header-wrapper {
-        text-align: center;
-        margin-bottom: 50px;
-    }
-
-    .hod-premium-card {
-        display: inline-flex;
-        align-items: center;
-        background: #fff;
-        padding: 30px 60px;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        border-bottom: 5px solid var(--anu-red);
-    }
-
-    .hod-icon-circle {
-        width: 70px;
-        height: 70px;
-        background: #fff5f5;
-        color: var(--anu-red);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 32px;
-        margin-right: 25px;
-    }
-
-    .hod-label-text {
-        text-transform: uppercase;
-        font-weight: 800;
-        font-size: 0.85rem;
-        color: var(--anu-red);
-        letter-spacing: 1.5px;
-        display: block;
-        text-align: left;
-    }
-
-    .hod-name-text {
-        font-size: 2rem;
-        font-weight: 800;
-        color: var(--anu-blue);
-        margin: 0;
-        text-align: left;
-    }
-
-    /* 2. FORCING SIDE-BY-SIDE GRID */
-    .contact-flex-row {
-        display: flex;
-        justify-content: center;
-        align-items: stretch;
-        gap: 25px;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .contact-item-card {
-        flex: 1; /* This forces them to take equal space side-by-side */
-        background: #fff;
-        border: 1px solid #eee;
-        border-radius: 12px;
-        padding: 40px 25px;
-        text-align: center;
-        transition: transform 0.3s ease;
-    }
-
-    .contact-item-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 40px rgba(0,0,0,0.06);
-        border-color: var(--anu-teal);
-    }
-
-    .circle-icon-top {
-        font-size: 28px;
-        color: var(--anu-teal);
-        margin-bottom: 20px;
-    }
-
-    .card-title-main {
-        font-weight: 800;
-        color: var(--anu-blue);
-        text-transform: uppercase;
-        font-size: 1.1rem;
-        letter-spacing: 0.5px;
-        margin-bottom: 15px;
-    }
-
-    .card-info-content {
-        color: #555;
-        font-size: 1rem;
-        line-height: 1.8;
-        margin: 0;
-    }
-
-    .card-info-content a {
-        color: inherit;
-        text-decoration: none;
-        font-weight: 600;
-    }
-
-    .card-info-content a:hover {
-        color: var(--anu-red);
-    }
-
-    /* Mobile Responsiveness */
-    @media (max-width: 991px) {
-        .contact-flex-row {
-            flex-direction: column;
-            padding: 0 20px;
-        }
-        .hod-premium-card {
-            padding: 20px 30px;
-            flex-direction: column;
-        }
-        .hod-icon-circle {
-            margin: 0 0 15px 0;
-        }
-        .hod-label-text, .hod-name-text {
-            text-align: center;
-        }
-    }
-</style>
-
-<section class="contact-container-full">
-    <div class="container">
-        
-        <div class="hod-header-wrapper">
-            <div class="hod-premium-card">
-                <div class="hod-icon-circle">
-                    <i class="fas fa-id-badge"></i>
-                </div>
-                <div>
-                    <span class="hod-label-text">Head of Department</span>
-                    <h2 class="hod-name-text">Arun Kumar Panigrahi</h2>
-                    <p>M. Tech., PGDHSE, I Dip. NEBOSH, DIS</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="contact-flex-row">
-            
-            <div class="contact-item-card shadow-sm">
-                <div class="circle-icon-top"><i class="fas fa-map-marked-alt"></i></div>
-                <!--<h4 class="card-title-main">Postal Address</h4>-->
-                <p class="card-info-content">
-                    Department of Fire & Industrial Safety<br>
-                    ANU College of Sciences<br>
-                    Acharya Nagarjuna University<br>
-                    Nagarjunanagar, Guntur - 522510
-                </p>
-            </div>
-
-            <div class="contact-item-card shadow-sm">
-                <div class="circle-icon-top"><i class="fas fa-phone-square-alt"></i></div>
-                <h4 class="card-title-main">Contact Numbers</h4>
-                <p class="card-info-content">
-                    <a href="tel:8374340999">83743 40999</a><br>
-                    <a href="tel:9246624868">92466 24868</a><br>
-                    <a href="tel:7842911536">78429 11536</a>
-                </p>
-            </div>
-
-            <div class="contact-item-card shadow-sm">
-                <div class="circle-icon-top"><i class="fas fa-paper-plane"></i></div>
-                <h4 class="card-title-main">Email Inquiries</h4>
-                <p class="card-info-content">
-                    <span class="text-muted small fw-bold">HEAD OFFICE:</span><br>
-                    <a href="mailto:headoffice@nifsindia.com">headoffice@nifsindia.com</a><br>
-                    <span class="text-muted small fw-bold">GUNTUR BRANCH:</span><br>
-                    <a href="mailto:guntur@nifsindia.com">guntur@nifsindia.com</a>
-                </p>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-<style>
-    /* Footer Container */
-    .site-footer {
-        background-color: #061d36; /* Dark Navy Blue from screenshot */
-        color: #ffffff;
-        padding: 60px 0 0 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .footer-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        padding: 0 20px 40px 20px;
-        justify-content: space-between;
-    }
-
-    .footer-column {
-        flex: 1;
-        min-width: 250px;
-        margin-bottom: 30px;
-    }
-
-    .footer-column h3 {
-        color: #ffffff;
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 25px;
-        position: relative;
-    }
-
-    /* Column 1: Get In Touch */
-    .footer-logo {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .footer-logo i.fa-university {
-        font-size: 24px;
-        color: #ffffff;
-        margin-right: 10px;
-    }
-
-    .footer-logo span {
-        color: #ffc107; /* Yellow color from screenshot */
-        font-size: 24px;
-        font-weight: bold;
-    }
-
-    .contact-item {
-        display: flex;
-        align-items: flex-start;
-        margin-bottom: 12px;
-        font-size: 14px;
-        line-height: 1.6;
-        color: #d1d1d1;
-    }
-
-    .contact-item i {
-        margin-top: 4px;
-        margin-right: 10px;
-        width: 15px;
-        text-align: center;
-        color: #ffffff;
-    }
-
-    /* Columns 2 & 3: Links */
-    .footer-links {
-        list-style: none;
-        padding: 0;
-    }
-
-    .footer-links li {
-        margin-bottom: 12px;
-    }
-
-    .footer-links li a {
-        color: #d1d1d1;
-        text-decoration: none;
-        font-size: 15px;
-        display: flex;
-        align-items: center;
-        transition: color 0.3s;
-    }
-
-    .footer-links li a:hover {
-        color: #ffc107;
-    }
-
-    .footer-links li a::before {
-        content: '›';
-        margin-right: 10px;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    /* Column 4: Newsletter */
-    .newsletter-form {
-        display: flex;
-        margin-top: 10px;
-        margin-bottom: 20px;
-    }
-
-    .newsletter-form input {
-        padding: 12px 15px;
-        border: none;
-        width: 100%;
-        font-size: 14px;
-    }
-
-    .newsletter-form button {
-        background-color: #ffc107;
-        color: #000;
-        border: none;
-        padding: 0 20px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background 0.3s;
-        white-space: nowrap;
-    }
-
-    .newsletter-form button:hover {
-        background-color: #e0a800;
-    }
-
-    .social-title {
-        font-size: 16px;
-        font-weight: bold;
-        margin-bottom: 15px;
-        display: block;
-    }
-
-    .social-icons {
-        display: flex;
-        gap: 8px;
-    }
-
-    .social-icon {
-        width: 32px;
-        height: 32px;
-        border: 1px solid rgba(255,255,255,0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 14px;
-        transition: background 0.3s;
-    }
-
-    .social-icon:hover {
-        background-color: #ffc107;
-        color: #000;
-        border-color: #ffc107;
-    }
-
-    /* Bottom Bar */
-    .footer-bottom {
-        background-color: #041426; /* Darker navy for copyright */
-        padding: 20px 0;
-        border-top: 1px solid rgba(255,255,255,0.05);
-        position: relative;
-    }
-
-    .bottom-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-        font-size: 14px;
-        color: #ffffff;
-    }
-
-    .bottom-container span.highlight {
-        color: #ffc107;
-    }
-
-    /* Back to top button */
-    .back-to-top {
-        position: absolute;
-        right: 20px;
-        top: -20px;
-        background-color: #ffc107;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #000;
-        text-decoration: none;
-        font-size: 20px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    }
-</style>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-<footer class="site-footer">
-    <div class="footer-container">
-        <div class="footer-column">
-            <h3>Get In Touch</h3>
-            <div class="footer-logo">
-                <i class="fas fa-university"></i>
-                <span>ANU University</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>HOD, Fire and Industrial Safety Department, ANU College of Sciences,<br>
-                Nagarjuna Nagar, Guntur, Andhra<br>
-                Pradesh 522510.</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-phone-alt"></i>
-                <span>83743 40999</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <span>anusafetydept@gmail.com</span>
-            </div>
-        </div>
-
-        <div class="footer-column">
-            <h3>Quick Links</h3>
-            <ul class="footer-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Department</a></li>
-                <li><a href="#">People</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-column">
-            <h3>Popular Links</h3>
-            <ul class="footer-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Department</a></li>
-                <li><a href="#">People</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-column">
-            <h3>Newsletter</h3>
-            <div class="newsletter-form">
-                <input type="email" placeholder="Your Email Address">
-                <button type="submit">Sign Up</button>
-            </div>
-            
-            <span class="social-title">Follow Us</span>
-            <div class="social-icons">
-                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer-bottom">
-        <div class="bottom-container">
-            © <span class="highlight">Acharya Nagarjuna University</span>, All Right Reserved.
-        </div>
-        <a href="#" class="back-to-top">↑</a>
-    </div>
-</footer>

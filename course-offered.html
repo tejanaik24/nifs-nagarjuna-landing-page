@@ -1,814 +1,273 @@
-﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANU - DEPARTMENT OF FIRE AND INDUSTRIAL SAFETY</title>
-    <style>
-        /* CSS Reset & Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Courses Offered – ANU Fire &amp; Industrial Safety</title>
+  <meta name="description" content="B.Sc. (Hons) and B.Sc. programs in Fire and Industrial Safety at Acharya Nagarjuna University. Also: Advanced Diplomas and Certificate courses.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/premium.css">
+  <style>
+    .page-hero::before{background-image:url('images/slide3.png')}
 
-        body {
-            background-color: #ffffff;
-        }
+    /* Comparison cards */
+    .programs-section{padding:90px 0;background:var(--light)}
+    .program-card{
+      background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-lg);
+      overflow:hidden;height:100%;display:flex;flex-direction:column;
+      transition:transform var(--transition),box-shadow var(--transition);
+      position:relative;
+    }
+    .program-card:hover{transform:translateY(-8px);box-shadow:0 28px 70px rgba(0,0,0,.16)}
 
-        /* 1. TOP BANNER - Navy & Yellow with Diagonal Slash */
-        .top-banner {
-            display: flex;
-            align-items: center;
-            height: 75px;
-            /* Creates the sharp angled transition from dark blue to yellow as seen in the image */
-            background: #ffc107; /* Fallback */
-            background: linear-gradient(62deg, #00334e 31%, #ffc107 31.2%);
-            padding: 0 20px;
-            color: white;
-            position: relative;
-        }
+    .program-card.honors .card-header-band{background:linear-gradient(135deg,var(--navy),var(--teal))}
+    .program-card.regular .card-header-band{background:linear-gradient(135deg,var(--teal),#007a5e)}
 
-        .contact-info {
-            flex: 1;
-            font-size: 13px;
-            padding-left: 20px;
-            white-space: nowrap;
-        }
-
-        .contact-info span {
-            color: #ffffff;
-            font-weight: 500;
-        }
-
-        .contact-info .separator {
-            margin: 0 12px;
-            color: #ffffff;
-            opacity: 0.5;
-        }
-
-        .accreditation-box {
-            flex: 2;
-            text-align: center;
-            color: #000000;
-            font-weight: bold;
-            font-size: 19px;
-            line-height: 1.3;
-            padding: 0 10px;
-        }
-
-        .logos-right {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 8px;
-            padding-right: 20px;
-        }
-        .logos-right img {
-        /* Adjust these values to your liking */
-        max-height: 50px; /* Limits the height so it doesn't stretch the banner */
-        width: auto;      /* Maintains the original aspect ratio */
-        display: block;   /* Good practice for images in flex containers */
+    .card-header-band{padding:32px 28px;color:#fff;position:relative;overflow:hidden}
+    .card-header-band::after{content:'';position:absolute;right:-20px;top:-20px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.06)}
+    .card-badge{
+      display:inline-block;background:var(--yellow);color:#000;
+      font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;
+      padding:4px 12px;border-radius:20px;margin-bottom:12px;
+    }
+    .card-degree{font-size:1.4rem;font-weight:900;line-height:1.2;margin-bottom:6px}
+    .card-duration-pill{
+      display:inline-flex;align-items:center;gap:6px;
+      background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);
+      padding:6px 14px;border-radius:20px;font-size:13px;font-weight:700;margin-top:8px;
     }
 
-        .mini-badge {
-            width: 35px;
-            height: 35px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
+    .card-body-content{padding:28px;flex:1;display:flex;flex-direction:column;gap:20px}
 
-        /* 2. MAIN LOGO SECTION */
-        .main-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 40px;
-            background-color: #ffffff;
-        }
+    .info-block-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:8px}
+    .info-block-text{color:#444;font-size:14.5px;line-height:1.75}
 
-        .univ-logo {
-            flex: 0 0 140px;
-        }
-        
-        .univ-logo img {
-            max-width: 100px;
-            height: auto;
-        }
+    .career-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+    .career-tag{background:#f0f4f8;color:var(--navy);font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px}
 
-        .center-titles {
-            flex: 1;
-            text-align: center;
-        }
+    .elig-list{list-style:none;padding:0;margin:0}
+    .elig-list li{position:relative;padding-left:20px;color:#555;font-size:14px;line-height:1.6;margin-bottom:6px}
+    .elig-list li::before{content:'●';position:absolute;left:0;color:var(--yellow);font-size:12px}
 
-        .telugu-header {
-            color: #d10000; /* Dark Red from screenshot */
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+    .enroll-btn{
+      display:block;text-align:center;background:var(--navy);color:#fff;
+      padding:14px;font-weight:800;font-size:14px;margin:0;
+      transition:background .3s;text-decoration:none;
+    }
+    .program-card.honors .enroll-btn{background:var(--navy)}
+    .program-card.honors .enroll-btn:hover{background:var(--teal);color:#fff}
+    .program-card.regular .enroll-btn{background:var(--teal)}
+    .program-card.regular .enroll-btn:hover{background:#005040;color:#fff}
 
-        .english-header {
-            color: #005b7f; /* Teal/Blue from screenshot */
-            font-size: 38px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
-        }
+    /* Section tag */
+    .section-tag-strip{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--teal);color:#fff;
+      padding:8px 22px;border-radius:0 24px 24px 0;
+      font-weight:700;font-size:14px;margin-bottom:24px;
+    }
 
-        .azadi-logo {
-            flex: 0 0 140px;
-            text-align: right;
-        }
-        
-        .azadi-logo img {
-            max-width: 120px;
-            height: auto;
-        }
+    /* Table section */
+    .diplomas-section{padding:60px 0 90px}
+    .course-table-wrap{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);border:1px solid #eee}
+    .course-table{width:100%;border-collapse:collapse;margin:0}
+    .course-table thead th{background:var(--navy);color:#fff;padding:18px 20px;font-size:13px;text-transform:uppercase;letter-spacing:1px;border:none;font-weight:700}
+    .course-table tbody td{padding:18px 20px;vertical-align:middle;border-bottom:1px solid #f1f1f1;font-size:14px}
+    .course-table tbody tr:last-child td{border-bottom:none}
+    .course-table tbody tr:hover{background:#fafbfc}
+    .course-name-big{color:var(--navy);font-weight:700;display:block;font-size:1rem}
+    .course-cat{font-size:11px;text-transform:uppercase;color:var(--teal);font-weight:800;letter-spacing:.5px}
+    .dur-pill{display:inline-block;padding:5px 14px;background:#f0f4f7;color:var(--navy);border-radius:50px;font-weight:700;font-size:13px;border:1px solid #dce4e9}
+    .elig-li{color:#555;font-size:13.5px;line-height:1.6;padding-left:16px;position:relative}
+    .elig-li::before{content:'•';position:absolute;left:0;color:var(--yellow);font-weight:700}
 
-        /* 3. NAVIGATION BAR */
-        .navigation-bar {
-            background-color: #fdbd00;
-            border-top: 1px solid #e0a800;
-            border-bottom: 1px solid #e0a800;
-        }
+    /* Syllabus CTA */
+    .syllabus-cta{background:linear-gradient(135deg,var(--navy),var(--teal));padding:60px 0;text-align:center}
 
-        .nav-list {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            padding: 12px 0;
-            font-weight: 700;
-        }
-
-        .nav-item {
-            margin: 0 20px;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #000000;
-            font-weight: bold;
-            font-size: 16px;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover {
-            color: #00334e;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 1024px) {
-            .english-header { font-size: 28px; }
-            .telugu-header { font-size: 24px; }
-            .top-banner { height: auto; padding: 10px; flex-direction: column; background: #ffc107; }
-            .contact-info, .accreditation-box, .logos-right { width: 100%; text-align: center; justify-content: center; padding: 5px 0; }
-        }
-        
-        /* Enable relative positioning for the parent items */
-.nav-item.dropdown {
-    position: relative;
-}
-
-/* Hide the dropdown menu by default */
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%; /* Positions it exactly below the nav bar */
-    left: 0;
-    background-color: #ffffff;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-    list-style: none;
-    padding: 10px 0;
-    z-index: 1000;
-    border-top: 3px solid var(--anu-blue); /* Visual indicator matching the theme */
-}
-
-/* Dropdown list items styling */
-.dropdown-menu li {
-    padding: 0;
-}
-
-.dropdown-menu li a {
-    color: #333;
-    padding: 10px 20px;
-    text-decoration: none;
-    display: block;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background 0.3s, color 0.3s;
-}
-
-/* Hover effects for dropdown items */
-.dropdown-menu li a:hover {
-    background-color: var(--anu-yellow);
-    color: #000;
-}
-
-/* Show the menu on hover of the parent .nav-item */
-.nav-item.dropdown:hover .dropdown-menu {
-    display: block;
-}
-
-/* Optional: Add a small arrow indicator to dropdown links */
-.dropdown-toggle::after {
-    content: ' ▼';
-    font-size: 10px;
-    vertical-align: middle;
-}
-    </style>
+    @media(max-width:768px){
+      .course-table thead th,.course-table tbody td{padding:12px 14px;font-size:13px}
+      .programs-section{padding:50px 0}
+    }
+  </style>
 </head>
-<body>
+<body id="top">
+<div id="site-header-ph"></div>
 
-    <header class="top-banner">
-        <div class="contact-info">
-            Call Now : <span>83743 40999</span>
-            <span class="separator">|</span>
-            Email Now : <span>anusafetydept@gmail.com</span>
+<main>
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <span class="page-hero-badge">Academics</span>
+      <h1>Academic Programs</h1>
+      <div class="page-hero-line"></div>
+    </div>
+  </div>
+
+  <!-- UG Program Cards -->
+  <section class="programs-section">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <span class="section-overline">Degree Programs</span>
+        <h2 class="section-title">Undergraduate Courses in<br>Fire &amp; Industrial Safety</h2>
+        <div class="section-divider center"></div>
+        <p style="color:var(--muted);max-width:600px;margin:0 auto;font-size:15px;line-height:1.75">Both programs are offered on campus, on a self-supporting mode, for the academic year 2025-2026 onward.</p>
+      </div>
+
+      <div class="row g-4 align-items-stretch">
+
+        <!-- B.Sc. Hons -->
+        <div class="col-md-6 reveal-3d">
+          <div class="program-card honors">
+            <div class="card-header-band">
+              <div class="card-badge">Honours Degree</div>
+              <div class="card-degree">B.Sc. (Hons.) in Fire &amp; Industrial Safety</div>
+              <div class="card-duration-pill"><i class="fas fa-calendar-alt"></i> 4 Years / 8 Semesters</div>
+            </div>
+            <div class="card-body-content">
+              <div>
+                <div class="info-block-label">Program Overview</div>
+                <div class="info-block-text">A comprehensive 4-year honours degree with a research component in the final year. Covers fire science, safety engineering, occupational health, disaster management, environmental safety, and industrial risk assessment — aligned to NEBOSH and ISO 45001 frameworks.</div>
+              </div>
+              <div>
+                <div class="info-block-label">Eligibility</div>
+                <ul class="elig-list">
+                  <li>10+2 / Intermediate / Diploma (2 or 3 Years) — any stream or equivalent</li>
+                </ul>
+              </div>
+              <div>
+                <div class="info-block-label">Career Pathways</div>
+                <div class="career-tags">
+                  <span class="career-tag">HSE Officer</span>
+                  <span class="career-tag">Fire Safety Manager</span>
+                  <span class="career-tag">EHS Consultant</span>
+                  <span class="career-tag">Safety Auditor</span>
+                  <span class="career-tag">Risk Analyst</span>
+                  <span class="career-tag">Research &amp; Academics</span>
+                </div>
+              </div>
+              <div>
+                <div class="info-block-label">Key Features</div>
+                <div class="info-block-text">✔ NSDC skill certification &nbsp; ✔ On-the-Job Training (OJT) &nbsp; ✔ Industry internships &nbsp; ✔ Advanced safety lab &nbsp; ✔ NIFS centre network access</div>
+              </div>
+            </div>
+            <a href="contact" class="enroll-btn"><i class="fas fa-graduation-cap me-2"></i>Enquire / Apply Now</a>
+          </div>
         </div>
-        
-        <div class="accreditation-box">
-            Accredited by NAAC with "A+ Grade (With 3.46 Outstanding<br>
-            Score in Dual Mode Category - First in the State & Country)"
+
+        <!-- B.Sc. Regular -->
+        <div class="col-md-6 reveal-3d">
+          <div class="program-card regular">
+            <div class="card-header-band">
+              <div class="card-badge">Undergraduate</div>
+              <div class="card-degree">B.Sc. in Fire &amp; Industrial Safety</div>
+              <div class="card-duration-pill"><i class="fas fa-calendar-alt"></i> 3 Years / 6 Semesters</div>
+            </div>
+            <div class="card-body-content">
+              <div>
+                <div class="info-block-label">Program Overview</div>
+                <div class="info-block-text">A focused 3-year undergraduate program covering core fire prevention, industrial safety management, emergency response, and hazard control. Designed for rapid industry entry into HSE roles across manufacturing, oil &amp; gas, construction, and public safety sectors.</div>
+              </div>
+              <div>
+                <div class="info-block-label">Eligibility</div>
+                <ul class="elig-list">
+                  <li>10+2 / Intermediate / Diploma (2 or 3 Years) — any stream or equivalent</li>
+                </ul>
+              </div>
+              <div>
+                <div class="info-block-label">Career Pathways</div>
+                <div class="career-tags">
+                  <span class="career-tag">Safety Supervisor</span>
+                  <span class="career-tag">Fire Officer</span>
+                  <span class="career-tag">HSE Executive</span>
+                  <span class="career-tag">Industrial Inspector</span>
+                  <span class="career-tag">Emergency Coordinator</span>
+                </div>
+              </div>
+              <div>
+                <div class="info-block-label">Key Features</div>
+                <div class="info-block-text">✔ NSDC skill certification &nbsp; ✔ On-the-Job Training (OJT) &nbsp; ✔ Industry internships &nbsp; ✔ Digital classrooms &nbsp; ✔ NIFS centre placement network</div>
+              </div>
+            </div>
+            <a href="contact" class="enroll-btn"><i class="fas fa-graduation-cap me-2"></i>Enquire / Apply Now</a>
+          </div>
         </div>
 
-        <div class="logos-right">
-           <img src="images/logo-tags.png" alt="Azadi Ka Amrit Mahotsav">
-        </div>
-    </header>
+      </div>
+    </div>
+  </section>
 
-    <section class="main-header">
-        <div class="univ-logo">
-            <img src="images/logo-anu.png" alt="ANU Logo">
-        </div>
-        
-        <div class="center-titles">
-            <div class="telugu-header">ఆచార్య నాగార్జున విశ్వవిద్యాలయం</div>
-            <h1 class="english-header">DEPARTMENT OF FIRE AND INDUSTRIAL SAFETY</h1>
-        </div>
+  <!-- Professional Diplomas & Certificates -->
+  <section class="diplomas-section">
+    <div class="container">
+      <div class="reveal mb-2">
+        <div class="section-tag-strip"><i class="fas fa-award"></i> Professional Diplomas &amp; Certificates</div>
+      </div>
+      <div class="course-table-wrap reveal">
+        <table class="course-table">
+          <thead>
+            <tr>
+              <th style="width:42%">Specialization</th>
+              <th style="width:18%;text-align:center">Duration</th>
+              <th style="width:40%">Eligibility</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="course-cat">PG Diploma</span><span class="course-name-big">Advance Diploma in Industrial Safety (ADIS)</span></td>
+              <td class="text-center"><span class="dur-pill">1 Year</span></td>
+              <td>
+                <div class="elig-li">B.E. / B.Tech or Any Degree with Science background</div>
+                <div class="elig-li">3-year Diploma + 1 year industrial experience</div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="course-cat">Advanced Diploma</span><span class="course-name-big">ADFS / ADQHSE / ADIS</span></td>
+              <td class="text-center"><span class="dur-pill">1 Year</span></td>
+              <td><div class="elig-li">Bachelor Degree or 3-year Diploma in any stream</div></td>
+            </tr>
+            <tr>
+              <td><span class="course-cat">Certificate</span><span class="course-name-big">Fire and Safety Course (CCFS)</span></td>
+              <td class="text-center"><span class="dur-pill" style="background:#fff0f0;color:var(--red);border-color:#ffdada">3 Months</span></td>
+              <td><div class="elig-li">10th / SSC / SSE or equivalent</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 
-        <div class="azadi-logo">
-            <img src="images/75years.png" alt="Azadi Ka Amrit Mahotsav">
-        </div>
-    </section>
+  <!-- Syllabus CTA -->
+  <section class="syllabus-cta">
+    <div class="container">
+      <div class="reveal">
+        <span style="color:var(--yellow);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:3px">Download</span>
+        <h2 style="color:#fff;font-weight:900;font-size:clamp(1.5rem,3vw,2.1rem);margin:10px 0 14px">View the Full Syllabus</h2>
+        <p style="color:rgba(255,255,255,.82);max-width:500px;margin:0 auto 28px;font-size:15px">Download the official course syllabus for B.Sc. (Hons.) and B.Sc. programs in Fire and Industrial Safety.</p>
+        <a href="images/syllabus.pdf" target="_blank" style="background:var(--yellow);color:#000;font-weight:800;padding:14px 36px;border-radius:4px;display:inline-block;font-size:15px;transition:background .3s">
+          <i class="fas fa-download me-2"></i>Download Syllabus (PDF)
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
 
-   <nav class="navigation-bar">
-    <ul class="nav-list">
-        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-        
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle">About Department</a>
-            <ul class="dropdown-menu">
-                <li><a href="profile.html">Department Profile</a></li>
-                <li><a href="vision-mission.html">Vision & Mission</a></li>
-                
-            </ul>
-        </li>
+<div id="site-footer-ph"></div>
 
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle">Faculty</a>
-            <ul class="dropdown-menu">
-                <li><a href="faculty.html">Teaching</a></li>
-                
-            </ul>
-        </li>
-
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle">Academics</a>
-            <ul class="dropdown-menu">
-                <li><a href="course-offered.html">Course Offered</a></li>
-                
-                <li><a href="images/syllabus.pdf" target="_blank">Syllabus</a></li>
-                
-            </ul>
-        </li>
-
-        <li class="nav-item"><a href="contact.html" class="nav-link">Contact us</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Back to main page</a></li>
-    </ul>
-</nav>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/shared.js"></script>
+<script>
+(function(){
+  const rm = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  gsap.registerPlugin(ScrollTrigger);
+  if(!rm){
+    gsap.utils.toArray('.reveal').forEach(el=>gsap.fromTo(el,{opacity:0,y:36},{opacity:1,y:0,duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 87%'}}));
+    gsap.utils.toArray('.reveal-3d').forEach((el,i)=>gsap.fromTo(el,{opacity:0,rotateX:16,y:36,transformPerspective:800},{opacity:1,rotateX:0,y:0,duration:.9,ease:'power3.out',delay:i*.15,scrollTrigger:{trigger:el,start:'top 87%'}}));
+  } else {
+    document.querySelectorAll('.reveal,.reveal-3d').forEach(el=>{el.style.opacity='1';el.style.transform='none';});
+  }
+})();
+</script>
 </body>
 </html>
-
-<style>
-    :root {
-        --anu-yellow: #fdbd00;
-        --anu-blue: #00334e;
-        --anu-teal: #005b7f;
-        --anu-red: #d10000;
-    }
-
-    .courses-wrapper {
-        background-color: #ffffff;
-        padding-bottom: 80px;
-    }
-
-    /* Professional Header Section */
-    .page-header-clean {
-        text-align: center;
-        padding: 60px 0 40px;
-        background: #f8f9fa;
-        border-bottom: 1px solid #eee;
-    }
-
-    .page-header-clean h2 {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: var(--anu-blue);
-        margin-bottom: 10px;
-    }
-
-    .header-underline {
-        width: 60px;
-        height: 4px;
-        background: var(--anu-yellow);
-        margin: 0 auto;
-    }
-
-    /* Modern Table Design */
-    .course-table-container {
-        margin-top: 40px;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        border: 1px solid #eee;
-    }
-
-    .course-table {
-        width: 100%;
-        margin-bottom: 0;
-        border-collapse: collapse;
-    }
-
-    .course-table thead th {
-        background-color: var(--anu-blue);
-        color: #fff;
-        padding: 20px;
-        text-transform: uppercase;
-        font-size: 0.85rem;
-        letter-spacing: 1px;
-        border: none;
-    }
-
-    .course-table tbody td {
-        padding: 20px;
-        vertical-align: middle;
-        border-bottom: 1px solid #f1f1f1;
-        font-size: 0.95rem;
-    }
-
-    /* Highlighted Course Name */
-    .course-name {
-        color: var(--anu-blue);
-        font-weight: 700;
-        display: block;
-        font-size: 1.1rem;
-    }
-
-    .course-category {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        color: var(--anu-teal);
-        font-weight: 800;
-        letter-spacing: 0.5px;
-    }
-
-    /* Duration Badges */
-    .duration-pill {
-        display: inline-block;
-        padding: 6px 16px;
-        background: #f0f4f7;
-        color: var(--anu-blue);
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 0.85rem;
-        border: 1px solid #dce4e9;
-    }
-
-    /* Custom Bullet for Eligibility */
-    .eligibility-list {
-        list-style: none;
-        padding-left: 0;
-        margin-bottom: 0;
-    }
-
-    .eligibility-list li {
-        position: relative;
-        padding-left: 20px;
-        line-height: 1.6;
-        color: #555;
-    }
-
-    .eligibility-list li::before {
-        content: '●';
-        position: absolute;
-        left: 0;
-        color: var(--anu-yellow);
-        font-size: 14px;
-    }
-
-    /* Hover Effect */
-    .course-table tbody tr:hover {
-        background-color: #fafbfc;
-    }
-
-    .section-tag {
-        background: var(--anu-teal);
-        color: white;
-        padding: 10px 25px;
-        display: inline-block;
-        border-radius: 0 25px 25px 0;
-        font-weight: 700;
-        margin-bottom: 20px;
-        font-size: 0.9rem;
-    }
-</style>
-
-<div class="courses-wrapper">
-    <header class="page-header-clean">
-        <div class="container">
-            <h2>Academic Programs</h2>
-            <div class="header-underline"></div>
-        </div>
-    </header>
-
-    <div class="container mt-5">
-        
-        <div class="section-tag">Degree & Regular Programs</div>
-        <div class="course-table-container">
-            <table class="course-table">
-                <thead>
-                    <tr>
-                        <th style="width: 40%;">Course & Level</th>
-                        <th style="width: 20%; text-align: center;">Duration</th>
-                        <th style="width: 40%;">Eligibility Criteria</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <span class="course-category">Honors Degree</span>
-                            <span class="course-name">B.Sc. Honors in Fire & Industrial Safety</span>
-                        </td>
-                        <td class="text-center">
-                            <span class="duration-pill">4 Years / 8 Sem</span>
-                        </td>
-                        <td>
-                            <ul class="eligibility-list">
-                                <li>10 + 2 / Intermediate / Diploma (2 or 3 Years) any stream or equivalent</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="course-category">Undergraduate</span>
-                            <span class="course-name">B.Sc. (Fire & Industrial Safety) - UG</span>
-                        </td>
-                        <td class="text-center">
-                            <span class="duration-pill">3 Years / 6 Sem</span>
-                        </td>
-                        <td>
-                            <ul class="eligibility-list">
-                                <li>10 + 2 / Intermediate / Diploma (2 or 3 Years) any stream or equivalent</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="section-tag mt-5">Professional Diplomas & Certificates</div>
-        <div class="course-table-container">
-            <table class="course-table">
-                <thead>
-                    <tr>
-                        <th style="width: 40%;">Specialization</th>
-                        <th style="width: 20%; text-align: center;">Duration</th>
-                        <th style="width: 40%;">Eligibility Criteria</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <span class="course-category">PG Diploma</span>
-                            <span class="course-name">Advance Diploma in Industrial Safety (ADIS)</span>
-                        </td>
-                        <td class="text-center">
-                            <span class="duration-pill">1 Year</span>
-                        </td>
-                        <td>
-                            <ul class="eligibility-list">
-                                <li>B.E. / B.Tech or Any Degree with Science background</li>
-                                <li>3-year Diploma + 1 year industrial experience</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="course-category">Advanced Diploma</span>
-                            <span class="course-name">ADFS / ADQHSE / ADIS</span>
-                        </td>
-                        <td class="text-center">
-                            <span class="duration-pill">1 Year</span>
-                        </td>
-                        <td>
-                            <ul class="eligibility-list">
-                                <li>Bachelor Degree or 3-year Diploma in any stream</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="course-category">Certificate</span>
-                            <span class="course-name">Fire and Safety Course (CCFS)</span>
-                        </td>
-                        <td class="text-center">
-                            <span class="duration-pill" style="background: #fff0f0; color: var(--anu-red); border-color: #ffdada;">3 Months</span>
-                        </td>
-                        <td>
-                            <ul class="eligibility-list">
-                                <li>10th / SSC / SSE or equivalent</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-</div>
-
-
-<style>
-    /* Footer Container */
-    .site-footer {
-        background-color: #061d36; /* Dark Navy Blue from screenshot */
-        color: #ffffff;
-        padding: 60px 0 0 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .footer-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        padding: 0 20px 40px 20px;
-        justify-content: space-between;
-    }
-
-    .footer-column {
-        flex: 1;
-        min-width: 250px;
-        margin-bottom: 30px;
-    }
-
-    .footer-column h3 {
-        color: #ffffff;
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 25px;
-        position: relative;
-    }
-
-    /* Column 1: Get In Touch */
-    .footer-logo {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .footer-logo i.fa-university {
-        font-size: 24px;
-        color: #ffffff;
-        margin-right: 10px;
-    }
-
-    .footer-logo span {
-        color: #ffc107; /* Yellow color from screenshot */
-        font-size: 24px;
-        font-weight: bold;
-    }
-
-    .contact-item {
-        display: flex;
-        align-items: flex-start;
-        margin-bottom: 12px;
-        font-size: 14px;
-        line-height: 1.6;
-        color: #d1d1d1;
-    }
-
-    .contact-item i {
-        margin-top: 4px;
-        margin-right: 10px;
-        width: 15px;
-        text-align: center;
-        color: #ffffff;
-    }
-
-    /* Columns 2 & 3: Links */
-    .footer-links {
-        list-style: none;
-        padding: 0;
-    }
-
-    .footer-links li {
-        margin-bottom: 12px;
-    }
-
-    .footer-links li a {
-        color: #d1d1d1;
-        text-decoration: none;
-        font-size: 15px;
-        display: flex;
-        align-items: center;
-        transition: color 0.3s;
-    }
-
-    .footer-links li a:hover {
-        color: #ffc107;
-    }
-
-    .footer-links li a::before {
-        content: '›';
-        margin-right: 10px;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    /* Column 4: Newsletter */
-    .newsletter-form {
-        display: flex;
-        margin-top: 10px;
-        margin-bottom: 20px;
-    }
-
-    .newsletter-form input {
-        padding: 12px 15px;
-        border: none;
-        width: 100%;
-        font-size: 14px;
-    }
-
-    .newsletter-form button {
-        background-color: #ffc107;
-        color: #000;
-        border: none;
-        padding: 0 20px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background 0.3s;
-        white-space: nowrap;
-    }
-
-    .newsletter-form button:hover {
-        background-color: #e0a800;
-    }
-
-    .social-title {
-        font-size: 16px;
-        font-weight: bold;
-        margin-bottom: 15px;
-        display: block;
-    }
-
-    .social-icons {
-        display: flex;
-        gap: 8px;
-    }
-
-    .social-icon {
-        width: 32px;
-        height: 32px;
-        border: 1px solid rgba(255,255,255,0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 14px;
-        transition: background 0.3s;
-    }
-
-    .social-icon:hover {
-        background-color: #ffc107;
-        color: #000;
-        border-color: #ffc107;
-    }
-
-    /* Bottom Bar */
-    .footer-bottom {
-        background-color: #041426; /* Darker navy for copyright */
-        padding: 20px 0;
-        border-top: 1px solid rgba(255,255,255,0.05);
-        position: relative;
-    }
-
-    .bottom-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-        font-size: 14px;
-        color: #ffffff;
-    }
-
-    .bottom-container span.highlight {
-        color: #ffc107;
-    }
-
-    /* Back to top button */
-    .back-to-top {
-        position: absolute;
-        right: 20px;
-        top: -20px;
-        background-color: #ffc107;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #000;
-        text-decoration: none;
-        font-size: 20px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    }
-</style>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-<footer class="site-footer">
-    <div class="footer-container">
-        <div class="footer-column">
-            <h3>Get In Touch</h3>
-            <div class="footer-logo">
-                <i class="fas fa-university"></i>
-                <span>ANU University</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>HOD, Fire and Industrial Safety Department, ANU College of Sciences,<br>
-                Nagarjuna Nagar, Guntur, Andhra<br>
-                Pradesh 522510.</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-phone-alt"></i>
-                <span>83743 40999</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <span>anusafetydept@gmail.com</span>
-            </div>
-        </div>
-
-        <div class="footer-column">
-            <h3>Quick Links</h3>
-            <ul class="footer-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Department</a></li>
-                <li><a href="#">People</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-column">
-            <h3>Popular Links</h3>
-            <ul class="footer-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Department</a></li>
-                <li><a href="#">People</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-column">
-            <h3>Newsletter</h3>
-            <div class="newsletter-form">
-                <input type="email" placeholder="Your Email Address">
-                <button type="submit">Sign Up</button>
-            </div>
-            
-            <span class="social-title">Follow Us</span>
-            <div class="social-icons">
-                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer-bottom">
-        <div class="bottom-container">
-            © <span class="highlight">Acharya Nagarjuna University</span>, All Right Reserved.
-        </div>
-        <a href="#" class="back-to-top">↑</a>
-    </div>
-</footer>
