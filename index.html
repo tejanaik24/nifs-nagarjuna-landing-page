@@ -595,9 +595,9 @@
     const viewport = document.getElementById('heroViewport');
     const slides   = [...document.querySelectorAll('.hero-slide')];
     const dots     = [...document.querySelectorAll('#heroDots .hero-dot')];
-    const INTERVAL = 5500;
+    const INTERVAL = 3000;
     const isMob    = () => window.innerWidth < 768;
-    let cur = 0, busy = false, timer = null, isPaused = false;
+    let cur = 0, busy = false, timer = null;
 
     /* Init: slide 0 visible, rest rotated off-screen */
     slides.forEach((s,i)=>{
@@ -642,33 +642,28 @@
       }
     }
 
-    function advanceNext(){ if(!isPaused && !busy) goTo((cur+1)%slides.length, 1); }
+    function advanceNext(){ if(!busy) goTo((cur+1)%slides.length, 1); }
     function advancePrev(){ goTo((cur-1+slides.length)%slides.length,-1); }
 
-    /* Timer always runs — isPaused flag controls whether tick actually advances */
+    /* Timer — always running, no hover pause (hover pause caused spurious pointerenter on load) */
     timer = setInterval(advanceNext, INTERVAL);
 
-    /* Dots: manual click resets the 5.5s window */
+    /* Dots: click resets the 3s window */
     dots.forEach((d,i)=>d.addEventListener('click',()=>{
       clearInterval(timer);
       goTo(i, i>cur?1:-1);
       timer=setInterval(advanceNext,INTERVAL);
     }));
 
-    /* Hover pause — pointer events only; ignore touch-simulated mouse events */
-    section.addEventListener('pointerenter',e=>{ if(e.pointerType!=='touch') isPaused=true; });
-    section.addEventListener('pointerleave',e=>{ if(e.pointerType!=='touch') isPaused=false; });
-
-    /* Touch swipe — 8s cooldown before auto-advance resumes */
-    let tsx=0,tsy=0,swipeCooldown=null;
+    /* Touch swipe */
+    let tsx=0,tsy=0;
     viewport.addEventListener('touchstart',e=>{tsx=e.changedTouches[0].clientX;tsy=e.changedTouches[0].clientY;},{passive:true});
     viewport.addEventListener('touchend',e=>{
       const dx=tsx-e.changedTouches[0].clientX,dy=Math.abs(tsy-e.changedTouches[0].clientY);
       if(Math.abs(dx)>44&&Math.abs(dx)>dy){
-        isPaused=true;
+        clearInterval(timer);
         if(dx>0) advanceNext(); else advancePrev();
-        clearTimeout(swipeCooldown);
-        swipeCooldown=setTimeout(()=>{ isPaused=false; },8000);
+        timer=setInterval(advanceNext,INTERVAL);
       }
     },{passive:true});
   })();
