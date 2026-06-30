@@ -286,10 +286,21 @@
     .programs-section .section-overline{color:rgba(253,189,0,.8)}
     .programs-section .section-title{color:#fff}
     .programs-section .section-divider.center{background:var(--yellow)}
-    .prog-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:44px 38px;height:100%;position:relative;overflow:hidden;will-change:transform;transition:border-color .35s,box-shadow .35s}
+    /* prog card image header — card padding is 0 38px 44px so image bleeds to inner border edges */
+    .prog-img-wrap{margin:0 -38px 28px;height:200px;overflow:hidden;position:relative;flex-shrink:0}
+    .prog-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease}
+    .prog-img-wrap::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,rgba(3,18,35,1) 0%,transparent 100%)}
+    .prog-card:hover .prog-img-wrap img{transform:scale(1.05)}
+    /* whyus card image header — card padding is 30px 26px so bleed -30px top -26px sides */
+    .whyus-img-wrap{margin:-30px -26px 20px;height:140px;overflow:hidden;flex-shrink:0}
+    .whyus-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+    .whyus-card:hover .whyus-img-wrap img{transform:scale(1.06)}
+    .prog-card{background:rgba(3,18,35,.85);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:0 38px 44px;height:100%;position:relative;overflow:hidden;will-change:transform;transition:border-color .35s,box-shadow .35s;display:flex;flex-direction:column}
     .prog-card::after{content:'';position:absolute;inset:0;border-radius:20px;background:linear-gradient(135deg,rgba(253,189,0,.07) 0%,transparent 55%);opacity:0;transition:opacity .4s;pointer-events:none}
     .prog-card:hover{border-color:rgba(253,189,0,.35);box-shadow:0 28px 72px rgba(0,0,0,.5)}
     .prog-card:hover::after{opacity:1}
+    .prog-card>.prog-icon,.prog-card>.prog-type,.prog-card>.prog-title,.prog-card>.prog-sub,.prog-card>.prog-features,.prog-card>.prog-ctas{padding-left:0;padding-right:0}
+    .prog-img-wrap~.prog-icon{margin-top:28px}
     .prog-icon{width:60px;height:60px;border-radius:14px;margin-bottom:24px;background:rgba(253,189,0,.1);border:1px solid rgba(253,189,0,.22);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--yellow)}
     .prog-type{display:inline-block;background:rgba(253,189,0,.12);color:rgba(253,189,0,.9);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.8px;padding:4px 12px;border-radius:20px;margin-bottom:16px}
     .prog-title{font-size:1.5rem;font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px}
@@ -594,6 +605,7 @@
     <div class="row g-4 justify-content-center">
       <div class="col-lg-5 col-md-6">
         <div class="prog-card reveal-3d">
+          <div class="prog-img-wrap"><img src="images/slide5.jpg" alt="Fire Safety Training Lab" loading="lazy"></div>
           <div class="prog-icon"><i class="fas fa-fire-extinguisher"></i></div>
           <span class="prog-type">3-Year Program</span>
           <h3 class="prog-title">B.Sc. Fire &amp; Industrial Safety</h3>
@@ -612,6 +624,7 @@
       </div>
       <div class="col-lg-5 col-md-6">
         <div class="prog-card reveal-3d">
+          <div class="prog-img-wrap"><img src="images/ev2.jpeg" alt="NIFS Safety Classroom" loading="lazy"></div>
           <div class="prog-icon"><i class="fas fa-shield-alt"></i></div>
           <span class="prog-type">4-Year Honours</span>
           <h3 class="prog-title">B.Sc. (Hons) Fire &amp; Industrial Safety</h3>
@@ -642,31 +655,37 @@
     </div>
     <div class="whyus-grid">
       <div class="whyus-card">
+        <div class="whyus-img-wrap"><img src="images/slide1.png" alt="ANU Department Inauguration" loading="lazy"></div>
         <div class="whyus-icon"><i class="fas fa-star"></i></div>
         <div class="whyus-title">NAAC A+ Accredited University</div>
         <div class="whyus-desc">Acharya Nagarjuna University holds India's highest NAAC grade — 3.46 score, first in the state in Dual Mode category.</div>
       </div>
       <div class="whyus-card">
+        <div class="whyus-img-wrap"><img src="images/nifscampus.png" alt="NIFS ANU Department Building" loading="lazy"></div>
         <div class="whyus-icon"><i class="fas fa-network-wired"></i></div>
         <div class="whyus-title">85+ NIFS Centres Nationally</div>
         <div class="whyus-desc">NIFS operates 85+ training centres across India — giving students an unmatched network for internships, mentorship, and placement.</div>
       </div>
       <div class="whyus-card">
+        <div class="whyus-img-wrap"><img src="images/slide5.jpg" alt="Fire Safety Equipment Lab" loading="lazy"></div>
         <div class="whyus-icon"><i class="fas fa-hard-hat"></i></div>
         <div class="whyus-title">Real Equipment, Real Training</div>
         <div class="whyus-desc">Hands-on practice with industrial fire safety equipment — extinguishers, sprinkler systems, hazmat gear — from day one.</div>
       </div>
       <div class="whyus-card">
+        <div class="whyus-img-wrap"><img src="images/ev3.jpeg" alt="Students receiving certificates" loading="lazy"></div>
         <div class="whyus-icon"><i class="fas fa-briefcase"></i></div>
         <div class="whyus-title">100% Placement Assistance</div>
         <div class="whyus-desc">Dedicated placement cell with strong ties to Adani, L&amp;T, ONGC, Tata Projects, and 10+ more corporations hiring our graduates.</div>
       </div>
       <div class="whyus-card">
+        <div class="whyus-img-wrap"><img src="images/ev1.jpeg" alt="NIFS ANU NSDC Skill India certification" loading="lazy"></div>
         <div class="whyus-icon"><i class="fas fa-certificate"></i></div>
         <div class="whyus-title">Government Recognised Credentials</div>
         <div class="whyus-desc">UGC-recognised, NSDC &amp; Skill India affiliated, ISO 9001:2015 certified — your degree is accepted by industry and government alike.</div>
       </div>
       <div class="whyus-card">
+        <div class="whyus-img-wrap"><img src="images/ev5.jpeg" alt="NIFS students fire safety awareness" loading="lazy"></div>
         <div class="whyus-icon"><i class="fas fa-globe-asia"></i></div>
         <div class="whyus-title">Global Safety Standards</div>
         <div class="whyus-desc">Curriculum aligned with NEBOSH, IOSH, and ISO 45001 — preparing you for Indian industries and global safety roles alike.</div>
