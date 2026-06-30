@@ -36,13 +36,11 @@ a{text-decoration:none;color:inherit}
 }
 
 /* ================================================================
-   HEADER WRAPPER — sticky container
+   HEADER WRAPPER — scrolls normally; nav bar is the sticky element
    ================================================================ */
 .site-header-wrapper{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  will-change:transform;
+  position:relative;
+  z-index:999;
 }
 
 /* ── 1. TOP BANNER ── */
@@ -53,8 +51,6 @@ a{text-decoration:none;color:inherit}
   background:linear-gradient(62deg,#00334e 31%,#ffc107 31.2%);
   padding:0 20px;
   color:#fff;
-  transition:max-height var(--transition),opacity var(--transition),padding var(--transition);
-  max-height:75px;
   overflow:hidden;
 }
 .contact-info{flex:1;font-size:13px;padding-left:20px;white-space:nowrap;color:#fff;font-weight:500}
@@ -70,8 +66,6 @@ a{text-decoration:none;color:inherit}
   justify-content:space-between;
   padding:15px 40px;
   background:#fff;
-  transition:max-height var(--transition),padding var(--transition),opacity var(--transition);
-  max-height:120px;
   overflow:hidden;
 }
 .univ-logo{flex:0 0 140px}
@@ -82,13 +76,23 @@ a{text-decoration:none;color:inherit}
 .azadi-logo{flex:0 0 140px;text-align:right}
 .azadi-logo img{max-width:120px;height:auto;margin-left:auto}
 
-/* ── 3. NAV BAR ── */
+/* ── 3. NAV BAR — sticky; only GPU-safe props transition ── */
 .navigation-bar{
   background:#fdbd00;
   border-top:1px solid #e0a800;
   border-bottom:1px solid #e0a800;
-  position:relative;
-  transition:background var(--transition),box-shadow var(--transition),backdrop-filter var(--transition);
+  position:sticky;
+  top:0;
+  z-index:1000;
+  transition:background .3s ease,box-shadow .3s ease,border-color .3s ease;
+  will-change:background,box-shadow;
+}
+.navigation-bar.stuck{
+  background:rgba(253,189,0,.93);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 4px 22px rgba(0,0,0,.18);
+  border-color:transparent;
 }
 .nav-list{display:flex;justify-content:center;list-style:none;padding:12px 0;font-weight:700;flex-wrap:wrap}
 .nav-item{margin:0 20px;position:relative}
@@ -145,15 +149,7 @@ a{text-decoration:none;color:inherit}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-/* ── Compact / Sticky scroll state ── */
-.site-header-wrapper.compact .top-banner{max-height:0;padding-top:0;padding-bottom:0;opacity:0}
-.site-header-wrapper.compact .main-header{max-height:0;padding-top:0;padding-bottom:0;opacity:0}
-.site-header-wrapper.compact .navigation-bar{
-  background:rgba(253,189,0,.92);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  box-shadow:0 4px 20px rgba(0,0,0,.18);
-}
+/* (compact state removed — nav is now self-sticky, top rows scroll away naturally) */
 
 /* ================================================================
    FOOTER

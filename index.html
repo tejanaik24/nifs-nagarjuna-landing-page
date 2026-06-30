@@ -11,19 +11,47 @@
   <style>
     /* ── Hero ── */
     .hero-section{position:relative;overflow:hidden}
-    .hero-img{width:100%;height:520px;object-fit:cover}
-    .ember-canvas{position:absolute;inset:0;pointer-events:none;z-index:5}
-    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,51,78,.45) 0%,rgba(0,51,78,.12) 55%,rgba(0,51,78,.55) 100%);z-index:6;pointer-events:none}
-    .hero-text-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:8;text-align:center;width:90%;will-change:transform}
-    .hero-tagline{font-size:clamp(1rem,2.5vw,1.4rem);font-weight:700;color:#fdbd00;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;text-shadow:0 2px 10px rgba(0,0,0,.4)}
-    .hero-title{font-size:clamp(1.8rem,5vw,3.5rem);font-weight:900;color:#fff;line-height:1.15;text-shadow:0 4px 24px rgba(0,0,0,.5);margin-bottom:22px}
+    .ember-canvas{position:absolute;inset:0;pointer-events:none;z-index:8}
+
+    /* Hero 3D viewport */
+    .hero-viewport{position:relative;height:560px;overflow:hidden;background:#00334e}
+    .hero-slide{position:absolute;inset:0;overflow:hidden;will-change:transform,opacity}
+    .hero-bg-wrap{position:absolute;inset:0;overflow:hidden}
+    .hero-bg-img{width:100%;height:100%;object-fit:cover;display:block;will-change:transform}
+
+    /* Ken Burns — CSS animation, restarts when .kb-active toggled */
+    @keyframes kenBurns{from{transform:scale(1) translateZ(0)}to{transform:scale(1.06) translateZ(0)}}
+    .hero-slide.kb-active .hero-bg-img{animation:kenBurns 6.5s ease-out forwards}
+    @media(max-width:768px){@keyframes kenBurns{from{transform:scale(1) translateZ(0)}to{transform:scale(1.03) translateZ(0)}}}
+    @media(prefers-reduced-motion:reduce){@keyframes kenBurns{from{transform:none}to{transform:none}}.hero-slide.kb-active .hero-bg-img{animation:none}}
+
+    /* Overlays */
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,51,78,.38) 0%,rgba(0,51,78,.08) 45%,rgba(0,0,0,.65) 100%);z-index:2;pointer-events:none}
+
+    /* Per-slide text */
+    .hero-content{position:absolute;bottom:120px;left:50%;transform:translateX(-50%);width:min(90%,820px);text-align:center;z-index:10;will-change:transform,opacity}
+    .hero-tagline{font-size:clamp(.85rem,2vw,1.1rem);font-weight:700;color:#fdbd00;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;text-shadow:0 2px 10px rgba(0,0,0,.4)}
+    .hero-title{font-size:clamp(1.65rem,4.5vw,3.2rem);font-weight:900;color:#fff;line-height:1.15;text-shadow:0 4px 24px rgba(0,0,0,.55);margin-bottom:14px}
+    .hero-subtext{font-size:clamp(.9rem,1.8vw,1.1rem);color:rgba(255,255,255,.88);margin-bottom:26px;text-shadow:0 2px 8px rgba(0,0,0,.4);font-weight:500;max-width:620px;margin-left:auto;margin-right:auto}
     .btn-hero-primary{background:var(--yellow);color:#000;font-weight:800;padding:14px 32px;border-radius:4px;font-size:15px;border:none;cursor:pointer;transition:background .3s,transform .2s;display:inline-block;margin:4px}
     .btn-hero-primary:hover{background:#ffd700;transform:translateY(-2px);color:#000}
     .btn-hero-outline{border:2px solid rgba(255,255,255,.8);color:#fff;font-weight:700;padding:13px 30px;border-radius:4px;font-size:15px;display:inline-block;transition:background .3s;margin:4px}
     .btn-hero-outline:hover{background:rgba(255,255,255,.15);color:#fff}
-    .carousel-indicators[data-bs-target="#heroCarousel"]{bottom:76px;position:absolute;margin:0}
-    .carousel-indicators [data-bs-target]{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.8);background:transparent;opacity:1;margin:0 4px}
-    .carousel-indicators .active{background:#fdbd00;border-color:#fdbd00}
+
+    /* Dot navigation */
+    .hero-dots-wrap{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:12}
+    .hero-dot{width:10px;height:10px;border-radius:50%;border:2px solid rgba(255,255,255,.7);background:transparent;padding:0;cursor:pointer;transition:background .25s,transform .25s,border-color .25s}
+    .hero-dot.active{background:#fdbd00;border-color:#fdbd00;transform:scale(1.35)}
+
+    @media(max-width:768px){
+      .hero-viewport{height:420px}
+      .hero-content{bottom:90px}
+      .hero-dots-wrap{bottom:56px}
+    }
+    @media(max-width:480px){
+      .hero-viewport{height:360px}
+      .hero-content{bottom:76px}
+    }
 
     /* Info cards */
     .info-cards-wrap{position:absolute;bottom:-52px;left:0;right:0;z-index:10}
@@ -178,34 +206,81 @@
 <!-- ═══ MAIN ═══ -->
 <main>
 
-<!-- Hero -->
-<section class="hero-section">
+<!-- Hero — 3D flip slider -->
+<section class="hero-section" id="heroSection">
   <canvas class="ember-canvas" id="emberCanvas"></canvas>
-  <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
-      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+
+  <div class="hero-viewport" id="heroViewport">
+
+    <!-- Slide 1 (hero-1.png = sourced from "hero 2.png") -->
+    <div class="hero-slide kb-active" data-slide="0">
+      <div class="hero-bg-wrap">
+        <picture>
+          <source srcset="images/hero-1.webp" type="image/webp">
+          <img src="images/hero-1.png" class="hero-bg-img" alt="Trained for the Frontline" loading="eager">
+        </picture>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-tagline">Acharya Nagarjuna University</p>
+        <h2 class="hero-title">Trained for the Frontline.<br>Ready for Industry.</h2>
+        <p class="hero-subtext">Hands-on training with real industrial equipment for real career outcomes.</p>
+        <div>
+          <a href="course-offered" class="btn-hero-primary">Explore Programs</a>
+          <a href="contact" class="btn-hero-outline">Get in Touch</a>
+        </div>
+      </div>
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="5000"><img src="images/slide1.png" class="hero-img" alt="ANU Campus"></div>
-      <div class="carousel-item" data-bs-interval="5000"><img src="images/slide2.png" class="hero-img" alt="Department Activities" loading="lazy"></div>
-      <div class="carousel-item" data-bs-interval="5000"><img src="images/slide3.png" class="hero-img" alt="Fire Safety Training" loading="lazy"></div>
-      <div class="carousel-item" data-bs-interval="5000"><img src="images/slide4.png" class="hero-img" alt="Industrial Safety" loading="lazy"></div>
+
+    <!-- Slide 2 (hero-2.png = sourced from "hero 1.png") -->
+    <div class="hero-slide" data-slide="1">
+      <div class="hero-bg-wrap">
+        <picture>
+          <source srcset="images/hero-2.webp" type="image/webp">
+          <img src="images/hero-2.png" class="hero-bg-img" alt="Your Journey to a Safer India Starts Here" loading="eager">
+        </picture>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-tagline">Acharya Nagarjuna University</p>
+        <h2 class="hero-title">Your Journey to a Safer India<br>Starts Here</h2>
+        <p class="hero-subtext">Join Andhra Pradesh's first ANU-affiliated Fire &amp; Industrial Safety degree program.</p>
+        <div>
+          <a href="course-offered" class="btn-hero-primary">Explore Programs</a>
+          <a href="contact" class="btn-hero-outline">Get in Touch</a>
+        </div>
+      </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></button>
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></button>
+
+    <!-- Slide 3 (hero-3.png = sourced from "Hero 3.png") -->
+    <div class="hero-slide" data-slide="2">
+      <div class="hero-bg-wrap">
+        <picture>
+          <source srcset="images/hero-3.webp" type="image/webp">
+          <img src="images/hero-3.png" class="hero-bg-img" alt="From Classroom to Career" loading="eager">
+        </picture>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-tagline">Acharya Nagarjuna University</p>
+        <h2 class="hero-title">From Classroom to Career —<br>100% Placement Assistance</h2>
+        <p class="hero-subtext">NAAC A+ accredited. Industry-recognized. Built for employability.</p>
+        <div>
+          <a href="course-offered" class="btn-hero-primary">Explore Programs</a>
+          <a href="contact" class="btn-hero-outline">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.hero-viewport -->
+
+  <!-- Dot navigation -->
+  <div class="hero-dots-wrap" id="heroDots">
+    <button class="hero-dot active" data-goto="0" aria-label="Slide 1"></button>
+    <button class="hero-dot" data-goto="1" aria-label="Slide 2"></button>
+    <button class="hero-dot" data-goto="2" aria-label="Slide 3"></button>
   </div>
-  <div class="hero-overlay"></div>
-  <div class="hero-text-overlay" id="heroText">
-    <p class="hero-tagline">Acharya Nagarjuna University</p>
-    <h2 class="hero-title">Department of Fire &amp;<br>Industrial Safety</h2>
-    <div>
-      <a href="course-offered" class="btn-hero-primary">Explore Programs</a>
-      <a href="contact" class="btn-hero-outline">Get in Touch</a>
-    </div>
-  </div>
+
   <div class="container info-cards-wrap">
     <div class="row g-0">
       <div class="col-md-4"><div class="info-card"><div class="info-icon"><i class="fas fa-clock"></i></div><div><strong>Timings</strong><br><small class="text-muted">Mon – Sat: 9:00 AM – 5:00 PM</small></div></div></div>
@@ -429,9 +504,10 @@
 (function(){
   const rm = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  /* Sticky header */
-  const header = document.getElementById('siteHeader');
-  window.addEventListener('scroll',()=>header.classList.toggle('compact',window.scrollY>150),{passive:true});
+  /* Sticky nav — IntersectionObserver; animates only background/shadow (no layout) */
+  const nav  = document.querySelector('.navigation-bar');
+  const mhdr = document.querySelector('.main-header');
+  if(nav && mhdr) new IntersectionObserver(e=>nav.classList.toggle('stuck',!e[0].isIntersecting),{threshold:0}).observe(mhdr);
 
   /* Hamburger */
   const tog = document.getElementById('navToggle');
@@ -459,7 +535,7 @@
     const cv = document.getElementById('emberCanvas');
     const ctx = cv.getContext('2d');
     let W,H,pts=[];
-    function rsz(){const h=document.querySelector('.hero-section');W=cv.width=h.offsetWidth;H=cv.height=h.offsetHeight;}
+    function rsz(){const h=document.getElementById('heroViewport');W=cv.width=h.offsetWidth;H=cv.height=h.offsetHeight;}
     rsz(); window.addEventListener('resize',rsz,{passive:true});
     function Ember(){
       this.reset=function(){this.x=Math.random()*W;this.y=H+8;this.r=Math.random()*2.2+.5;this.vy=-(Math.random()*1.1+.35);this.vx=(Math.random()-.5)*.6;this.life=1;this.decay=Math.random()*.007+.003;this.hue=16+Math.random()*16;};
@@ -480,11 +556,95 @@
     })();
   }
 
-  /* Parallax hero text */
-  if(!rm){
-    const ht = document.getElementById('heroText');
-    window.addEventListener('scroll',()=>{ht.style.transform=`translate(-50%,calc(-50% + ${window.scrollY*.22}px))`;},{passive:true});
-  }
+  /* ── 3D HERO SLIDER ── */
+  (function(){
+    const section  = document.getElementById('heroSection');
+    const viewport = document.getElementById('heroViewport');
+    const slides   = [...document.querySelectorAll('.hero-slide')];
+    const dots     = [...document.querySelectorAll('#heroDots .hero-dot')];
+    const INTERVAL = 5500;
+    const isMob    = () => window.innerWidth < 768;
+    let cur = 0, busy = false, timer = null;
+
+    /* Init: slide 0 visible, rest invisible */
+    slides.forEach((s,i)=>{
+      if(i===0){ gsap.set(s,{opacity:1,rotationY:0,zIndex:2,transformPerspective:1400}); }
+      else      { gsap.set(s,{opacity:0,rotationY:isMob()?38:90,zIndex:1,transformPerspective:1400}); }
+    });
+
+    function updateDots(i){ dots.forEach((d,j)=>d.classList.toggle('active',j===i)); }
+
+    function goTo(next,dir){
+      if(busy||next===cur) return;
+      busy=true;
+      const prev=cur; cur=next; updateDots(cur);
+      const out=slides[prev], inn=slides[cur];
+      const rot=isMob()?38:90;
+      const dur=rm?0.01:(isMob()?.68:.85);
+
+      /* Remove Ken Burns from outgoing */
+      out.classList.remove('kb-active');
+      const outImg=out.querySelector('.hero-bg-img');
+      outImg.style.animation='none'; void outImg.offsetWidth;
+
+      /* Stage incoming */
+      gsap.set(inn,{opacity:1,rotationY:dir*rot,zIndex:3,transformPerspective:1400});
+      gsap.set(out,{zIndex:2});
+
+      if(rm){
+        /* prefers-reduced-motion: simple crossfade */
+        gsap.to(out,{opacity:0,duration:.4});
+        gsap.set(inn,{rotationY:0});
+        finish();
+      } else {
+        /* 3D flip */
+        gsap.to(out,{rotationY:-dir*rot,duration:dur,ease:'power2.inOut'});
+        gsap.to(inn,{rotationY:0,duration:dur,ease:'power2.inOut',onComplete:finish});
+        /* Text slides up inside incoming */
+        const ct=inn.querySelector('.hero-content');
+        if(ct) gsap.fromTo(ct,{y:24,opacity:0},{y:0,opacity:1,duration:.5,delay:dur*.4,ease:'power3.out'});
+      }
+
+      function finish(){
+        gsap.set(out,{opacity:0,rotationY:0,zIndex:1});
+        gsap.set(inn,{zIndex:2});
+        /* Restart Ken Burns on incoming */
+        const inImg=inn.querySelector('.hero-bg-img');
+        inImg.style.animation='none'; void inImg.offsetWidth; inImg.style.animation='';
+        inn.classList.add('kb-active');
+        busy=false;
+      }
+    }
+
+    function next(){ goTo((cur+1)%slides.length, 1); }
+    function prev(){ goTo((cur-1+slides.length)%slides.length,-1); }
+
+    function startTimer(){ clearInterval(timer); if(!rm) timer=setInterval(next,INTERVAL); }
+    function stopTimer(){  clearInterval(timer); }
+
+    startTimer();
+
+    /* Dots */
+    dots.forEach((d,i)=>d.addEventListener('click',()=>{
+      stopTimer(); goTo(i, i>cur?1:-1); startTimer();
+    }));
+
+    /* Pause on hover (desktop) */
+    section.addEventListener('mouseenter',stopTimer);
+    section.addEventListener('mouseleave',startTimer);
+
+    /* Touch swipe */
+    let tsx=0,tsy=0;
+    viewport.addEventListener('touchstart',e=>{tsx=e.changedTouches[0].clientX;tsy=e.changedTouches[0].clientY;},{passive:true});
+    viewport.addEventListener('touchend',e=>{
+      const dx=tsx-e.changedTouches[0].clientX,dy=Math.abs(tsy-e.changedTouches[0].clientY);
+      if(Math.abs(dx)>44&&Math.abs(dx)>dy){
+        stopTimer();
+        if(dx>0) next(); else prev();
+        setTimeout(startTimer,8000); /* resume after 8s */
+      }
+    },{passive:true});
+  })();
 
   /* GSAP scroll animations */
   gsap.registerPlugin(ScrollTrigger);

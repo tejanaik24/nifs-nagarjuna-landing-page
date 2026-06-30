@@ -76,9 +76,14 @@
     if(hp) hp.outerHTML = HEADER;
     if(fp) fp.outerHTML = FOOTER;
 
-    /* Sticky header */
-    const hdr = document.getElementById('siteHeader');
-    if(hdr) window.addEventListener('scroll', () => hdr.classList.toggle('compact', window.scrollY > 150), {passive:true});
+    /* Sticky nav — IntersectionObserver on main-header; only visual props change, zero layout jank */
+    const nav  = document.querySelector('.navigation-bar');
+    const mhdr = document.querySelector('.main-header');
+    if(nav && mhdr){
+      new IntersectionObserver(entries => {
+        nav.classList.toggle('stuck', !entries[0].isIntersecting);
+      }, {threshold:0}).observe(mhdr);
+    }
 
     /* Hamburger */
     const tog = document.getElementById('navToggle');
