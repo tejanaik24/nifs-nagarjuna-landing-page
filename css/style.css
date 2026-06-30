@@ -1,0 +1,60 @@
+header { width: 100%; }
+
+/* Top Bar Slant Effect */
+.top-bar {
+    background: #1a3c5a; /* Dark Blue fallback */
+    background: linear-gradient(105deg, #1a3c5a 32%, #ffcc00 32.1%);
+    color: white;
+    padding: 10px 0;
+}
+
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.contact-info { font-size: 13px; font-weight: bold; }
+.sep { margin: 0 10px; opacity: 0.5; }
+
+.accreditation-banner {
+    display: flex;
+    align-items: center;
+    color: #000;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.gov-logos img { height: 30px; margin-left: 10px; vertical-align: middle; }
+
+/* Branding */
+.brand-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.brand-titles { text-align: center; flex-grow: 1; }
+.telugu-title { color: #cc0000; font-size: 24px; margin: 0; }
+.dept-title { color: #004d40; font-size: 32px; margin: 5px 0; font-family: serif; }
+
+/* Nav */
+.nav-bar { background-color: #ffcc00; border-bottom: 2px solid #e2b600; }
+.nav-links { 
+    list-style: none; display: flex; justify-content: center; 
+    margin: 0; padding: 0; 
+}
+.nav-links li a {
+    display: block; padding: 15px 20px;
+    text-decoration: none; color: #000;
+    font-weight: bold; font-size: 14px;
+    text-transform: uppercase;
+}
+.nav-links li a:hover { background: rgba(0,0,0,0.05); }

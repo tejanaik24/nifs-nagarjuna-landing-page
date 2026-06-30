@@ -1,0 +1,1012 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANU - DEPARTMENT OF FIRE AND INDUSTRIAL SAFETY</title>
+    <style>
+        /* CSS Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        /* 1. TOP BANNER - Navy & Yellow with Diagonal Slash */
+        .top-banner {
+            display: flex;
+            align-items: center;
+            height: 75px;
+            /* Creates the sharp angled transition from dark blue to yellow as seen in the image */
+            background: #ffc107; /* Fallback */
+            background: linear-gradient(62deg, #00334e 31%, #ffc107 31.2%);
+            padding: 0 20px;
+            color: white;
+            position: relative;
+        }
+
+        .contact-info {
+            flex: 1;
+            font-size: 13px;
+            padding-left: 20px;
+            white-space: nowrap;
+        }
+
+        .contact-info span {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .contact-info .separator {
+            margin: 0 12px;
+            color: #ffffff;
+            opacity: 0.5;
+        }
+
+        .accreditation-box {
+            flex: 2;
+            text-align: center;
+            color: #000000;
+            font-weight: bold;
+            font-size: 19px;
+            line-height: 1.3;
+            padding: 0 10px;
+        }
+
+        .logos-right {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+            padding-right: 20px;
+        }
+        .logos-right img {
+        /* Adjust these values to your liking */
+        max-height: 50px; /* Limits the height so it doesn't stretch the banner */
+        width: auto;      /* Maintains the original aspect ratio */
+        display: block;   /* Good practice for images in flex containers */
+    }
+
+        .mini-badge {
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* 2. MAIN LOGO SECTION */
+        .main-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 40px;
+            background-color: #ffffff;
+        }
+
+        .univ-logo {
+            flex: 0 0 140px;
+        }
+        
+        .univ-logo img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        .center-titles {
+            flex: 1;
+            text-align: center;
+        }
+
+        .telugu-header {
+            color: #d10000; /* Dark Red from screenshot */
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .english-header {
+            color: #005b7f; /* Teal/Blue from screenshot */
+            font-size: 38px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+
+        .azadi-logo {
+            flex: 0 0 140px;
+            text-align: right;
+        }
+        
+        .azadi-logo img {
+            max-width: 120px;
+            height: auto;
+        }
+
+        /* 3. NAVIGATION BAR */
+        .navigation-bar {
+            background-color: #fdbd00;
+            border-top: 1px solid #e0a800;
+            border-bottom: 1px solid #e0a800;
+        }
+
+        .nav-list {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 12px 0;
+            font-weight: 700;
+        }
+
+        .nav-item {
+            margin: 0 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #000000;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #00334e;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .english-header { font-size: 28px; }
+            .telugu-header { font-size: 24px; }
+            .top-banner { height: auto; padding: 10px; flex-direction: column; background: #ffc107; }
+            .contact-info, .accreditation-box, .logos-right { width: 100%; text-align: center; justify-content: center; padding: 5px 0; }
+        }
+        
+        /* Enable relative positioning for the parent items */
+.nav-item.dropdown {
+    position: relative;
+}
+
+/* Hide the dropdown menu by default */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Positions it exactly below the nav bar */
+    left: 0;
+    background-color: #ffffff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    list-style: none;
+    padding: 10px 0;
+    z-index: 1000;
+    border-top: 3px solid var(--anu-blue); /* Visual indicator matching the theme */
+}
+
+/* Dropdown list items styling */
+.dropdown-menu li {
+    padding: 0;
+}
+
+.dropdown-menu li a {
+    color: #333;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Hover effects for dropdown items */
+.dropdown-menu li a:hover {
+    background-color: var(--anu-yellow);
+    color: #000;
+}
+
+/* Show the menu on hover of the parent .nav-item */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Optional: Add a small arrow indicator to dropdown links */
+.dropdown-toggle::after {
+    content: ' ▼';
+    font-size: 10px;
+    vertical-align: middle;
+}
+    </style>
+</head>
+<body>
+
+    <header class="top-banner">
+        <div class="contact-info">
+            Call Now : <span>83743 40999</span>
+            <span class="separator">|</span>
+            Email Now : <span>anusafetydept@gmail.com</span>
+        </div>
+        
+        <div class="accreditation-box">
+            Accredited by NAAC with "A+ Grade (With 3.46 Outstanding<br>
+            Score in Dual Mode Category - First in the State & Country)"
+        </div>
+
+        <div class="logos-right">
+           <img src="images/logo-tags.png" alt="Azadi Ka Amrit Mahotsav">
+        </div>
+    </header>
+
+    <section class="main-header">
+        <div class="univ-logo">
+            <img src="images/logo-anu.png" alt="ANU Logo">
+        </div>
+        
+        <div class="center-titles">
+            <div class="telugu-header">ఆచార్య నాగార్జున విశ్వవిద్యాలయం</div>
+            <h1 class="english-header">DEPARTMENT OF FIRE AND INDUSTRIAL SAFETY</h1>
+        </div>
+
+        <div class="azadi-logo">
+            <img src="images/75years.png" alt="Azadi Ka Amrit Mahotsav">
+        </div>
+    </section>
+
+   <nav class="navigation-bar">
+    <ul class="nav-list">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle">About Department</a>
+            <ul class="dropdown-menu">
+                <li><a href="profile.html">Department Profile</a></li>
+                <li><a href="vision-mission.html">Vision & Mission</a></li>
+                
+            </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle">Faculty</a>
+            <ul class="dropdown-menu">
+                <li><a href="faculty.html">Teaching</a></li>
+                
+            </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle">Academics</a>
+            <ul class="dropdown-menu">
+                <li><a href="course-offered.html">Course Offered</a></li>
+                
+                <li><a href="images/syllabus.pdf" target="_blank">Syllabus</a></li>
+                
+            </ul>
+        </li>
+
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact us</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Back to main page</a></li>
+    </ul>
+</nav>
+
+</body>
+</html>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+    :root {
+        --anu-yellow: #fdbd00;
+        --anu-blue: #00334e;
+        --anu-teal: #005b7f;
+    }
+
+    /* 1. Hero Slider Section */
+    .hero-section { position: relative; }
+    .hero-img { width: 100%; height: 500px; object-fit: cover; }
+    
+    .info-cards-container {
+        position: absolute;
+        bottom: -50px;
+        left: 0;
+        right: 0;
+        z-index: 10;
+    }
+    
+    .info-card {
+        background: white;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        height: 110px;
+        border-right: 1px solid #eee;
+    }
+    .info-card i {
+        background: var(--anu-yellow);
+        padding: 15px;
+        margin-right: 15px;
+        color: white;
+        font-size: 20px;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 2. Flash News */
+    .flash-news-bar {
+        background: var(--anu-yellow);
+        padding: 40px 0;
+        text-align: center;
+        margin-top: 80px;
+    }
+    .flash-news-bar h2 { font-weight: 800; margin: 0; }
+
+    /* 3. Welcome Section */
+    .welcome-section { padding: 80px 0; }
+    .welcome-text h4 { color: var(--anu-yellow); font-weight: bold; font-size: 14px; }
+    .welcome-text h1 { color: #000; font-weight: 800; margin-bottom: 20px; font-size: 36px; }
+    .welcome-text p { text-align: justify; font-size: 15px; color: #555; line-height: 1.7; }
+    .btn-anu { background: var(--anu-yellow); border: none; font-weight: bold; padding: 12px 25px; margin-top: 20px; transition: 0.3s; }
+    .btn-anu:hover { background: var(--anu-blue); color: white; }
+
+    /* 4. HOD Section */
+    .hod-section {
+        background: var(--anu-yellow);
+        padding: 60px 0;
+        display: flex;
+        justify-content: center;
+    }
+    .hod-card {
+        display: flex;
+        background: white;
+        max-width: 800px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .hod-img { width: 300px; object-fit: cover; }
+    .hod-info { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+
+    /* 5. Synchronized Achievements & Gallery Section */
+    .sync-slider-section { padding: 80px 0; background: #fff; }
+    .section-subtitle { color: var(--anu-yellow); text-transform: uppercase; letter-spacing: 2px; font-weight: bold; font-size: 13px; margin-bottom: 10px; }
+    .section-title { color: var(--anu-teal); font-weight: 800; margin-bottom: 30px; font-size: 32px; }
+    
+    .gallery-img { 
+        width: 100%; 
+        max-width: 750px; 
+        height: 450px; 
+        object-fit: cover; 
+        margin: 20px auto; 
+        border: 10px solid white; 
+        box-shadow: 0 5px 25px rgba(0,0,0,0.1); 
+    }
+
+    /* Custom Square Indicators */
+    .carousel-indicators {
+        position: static;
+        margin-top: 30px;
+        gap: 10px;
+    }
+    .carousel-indicators [data-bs-target] {
+        width: 15px;
+        height: 15px;
+        border: 1px solid #ccc;
+        background-color: transparent;
+        opacity: 1;
+    }
+    .carousel-indicators .active {
+        background-color: var(--anu-yellow) !important;
+        border-color: var(--anu-yellow);
+    }
+
+    .back-to-top-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--anu-yellow);
+        color: black;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        z-index: 99;
+    }
+   
+    /* Flash News Bar Layout */
+    .flash-news-bar {
+        background: var(--anu-yellow);
+        padding: 15px 0; /* Reduced padding for a sleeker look */
+        overflow: hidden;
+        border-bottom: 2px solid rgba(0,0,0,0.05);
+    }
+
+    .flash-news-bar h2 {
+        font-weight: 800;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        color: var(--anu-blue);
+        white-space: nowrap;
+        background: var(--anu-yellow);
+        z-index: 10;
+        margin-right: 20px;
+    }
+
+    /* The Marquee Container */
+    .flash-container {
+        flex-grow: 1;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+    }
+
+    .flash-text {
+        display: inline-block;
+        font-weight: 600;
+        color: #000;
+        padding-left: 100%; /* Initial position off-screen */
+        animation: marquee 20s linear infinite;
+    }
+
+    /* Smooth Scrolling Animation */
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+    }
+
+    /* Optional: Pause on hover so users can read specific dates */
+    .flash-container:hover .flash-text {
+        animation-play-state: paused;
+        cursor: pointer;
+    }
+
+</style>
+
+<main>
+    <section class="hero-section">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators" style="bottom: 70px; position: absolute; margin-top: 0;">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+            </div>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <img src="images/slide1.png" class="hero-img" alt="Campus View 1">
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="images/slide2.png" class="hero-img" alt="Campus View 2">
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="images/slide3.png" class="hero-img" alt="Department Activities">
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="images/slide4.png" class="hero-img" alt="Department Activities">
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <div class="container info-cards-container">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Timings</strong><br>
+                            <small class="text-muted">The college opens at 9:00 AM and closes at 5:00 PM</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <strong>Contact Number</strong><br>
+                            <small class="text-muted">You can contact us through 83743 40999</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <div>
+                            <strong>Email</strong><br>
+                            <small class="text-muted">Contact us through anusafetydept@gmail.com</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="flash-news-bar">
+    <div class="container d-flex align-items-center">
+        <h2 class="me-4 mb-0">Flash News</h2>
+        <div class="flash-container">
+            <p class="flash-text mb-0">
+                Fire Services Week (FSW) - 14–20 April, 2026 &nbsp;&nbsp; | &nbsp;&nbsp; 
+                Admissions are open for the Academic Year 2026-2027 &nbsp;&nbsp; | &nbsp;&nbsp; 
+                
+            </p>
+        </div>
+    </div>
+</section>
+
+    <section class="container welcome-section">
+        <div class="row align-items-center">
+            <div class="col-md-6 welcome-text">
+                <h4>WELCOME TO!</h4>
+                <h1>FIRE AND INDUSTRIAL SAFETY <br>DEPARTMENT</h1>
+                <p>The Department of Fire and Industrial Safety was established in 18th September, 2025 by the esteemed personalities Sri. Dr. Gangadhara Rao Kancharla, I/c Vice Chancellor, Smt. Prof. K. Ratna Shiela Mani garu, Rector [I/C], Sri Prof. G. Simhachalam garu, Registrar [I/C], Sri Suneel Mahanty, C.E.O. and Chairman and offering Bachelor Degrees in Fire and Industrial Safety on self-supporting mode. The department inaugurated two regular and on-campus courses i.e., Bachelor of Science (B.Sc.) Honors in Fire and Industrial Safety Four years and Bachelor of Science (B.Sc.) in Fire and Industrial Safety three years for the academic year 2025-2026. </p>
+                <button class="btn btn-anu me-2">Learn More</button>
+                <button class="btn btn-anu" style="background: #f1c40f; color: #000;">83743 40999</button>
+            </div>
+            <div class="col-md-6">
+    <img src="images/nifscampus.png" style="width: 90%; height: auto; display: block; margin: 0 auto;" alt="Department Building">
+</div>
+        </div>
+    </section>
+
+    <section class="hod-section">
+        <div class="hod-card">
+            <img src="images/ceo.jpg" class="hod-img" alt="HOD Profile">
+            <div class="hod-info">
+                <h2 class="fw-bold mb-1">Sri. SUNEEL MAHANTY</h2>
+                <h5 class="text-muted mb-4">M.Sc., M.Phil., MBA(FISM)</h5>
+                <p class="mb-1"><strong>C.E.O. and Chairman, NIFS</strong></p>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="sync-slider-section">
+        <div class="container text-center">
+            
+            <div id="syncCarousel" class="carousel slide" data-bs-ride="carousel">
+                
+                <div class="carousel-inner">
+                    
+                    <div class="carousel-item active">
+                        <p class="section-subtitle">ACHIEVEMENTS & EVENTS</p>
+                        <h2 class="section-title">Achievements</h2>
+                        <div class="mx-auto mb-5" style="max-width: 850px;">
+                            <p class="text-muted">Short Term Training Program (STT)-Ergonomic Safety Steward 
+                        The Department of Fire and Industrial Safety, ANU was acted as one of the nodal agencies to organize Short Term Training Program (STT) - Ergonomic Safety Steward program under the Pradhan Mantri Kaushal Vikas Yojana (PMKVY) with the coordination of Andhra Pradesh Productivity Council (APPC), Government of Andhra Pradesh to enhance skill development among the youth of University and Affiliated Colleges of ANU.
+                        </p>
+                        </div>
+                        
+                        <h2 class="section-title" style="color:#000;">Our Recent Gallery</h2>
+                        <img src="images/gallery1.jpg" class="gallery-img" alt="Gallery 1">
+                    </div>
+
+                    <div class="carousel-item">
+                        <p class="section-subtitle">ACHIEVEMENTS & EVENTS</p>
+                        <h2 class="section-title">Events</h2>
+                        <div class="mx-auto mb-5" style="max-width: 850px;">
+                            <p class="text-muted">The 55th National Safety Day/Safety Month- March 4th, 2026
+                        As per the guidelines of National Safety Council (NSC), India, the Department of Fire and Industrial Safety, ANU was successfully organized the 55th National Safety Day/Safety Month on March 4th, 2026 under the theme "Engage, Educate and Empower People to Enhance Safety. The event highlighted the active participation of Students, Teachers and Public for fostering a proactive safety culture in work place. 
+                        </p>
+                        </div>
+                        
+                        <h2 class="section-title" style="color:#000;">Our Recent Gallery</h2>
+                        <img src="images/gallery2.jpg" class="gallery-img" alt="Gallery 2">
+                    </div>
+
+                    <div class="carousel-item">
+                        <p class="section-subtitle">ACHIEVEMENTS & EVENTS</p>
+                        <h2 class="section-title">Events</h2>
+                        <div class="mx-auto mb-5" style="max-width: 850px;">
+                            <p class="text-muted">Fire Services Week (FSW) - 14–20 April, 2026
+The Department of Fire and Safety, ANU, has been organized Fire Services Week (FSW) in remembrance of the tragic fire and explosions at Victoria Dock, Mumbai Port, on 14th April 1944. This week is dedicated to raising awareness and strengthening fire prevention measures across industries, workplaces, schools and offices. 
+</p>
+                        </div>
+                        
+                        <h2 class="section-title" style="color:#000;">Our Recent Gallery</h2>
+                        <img src="images/gallery3.jpg" class="gallery-img" alt="Gallery 3">
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <p class="section-subtitle">ACHIEVEMENTS & EVENTS</p>
+                        <h2 class="section-title">Events</h2>
+                        <div class="mx-auto mb-5" style="max-width: 850px;">
+                            <p class="text-muted">Fire Services Week (FSW) - 14–20 April, 2026
+The Department of Fire and Safety, ANU, has been organized Fire Services Week (FSW) in remembrance of the tragic fire and explosions at Victoria Dock, Mumbai Port, on 14th April 1944. This week is dedicated to raising awareness and strengthening fire prevention measures across industries, workplaces, schools and offices. 
+</p>
+                        </div>
+                        
+                        <h2 class="section-title" style="color:#000;">Our Recent Gallery</h2>
+                        <img src="images/ev1.jpeg" class="gallery-img" alt="Gallery 3">
+                    </div>
+                    
+                         <div class="carousel-item">
+                        <p class="section-subtitle">ACHIEVEMENTS & EVENTS</p>
+                        <h2 class="section-title">Events</h2>
+                        <div class="mx-auto mb-5" style="max-width: 850px;">
+                            <p class="text-muted">Fire Services Week (FSW) - 14–20 April, 2026
+The Department of Fire and Safety, ANU, has been organized Fire Services Week (FSW) in remembrance of the tragic fire and explosions at Victoria Dock, Mumbai Port, on 14th April 1944. This week is dedicated to raising awareness and strengthening fire prevention measures across industries, workplaces, schools and offices. 
+</p>
+                        </div>
+                        
+                        <h2 class="section-title" style="color:#000;">Our Recent Gallery</h2>
+                        <img src="images/ev2.jpeg" class="gallery-img" alt="Gallery 3">
+                    </div>
+                    
+                     <div class="carousel-item">
+                        <p class="section-subtitle">ACHIEVEMENTS & EVENTS</p>
+                        <h2 class="section-title">Events</h2>
+                        <div class="mx-auto mb-5" style="max-width: 850px;">
+                            <p class="text-muted">Fire Services Week (FSW) - 14–20 April, 2026
+The Department of Fire and Safety, ANU, has been organized Fire Services Week (FSW) in remembrance of the tragic fire and explosions at Victoria Dock, Mumbai Port, on 14th April 1944. This week is dedicated to raising awareness and strengthening fire prevention measures across industries, workplaces, schools and offices. 
+</p>
+                        </div>
+                        
+                        <h2 class="section-title" style="color:#000;">Our Recent Gallery</h2>
+                        <img src="images/ev3.jpeg" class="gallery-img" alt="Gallery 3">
+                    </div>
+                    
+                    
+                     <div class="carousel-item">
+                        <p class="section-subtitle">ACHIEVEMENTS & EVENTS</p>
+                        <h2 class="section-title">Events</h2>
+                        <div class="mx-auto mb-5" style="max-width: 850px;">
+                            <p class="text-muted">Fire Services Week (FSW) - 14–20 April, 2026
+The Department of Fire and Safety, ANU, has been organized Fire Services Week (FSW) in remembrance of the tragic fire and explosions at Victoria Dock, Mumbai Port, on 14th April 1944. This week is dedicated to raising awareness and strengthening fire prevention measures across industries, workplaces, schools and offices. 
+</p>
+                        </div>
+                        
+                        <h2 class="section-title" style="color:#000;">Our Recent Gallery</h2>
+                        <img src="images/ev4.jpeg" class="gallery-img" alt="Gallery 3">
+                    </div>
+                    
+                     <div class="carousel-item">
+                        <p class="section-subtitle">ACHIEVEMENTS & EVENTS</p>
+                        <h2 class="section-title">Events</h2>
+                        <div class="mx-auto mb-5" style="max-width: 850px;">
+                            <p class="text-muted">Fire Services Week (FSW) - 14–20 April, 2026
+The Department of Fire and Safety, ANU, has been organized Fire Services Week (FSW) in remembrance of the tragic fire and explosions at Victoria Dock, Mumbai Port, on 14th April 1944. This week is dedicated to raising awareness and strengthening fire prevention measures across industries, workplaces, schools and offices. 
+</p>
+                        </div>
+                        
+                        <h2 class="section-title" style="color:#000;">Our Recent Gallery</h2>
+                        <img src="images/ev5.jpeg" class="gallery-img" alt="Gallery 3">
+                    </div>
+                    
+                     <div class="carousel-item">
+                        <p class="section-subtitle">ACHIEVEMENTS & EVENTS</p>
+                        <h2 class="section-title">Events</h2>
+                        <div class="mx-auto mb-5" style="max-width: 850px;">
+                            <p class="text-muted">Fire Services Week (FSW) - 14–20 April, 2026
+The Department of Fire and Safety, ANU, has been organized Fire Services Week (FSW) in remembrance of the tragic fire and explosions at Victoria Dock, Mumbai Port, on 14th April 1944. This week is dedicated to raising awareness and strengthening fire prevention measures across industries, workplaces, schools and offices. 
+</p>
+                        </div>
+                        
+                        <h2 class="section-title" style="color:#000;">Our Recent Gallery</h2>
+                        <img src="images/ev6.jpeg" class="gallery-img" alt="Gallery 3">
+                    </div>
+                    
+                     <div class="carousel-item">
+                        <p class="section-subtitle">ACHIEVEMENTS & EVENTS</p>
+                        <h2 class="section-title">Events</h2>
+                        <div class="mx-auto mb-5" style="max-width: 850px;">
+                            <p class="text-muted">Fire Services Week (FSW) - 14–20 April, 2026
+The Department of Fire and Safety, ANU, has been organized Fire Services Week (FSW) in remembrance of the tragic fire and explosions at Victoria Dock, Mumbai Port, on 14th April 1944. This week is dedicated to raising awareness and strengthening fire prevention measures across industries, workplaces, schools and offices. 
+</p>
+                        </div>
+                        
+                        <h2 class="section-title" style="color:#000;">Our Recent Gallery</h2>
+                        <img src="images/ev7.jpeg" class="gallery-img" alt="Gallery 3">
+                    </div>
+                    
+                </div>
+
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#syncCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#syncCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#syncCarousel" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#syncCarousel" data-bs-slide-to="3"></button>
+                    <button type="button" data-bs-target="#syncCarousel" data-bs-slide-to="5"></button>
+                    <button type="button" data-bs-target="#syncCarousel" data-bs-slide-to="6"></button>
+                    <button type="button" data-bs-target="#syncCarousel" data-bs-slide-to="7"></button>
+                    <button type="button" data-bs-target="#syncCarousel" data-bs-slide-to="8"></button>
+                    <button type="button" data-bs-target="#syncCarousel" data-bs-slide-to="9"></button>
+                    <!--<button type="button" data-bs-target="#syncCarousel" data-bs-slide-to="10"></button>-->
+                    
+                    
+                </div>
+            </div>
+            
+        </div>
+    </section>
+</main>
+
+<a href="#" class="back-to-top-btn">↑</a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<style>
+    /* Footer Container */
+    .site-footer {
+        background-color: #061d36; /* Dark Navy Blue from screenshot */
+        color: #ffffff;
+        padding: 60px 0 0 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 20px 40px 20px;
+        justify-content: space-between;
+    }
+
+    .footer-column {
+        flex: 1;
+        min-width: 250px;
+        margin-bottom: 30px;
+    }
+
+    .footer-column h3 {
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 25px;
+        position: relative;
+    }
+
+    /* Column 1: Get In Touch */
+    .footer-logo {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .footer-logo i.fa-university {
+        font-size: 24px;
+        color: #ffffff;
+        margin-right: 10px;
+    }
+
+    .footer-logo span {
+        color: #ffc107; /* Yellow color from screenshot */
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 12px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #d1d1d1;
+    }
+
+    .contact-item i {
+        margin-top: 4px;
+        margin-right: 10px;
+        width: 15px;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    /* Columns 2 & 3: Links */
+    .footer-links {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 12px;
+    }
+
+    .footer-links li a {
+        color: #d1d1d1;
+        text-decoration: none;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        transition: color 0.3s;
+    }
+
+    .footer-links li a:hover {
+        color: #ffc107;
+    }
+
+    .footer-links li a::before {
+        content: '›';
+        margin-right: 10px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    /* Column 4: Newsletter */
+    .newsletter-form {
+        display: flex;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .newsletter-form input {
+        padding: 12px 15px;
+        border: none;
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .newsletter-form button {
+        background-color: #ffc107;
+        color: #000;
+        border: none;
+        padding: 0 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+        white-space: nowrap;
+    }
+
+    .newsletter-form button:hover {
+        background-color: #e0a800;
+    }
+
+    .social-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .social-icons {
+        display: flex;
+        gap: 8px;
+    }
+
+    .social-icon {
+        width: 32px;
+        height: 32px;
+        border: 1px solid rgba(255,255,255,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 14px;
+        transition: background 0.3s;
+    }
+
+    .social-icon:hover {
+        background-color: #ffc107;
+        color: #000;
+        border-color: #ffc107;
+    }
+
+    /* Bottom Bar */
+    .footer-bottom {
+        background-color: #041426; /* Darker navy for copyright */
+        padding: 20px 0;
+        border-top: 1px solid rgba(255,255,255,0.05);
+        position: relative;
+    }
+
+    .bottom-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        font-size: 14px;
+        color: #ffffff;
+    }
+
+    .bottom-container span.highlight {
+        color: #ffc107;
+    }
+
+    /* Back to top button */
+    .back-to-top {
+        position: absolute;
+        right: 20px;
+        top: -20px;
+        background-color: #ffc107;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        text-decoration: none;
+        font-size: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3>Get In Touch</h3>
+            <div class="footer-logo">
+                <i class="fas fa-university"></i>
+                <span>ANU University</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>HOD, Fire and Industrial Safety Department, ANU College of Sciences,<br>
+                Nagarjuna Nagar, Guntur, Andhra<br>
+                Pradesh 522510.</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>83743 40999</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>anusafetydept@gmail.com</span>
+            </div>
+        </div>
+
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Department</a></li>
+                <li><a href="#">People</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>Popular Links</h3>
+            <ul class="footer-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Department</a></li>
+                <li><a href="#">People</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>Newsletter</h3>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Your Email Address">
+                <button type="submit">Sign Up</button>
+            </div>
+            
+            <span class="social-title">Follow Us</span>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="bottom-container">
+            © <span class="highlight">Acharya Nagarjuna University</span>, All Right Reserved.
+        </div>
+        <a href="#" class="back-to-top">↑</a>
+    </div>
+</footer>
