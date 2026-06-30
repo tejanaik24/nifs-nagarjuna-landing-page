@@ -174,28 +174,29 @@
     .chairman-sig{font-weight:800;color:var(--navy);font-size:15px}
     .chairman-sig small{font-weight:500;color:var(--muted);font-size:12px;display:block}
 
-    /* Radial Wheel Gallery */
+    /* Animated Gallery — 3D scroll-driven grid */
     .gallery-section{padding:90px 0 0;background:#fff}
-    .radial-pin-wrap{
-      position:relative;width:100%;overflow:hidden;
-      mask-image:linear-gradient(to top,transparent 0%,#000 26%,#000 100%);
-      -webkit-mask-image:linear-gradient(to top,transparent 0%,#000 26%,#000 100%);
+    .ag-scroll-wrap{position:relative;height:300vh;width:100%}
+    .ag-sticky{
+      position:sticky;top:0;height:100vh;width:100%;overflow:hidden;
+      perspective:1200px;perspective-origin:center top;
     }
-    .radial-track{position:absolute;list-style:none;margin:0;padding:0;will-change:transform}
-    .radial-item{position:absolute;top:50%;left:50%}
-    .r-gallery-card{
-      width:200px;height:268px;border-radius:14px;overflow:hidden;
-      box-shadow:0 16px 52px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.12);
-      cursor:pointer;position:relative;user-select:none;
+    .ag-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+      width:100%;height:100%;will-change:transform;
+      transform-style:preserve-3d;padding:8px;box-sizing:border-box;
     }
-    .r-gallery-card img{width:100%;height:100%;object-fit:cover;display:block;will-change:transform;transition:transform .5s ease}
-    .r-gallery-card:hover img{transform:scale(1.07)}
-    .gallery-caption-bar{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,transparent 100%);padding:40px 14px 14px;color:#fff}
-    .ev-tag{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--yellow);margin-bottom:4px;display:block}
-    .ev-title{font-size:13px;font-weight:700;line-height:1.3}
-    .ev-date{font-size:11px;opacity:.72;margin-top:3px}
-    .gallery-scroll-hint{text-align:center;padding:18px 0 32px;color:var(--muted);font-size:13px;font-weight:600;letter-spacing:.5px;opacity:0;animation:hintFade 1.4s ease .8s forwards}
-    @keyframes hintFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .ag-col{display:flex;flex-direction:column;gap:8px;will-change:transform;height:100%}
+    .ag-card{
+      position:relative;overflow:hidden;border-radius:10px;flex:1;
+      cursor:pointer;box-shadow:0 4px 22px rgba(0,0,0,.16);
+    }
+    .ag-card img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;transition:transform .45s ease}
+    .ag-card:hover img{transform:scale(1.06)}
+    .gallery-caption-bar{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,transparent 100%);padding:28px 12px 12px;color:#fff}
+    .ev-tag{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--yellow);margin-bottom:3px;display:block}
+    .ev-title{font-size:12px;font-weight:700;line-height:1.3}
+    .ev-date{font-size:10px;opacity:.72;margin-top:2px}
 
     /* Recruiters */
     .recruiters-section{padding:80px 0;background:var(--light)}
@@ -237,8 +238,11 @@
       .chairman-img-col img{width:160px;height:202px}
       .chairman-text-col{padding:32px 24px}
       /* Gallery */
-      .r-gallery-card{width:145px;height:195px}
-      .ev-title{font-size:11px}
+      .ag-scroll-wrap{height:240vh}
+      .ag-sticky{height:85vh}
+      .ag-grid{gap:5px;padding:5px}
+      .ag-card{border-radius:6px}
+      .ev-date{display:none}
     }
   </style>
 </head>
@@ -495,82 +499,72 @@
   </div>
 </section>
 
-<!-- Gallery — Radial Wheel -->
+<!-- Gallery — 3D Scroll-Driven Grid -->
 <section class="gallery-section">
   <div class="container">
-    <div class="text-center mb-4 reveal">
+    <div class="text-center mb-5 reveal">
       <span class="section-overline">Achievements &amp; Events</span>
       <h2 class="section-title">Our Recent Gallery</h2>
       <div class="section-divider center"></div>
     </div>
   </div>
 
-  <!-- Radial wheel — pinned while user scrolls through it -->
-  <div class="radial-pin-wrap" id="radialPinWrap">
-    <ul class="radial-track" id="radialTrack">
-      <li class="radial-item">
-        <div class="r-gallery-card">
-          <img src="images/gallery1.jpg" alt="STT Ergonomic Safety Steward" loading="lazy">
-          <div class="gallery-caption-bar"><span class="ev-tag">Achievement</span><div class="ev-title">STT – Ergonomic Safety Steward (PMKVY)</div><div class="ev-date">With Andhra Pradesh Productivity Council (APPC)</div></div>
+  <!-- 300vh tall wrapper — sticky child stays in view while parent scrolls -->
+  <div class="ag-scroll-wrap" id="agScrollWrap">
+    <div class="ag-sticky" id="agSticky">
+      <div class="ag-grid" id="agGrid">
+
+        <!-- Column 1 (starts slightly high, drifts down on scroll) -->
+        <div class="ag-col" id="agCol1">
+          <div class="ag-card">
+            <img src="images/gallery1.jpg" alt="STT Ergonomic Safety Steward" loading="lazy">
+            <div class="gallery-caption-bar"><span class="ev-tag">Achievement</span><div class="ev-title">STT – Ergonomic Safety Steward (PMKVY)</div><div class="ev-date">With Andhra Pradesh Productivity Council</div></div>
+          </div>
+          <div class="ag-card">
+            <img src="images/ev2.jpeg" alt="Fire Extinguisher Training" loading="lazy">
+            <div class="gallery-caption-bar"><span class="ev-tag">Practical</span><div class="ev-title">Fire Extinguisher Practical Training</div><div class="ev-date">Hands-on ABC &amp; CO₂ extinguisher handling</div></div>
+          </div>
+          <div class="ag-card">
+            <img src="images/ev5.jpeg" alt="NEBOSH Workshop" loading="lazy">
+            <div class="gallery-caption-bar"><span class="ev-tag">Workshop</span><div class="ev-title">NEBOSH &amp; International Safety Standards</div><div class="ev-date">Orientation on NEBOSH IGC, IOSH &amp; ISO 45001</div></div>
+          </div>
         </div>
-      </li>
-      <li class="radial-item">
-        <div class="r-gallery-card">
-          <img src="images/gallery2.jpg" alt="55th National Safety Day" loading="lazy">
-          <div class="gallery-caption-bar"><span class="ev-tag">Event</span><div class="ev-title">55th National Safety Day / Safety Month</div><div class="ev-date">March 4, 2026 · "Engage, Educate and Empower"</div></div>
+
+        <!-- Column 2 (starts lower, drifts up — creates stagger depth) -->
+        <div class="ag-col" id="agCol2">
+          <div class="ag-card">
+            <img src="images/gallery2.jpg" alt="55th National Safety Day" loading="lazy">
+            <div class="gallery-caption-bar"><span class="ev-tag">Event</span><div class="ev-title">55th National Safety Day / Safety Month</div><div class="ev-date">March 4, 2026 · "Engage, Educate and Empower"</div></div>
+          </div>
+          <div class="ag-card">
+            <img src="images/ev3.jpeg" alt="Industrial Safety Visit" loading="lazy">
+            <div class="gallery-caption-bar"><span class="ev-tag">Industrial Visit</span><div class="ev-title">Industrial Safety Exposure Visit</div><div class="ev-date">Students at oil &amp; gas / power plant facilities</div></div>
+          </div>
+          <div class="ag-card">
+            <img src="images/ev6.jpeg" alt="Safety Audit" loading="lazy">
+            <div class="gallery-caption-bar"><span class="ev-tag">Audit</span><div class="ev-title">Campus Fire Safety Audit &amp; Inspection</div><div class="ev-date">Student-led audit of ANU College of Sciences</div></div>
+          </div>
         </div>
-      </li>
-      <li class="radial-item">
-        <div class="r-gallery-card">
-          <img src="images/gallery3.jpg" alt="Fire Services Week 2026" loading="lazy">
-          <div class="gallery-caption-bar"><span class="ev-tag">Event</span><div class="ev-title">Fire Services Week (FSW) 2026</div><div class="ev-date">14–20 April, 2026 · Victoria Dock Mumbai fire 1944</div></div>
+
+        <!-- Column 3 (matches col 1 rhythm) -->
+        <div class="ag-col" id="agCol3">
+          <div class="ag-card">
+            <img src="images/gallery3.jpg" alt="Fire Services Week 2026" loading="lazy">
+            <div class="gallery-caption-bar"><span class="ev-tag">Event</span><div class="ev-title">Fire Services Week (FSW) 2026</div><div class="ev-date">14–20 April, 2026 · Victoria Dock Mumbai fire 1944</div></div>
+          </div>
+          <div class="ag-card">
+            <img src="images/ev1.jpeg" alt="Mock Drill" loading="lazy">
+            <div class="gallery-caption-bar"><span class="ev-tag">Training</span><div class="ev-title">Campus Mock Drill &amp; Emergency Response</div><div class="ev-date">Fire evacuation and first-response simulation</div></div>
+          </div>
+          <div class="ag-card">
+            <img src="images/ev4.jpeg" alt="Guest Lecture" loading="lazy">
+            <div class="gallery-caption-bar"><span class="ev-tag">Guest Lecture</span><div class="ev-title">Occupational Health &amp; Hazard Control</div><div class="ev-date">Expert session on workplace hazard identification</div></div>
+          </div>
         </div>
-      </li>
-      <li class="radial-item">
-        <div class="r-gallery-card">
-          <img src="images/ev1.jpeg" alt="Mock Drill" loading="lazy">
-          <div class="gallery-caption-bar"><span class="ev-tag">Training</span><div class="ev-title">Campus Mock Drill &amp; Emergency Response</div><div class="ev-date">Fire evacuation and first-response simulation</div></div>
-        </div>
-      </li>
-      <li class="radial-item">
-        <div class="r-gallery-card">
-          <img src="images/ev2.jpeg" alt="Fire Extinguisher Training" loading="lazy">
-          <div class="gallery-caption-bar"><span class="ev-tag">Practical</span><div class="ev-title">Fire Extinguisher Practical Training</div><div class="ev-date">Hands-on ABC &amp; CO₂ extinguisher handling</div></div>
-        </div>
-      </li>
-      <li class="radial-item">
-        <div class="r-gallery-card">
-          <img src="images/ev3.jpeg" alt="Industrial Safety Visit" loading="lazy">
-          <div class="gallery-caption-bar"><span class="ev-tag">Industrial Visit</span><div class="ev-title">Industrial Safety Exposure Visit</div><div class="ev-date">Students at oil &amp; gas / power plant facilities</div></div>
-        </div>
-      </li>
-      <li class="radial-item">
-        <div class="r-gallery-card">
-          <img src="images/ev4.jpeg" alt="Guest Lecture" loading="lazy">
-          <div class="gallery-caption-bar"><span class="ev-tag">Guest Lecture</span><div class="ev-title">Occupational Health &amp; Hazard Control</div><div class="ev-date">Expert session on workplace hazard identification</div></div>
-        </div>
-      </li>
-      <li class="radial-item">
-        <div class="r-gallery-card">
-          <img src="images/ev5.jpeg" alt="NEBOSH Workshop" loading="lazy">
-          <div class="gallery-caption-bar"><span class="ev-tag">Workshop</span><div class="ev-title">NEBOSH &amp; International Safety Standards</div><div class="ev-date">Orientation on NEBOSH IGC, IOSH &amp; ISO 45001</div></div>
-        </div>
-      </li>
-      <li class="radial-item">
-        <div class="r-gallery-card">
-          <img src="images/ev6.jpeg" alt="Safety Audit" loading="lazy">
-          <div class="gallery-caption-bar"><span class="ev-tag">Audit</span><div class="ev-title">Campus Fire Safety Audit &amp; Inspection</div><div class="ev-date">Student-led audit of ANU College of Sciences</div></div>
-        </div>
-      </li>
-      <li class="radial-item">
-        <div class="r-gallery-card">
-          <img src="images/ev7.jpeg" alt="Certificate Distribution" loading="lazy">
-          <div class="gallery-caption-bar"><span class="ev-tag">Ceremony</span><div class="ev-title">Certificate Distribution — PMKVY Batch 2025</div><div class="ev-date">Ergonomic Safety Steward certificates presented</div></div>
-        </div>
-      </li>
-    </ul>
+
+      </div>
+    </div>
   </div>
-  <p class="gallery-scroll-hint"><i class="fas fa-mouse me-1"></i> Scroll to spin the wheel &nbsp;·&nbsp; Click any card to expand</p>
 </section>
 
 <!-- Recruiters -->
@@ -945,91 +939,52 @@
     }});
   });
 
-  /* ── Radial Wheel Gallery ── */
+  /* ── Animated Gallery — 3D scroll-driven grid ── */
   (function(){
-    const pinWrap=document.getElementById('radialPinWrap');
-    const track=document.getElementById('radialTrack');
-    const items=[...document.querySelectorAll('.radial-item')];
-    const N=items.length;
-    if(!pinWrap||!track||N===0) return;
-
-    function metrics(){
-      const mob=window.innerWidth<768;
-      const R=mob?230:510;
-      const D=R*2;
-      const cardH=mob?195:268;
-      const vis=0.48,hid=1-vis;
-      const wrapH=D*vis+cardH/2+95;
-      return{R,D,cardH,vis,hid,wrapH,mob};
-    }
-
-    function layout(){
-      const{R,D,hid,wrapH}=metrics();
-      pinWrap.style.height=wrapH+'px';
-      /* Centre the track and bury its bottom below the wrap */
-      gsap.set(track,{
-        width:D,height:D,
-        position:'absolute',bottom:-(D*hid),
-        left:'50%',xPercent:-50
-      });
-      /* Place each item around the circle */
-      items.forEach((item,i)=>{
-        const angle=(i/N)*2*Math.PI;
-        gsap.set(item,{
-          xPercent:-50,yPercent:-50,
-          x:R*Math.cos(angle),
-          y:R*Math.sin(angle),
-          rotation:(angle*180/Math.PI)+90
-        });
-      });
-    }
-    layout();
+    const scrollWrap=document.getElementById('agScrollWrap');
+    const grid=document.getElementById('agGrid');
+    const col1=document.getElementById('agCol1');
+    const col2=document.getElementById('agCol2');
+    const col3=document.getElementById('agCol3');
+    if(!scrollWrap||!grid||!col1||!col2||!col3) return;
 
     if(!rm){
-      /* Items pop in staggered when wheel enters viewport */
-      gsap.fromTo(items,{scale:0,autoAlpha:0},{
-        scale:1,autoAlpha:1,duration:1.1,ease:'back.out(1.2)',stagger:.06,
-        scrollTrigger:{trigger:pinWrap,start:'top 82%',toggleActions:'play none none reverse'}
+      /* Grid starts tilted 72° toward viewer, scale 1.15, pivoting from top */
+      gsap.set(grid,{
+        rotateX:72,scale:1.15,
+        transformPerspective:1200,
+        transformOrigin:'50% 0%'
       });
-      /* Scroll-driven 360° rotation — pin the section while spinning */
-      gsap.to(track,{
-        rotation:360,ease:'none',
+      /* Col 2 starts lower (stagger effect), cols 1&3 start slightly high */
+      gsap.set(col2,{yPercent:15});
+      gsap.set([col1,col3],{yPercent:-10});
+
+      /* Single scrub timeline — maps full scroll of agScrollWrap to two phases */
+      const tl=gsap.timeline({
         scrollTrigger:{
-          trigger:pinWrap,pin:true,
-          start:'center center',end:'+=2600',
-          scrub:1.2,invalidateOnRefresh:true,
-          onRefresh:layout
+          trigger:scrollWrap,
+          start:'top top',
+          end:'bottom bottom',
+          scrub:1.4,
+          invalidateOnRefresh:true,
         }
       });
+
+      /* Phase 1 (scroll 0→50%): grid rises from tilt to flat */
+      tl.to(grid,{rotateX:0,scale:1,ease:'none',duration:1});
+
+      /* Phase 2 (scroll 50→100%): columns drift at different speeds */
+      tl.to(col1,{yPercent:2,ease:'none',duration:1},'>');
+      tl.to(col2,{yPercent:5,ease:'none',duration:1},'<');
+      tl.to(col3,{yPercent:2,ease:'none',duration:1},'<');
+
     } else {
-      gsap.set(items,{scale:1,autoAlpha:1});
+      /* Reduced-motion: show grid flat */
+      gsap.set([col1,col2,col3],{yPercent:0});
     }
 
-    /* Hover — scale up hovered card, dim others */
-    items.forEach((item,i)=>{
-      const card=item.querySelector('.r-gallery-card');
-      if(!card) return;
-      item.addEventListener('mouseenter',()=>{
-        gsap.to(card,{scale:1.16,y:-14,duration:.3,ease:'power2.out',overwrite:'auto'});
-        items.forEach((o,j)=>{
-          if(j!==i) gsap.to(o.querySelector('.r-gallery-card'),{opacity:.3,duration:.26,overwrite:'auto'});
-        });
-      });
-      item.addEventListener('mouseleave',()=>{
-        gsap.to(card,{scale:1,y:0,duration:.36,ease:'power2.out',overwrite:'auto'});
-        items.forEach(o=>gsap.to(o.querySelector('.r-gallery-card'),{opacity:1,duration:.26,overwrite:'auto'}));
-      });
-    });
-
-    /* Resize */
-    let rsTimer;
-    window.addEventListener('resize',()=>{
-      clearTimeout(rsTimer);
-      rsTimer=setTimeout(()=>{layout();ScrollTrigger.refresh();},160);
-    },{passive:true});
-
     /* Lightbox */
-    const cards=[...document.querySelectorAll('.r-gallery-card')];
+    const cards=[...document.querySelectorAll('.ag-card')];
     const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap');
     let lbI=0;
     function openLB(i){
