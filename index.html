@@ -197,11 +197,64 @@
     .ev-title{font-size:12px;font-weight:700;line-height:1.3}
     .ev-date{font-size:10px;opacity:.72;margin-top:2px}
 
-    /* Recruiters */
-    .recruiters-section{padding:80px 0;background:var(--light)}
-    .recruiter-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:40px}
-    .recruiter-chip{background:#fff;border:1px solid #e5e7eb;padding:12px 24px;border-radius:8px;font-weight:700;font-size:15px;color:var(--navy);box-shadow:var(--shadow-sm);transition:box-shadow .25s,transform .25s,border-color .25s}
-    .recruiter-chip:hover{box-shadow:var(--shadow-md);transform:translateY(-4px);border-color:var(--yellow)}
+    /* Recruiters Trust Wall */
+    .recruiters-section{padding:80px 0 72px;background:var(--light);overflow:hidden}
+    /* Full-width marquee strip with edge-fade masks */
+    .rq-marquee-wrap{
+      position:relative;margin-top:44px;overflow:hidden;
+      mask-image:linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%);
+      -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%);
+    }
+    .rq-track{display:flex;gap:16px;padding:14px 0;width:max-content}
+    .rq-track.rq-scrolling{animation:rq-scroll 38s linear infinite}
+    .rq-track.rq-paused{animation-play-state:paused!important}
+    @keyframes rq-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    /* Hover-pause — desktop (hover-capable) devices only */
+    @media(hover:hover){.rq-marquee-wrap:hover .rq-track{animation-play-state:paused}}
+    /* Logo card */
+    .rq-card{
+      flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      width:150px;height:84px;background:#fff;border-radius:12px;
+      border:1px solid rgba(0,0,0,.055);box-shadow:0 2px 10px rgba(0,0,0,.06);
+      padding:12px 16px;overflow:hidden;
+      transition:box-shadow .3s,transform .3s;
+    }
+    @media(hover:hover){
+      .rq-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.13);transform:translateY(-4px)}
+      .rq-card:hover img{filter:grayscale(0%);opacity:1}
+      .rq-card:hover .rq-ph-initials{color:var(--navy)}
+      .rq-card:hover .rq-ph-name{color:var(--teal)}
+    }
+    /* Real logo image — grayscale + dim by default */
+    .rq-card img{
+      max-width:100%;max-height:48px;width:auto;height:auto;
+      object-fit:contain;display:block;
+      filter:grayscale(100%);opacity:.55;
+      transition:filter .35s,opacity .35s;
+    }
+    /* Placeholder — rendered when logo path is empty */
+    .rq-ph{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%}
+    .rq-ph-initials{
+      font-size:15px;font-weight:900;color:#607d8b;
+      letter-spacing:.5px;line-height:1.1;text-align:center;
+      transition:color .3s;
+    }
+    .rq-ph-name{
+      font-size:8.5px;font-weight:700;color:#94a3b8;text-align:center;
+      line-height:1.3;text-transform:uppercase;letter-spacing:.5px;
+      transition:color .3s;
+    }
+    /* Reduced-motion: static centered grid, clones hidden */
+    @media(prefers-reduced-motion:reduce){
+      .rq-track{animation:none!important;width:auto;flex-wrap:wrap;justify-content:center;gap:12px;padding:8px 20px}
+      .rq-card--clone{display:none!important}
+    }
+    @media(max-width:768px){
+      .rq-card{width:112px;height:66px;padding:8px 10px;border-radius:10px}
+      .rq-track{gap:10px;padding:10px 0}
+      .rq-ph-initials{font-size:12px}
+      .rq-ph-name{font-size:7.5px}
+    }
 
     /* Certify */
     .certify-section{padding:60px 0;background:#fff;border-top:1px solid #f0f0f0}
@@ -566,6 +619,7 @@
 </section>
 
 <!-- Recruiters -->
+<!-- Recruiters Trust Wall -->
 <section class="recruiters-section">
   <div class="container">
     <div class="text-center reveal">
@@ -574,22 +628,10 @@
       <div class="section-divider center"></div>
       <p style="color:var(--muted);max-width:580px;margin:0 auto;font-size:15px">Our graduates are industry-ready safety professionals placed across India's leading corporations.</p>
     </div>
-    <div class="recruiter-grid">
-      <div class="recruiter-chip reveal">Adani Group</div>
-      <div class="recruiter-chip reveal">Amazon</div>
-      <div class="recruiter-chip reveal">Asian Paints</div>
-      <div class="recruiter-chip reveal">Coca-Cola</div>
-      <div class="recruiter-chip reveal">GMR Group</div>
-      <div class="recruiter-chip reveal">ITC Ltd.</div>
-      <div class="recruiter-chip reveal">L&amp;T</div>
-      <div class="recruiter-chip reveal">MEIL</div>
-      <div class="recruiter-chip reveal">Power Mech</div>
-      <div class="recruiter-chip reveal">NSL Group</div>
-      <div class="recruiter-chip reveal">ONGC</div>
-      <div class="recruiter-chip reveal">HPCL</div>
-      <div class="recruiter-chip reveal">BPCL</div>
-      <div class="recruiter-chip reveal">Tata Projects</div>
-    </div>
+  </div>
+  <!-- Full-width marquee (JS builds cards from RECRUITERS array below) -->
+  <div class="rq-marquee-wrap" id="rqMarqueeWrap">
+    <div class="rq-track" id="rqTrack"></div>
   </div>
 </section>
 
@@ -1000,6 +1042,87 @@
       if(e.key==='ArrowLeft')openLB((lbI-1+cards.length)%cards.length);
       if(e.key==='ArrowRight')openLB((lbI+1)%cards.length);
     });
+  })();
+
+  /* ── Recruiters Trust Wall — infinite marquee ── */
+  (function(){
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       DROP REAL LOGO PATHS INTO logo: '' FIELDS BELOW
+       WHEN ASSETS ARE READY.  Leave logo:'' to keep
+       the styled placeholder (initials + name).
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    const RECRUITERS=[
+      {name:'Adani Group',  abbr:'AG',   logo:''},
+      {name:'Amazon',       abbr:'AMZ',  logo:''},
+      {name:'Asian Paints', abbr:'AP',   logo:''},
+      {name:'Coca-Cola',    abbr:'CC',   logo:''},
+      {name:'GMR Group',    abbr:'GMR',  logo:''},
+      {name:'ITC Ltd.',     abbr:'ITC',  logo:''},
+      {name:'L&T',          abbr:'L&T',  logo:''},
+      {name:'MEIL',         abbr:'MEIL', logo:''},
+      {name:'Power Mech',   abbr:'PM',   logo:''},
+      {name:'NSL Group',    abbr:'NSL',  logo:''},
+      {name:'ONGC',         abbr:'ONGC', logo:''},
+      {name:'HPCL',         abbr:'HPCL', logo:''},
+      {name:'BPCL',         abbr:'BPCL', logo:''},
+      {name:'Tata Projects',abbr:'TP',   logo:''},
+    ];
+
+    const wrap=document.getElementById('rqMarqueeWrap');
+    const track=document.getElementById('rqTrack');
+    if(!wrap||!track) return;
+
+    function makeCard(r,clone){
+      const card=document.createElement('div');
+      card.className='rq-card'+(clone?' rq-card--clone':'');
+      if(clone) card.setAttribute('aria-hidden','true');
+      if(r.logo){
+        const img=document.createElement('img');
+        img.src=r.logo;img.alt=r.name;img.loading='lazy';
+        card.appendChild(img);
+      } else {
+        const ph=document.createElement('div');
+        ph.className='rq-ph';
+        ph.innerHTML='<div class="rq-ph-initials">'+r.abbr+'</div>'
+                    +'<div class="rq-ph-name">'+r.name+'</div>';
+        card.appendChild(ph);
+      }
+      return card;
+    }
+
+    /* Build original set + duplicate set for seamless loop */
+    RECRUITERS.forEach(r=>track.appendChild(makeCard(r,false)));
+    RECRUITERS.forEach(r=>track.appendChild(makeCard(r,true)));
+
+    const origCards=[...track.querySelectorAll('.rq-card:not(.rq-card--clone)')];
+    const cloneCards=[...track.querySelectorAll('.rq-card.rq-card--clone')];
+
+    if(!rm){
+      /* Entrance: logos fade + scale in with stagger, then marquee starts */
+      gsap.set(origCards,{opacity:0,scale:.88,y:12});
+      gsap.set(cloneCards,{opacity:0});
+      ScrollTrigger.create({
+        trigger:wrap,start:'top 88%',once:true,
+        onEnter(){
+          gsap.to(origCards,{
+            opacity:1,scale:1,y:0,
+            duration:.52,ease:'back.out(1.4)',stagger:.048,
+            onComplete(){
+              gsap.set(cloneCards,{opacity:1});
+              track.classList.add('rq-scrolling');
+            }
+          });
+        }
+      });
+    } else {
+      /* Reduced-motion: show static grid immediately (clones hidden via CSS) */
+      gsap.set(origCards,{opacity:1,scale:1,y:0});
+    }
+
+    /* Mobile: tap-and-hold pauses marquee so users can read a specific logo */
+    wrap.addEventListener('touchstart', ()=>track.classList.add('rq-paused'),   {passive:true});
+    wrap.addEventListener('touchend',   ()=>track.classList.remove('rq-paused'),{passive:true});
+    wrap.addEventListener('touchcancel',()=>track.classList.remove('rq-paused'),{passive:true});
   })();
 
   /* Back to top */
