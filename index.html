@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="css/premium.css">
   <style>
     /* ── Hero ── */
-    .hero-section{position:relative;overflow:hidden}
+    /* No overflow:hidden on section — viewport clips slides internally; cards float below */
+    .hero-section{position:relative}
     .ember-canvas{position:absolute;inset:0;pointer-events:none;z-index:8}
 
     /* Hero 3D viewport */
@@ -53,14 +54,34 @@
       .hero-content{bottom:76px}
     }
 
-    /* Info cards */
-    .info-cards-wrap{position:absolute;bottom:-52px;left:0;right:0;z-index:10}
-    .info-card{background:#fff;padding:20px;box-shadow:0 6px 24px rgba(0,0,0,.1);display:flex;align-items:center;height:110px;border-right:1px solid #eee;transition:box-shadow var(--transition),transform var(--transition)}
-    .info-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-    .info-icon{background:var(--yellow);margin-right:15px;color:var(--navy);font-size:19px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:6px;flex-shrink:0}
+    /* Info cards — glassmorphism float strip */
+    .info-cards-wrap{
+      position:absolute;bottom:0;left:50%;transform:translate(-50%,50%);
+      z-index:20;width:100%;max-width:1200px;padding:0 20px;
+    }
+    .info-card{
+      background:rgba(0,22,46,.82);
+      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.11);border-right:none;
+      padding:20px 22px;height:96px;display:flex;align-items:center;
+      color:#fff;
+      transition:background var(--transition),transform var(--transition),box-shadow var(--transition);
+    }
+    .col-md-4:first-child .info-card{border-radius:12px 0 0 12px}
+    .col-md-4:last-child  .info-card{border-radius:0 12px 12px 0;border-right:1px solid rgba(255,255,255,.11)}
+    .info-card:hover{background:rgba(0,40,80,.9);transform:translateY(-5px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
+    .info-icon{
+      background:rgba(253,189,0,.14);border:1px solid rgba(253,189,0,.35);
+      color:var(--yellow);font-size:19px;width:50px;height:50px;
+      display:flex;align-items:center;justify-content:center;
+      border-radius:8px;flex-shrink:0;margin-right:15px;
+      box-shadow:0 0 16px rgba(253,189,0,.22);
+    }
+    .info-card strong{color:#fff;font-weight:700}
+    .info-card .text-muted{color:rgba(255,255,255,.72)!important}
 
-    /* Flash news */
-    .flash-bar{background:var(--yellow);padding:12px 0;border-bottom:2px solid rgba(0,0,0,.07);margin-top:80px}
+    /* Flash news — margin clears the glassmorphism cards floating 50% below hero (96px / 2 + 20px gap) */
+    .flash-bar{background:var(--yellow);padding:12px 0;border-bottom:2px solid rgba(0,0,0,.07);margin-top:68px}
     .flash-label{font-weight:800;font-size:12px;text-transform:uppercase;color:var(--navy);white-space:nowrap;margin-right:18px}
     .flash-scroller{flex:1;overflow:hidden}
     .flash-text{display:inline-block;font-weight:600;color:#000;padding-left:100%;animation:marquee 28s linear infinite;white-space:nowrap}
@@ -132,12 +153,24 @@
     .certify-badge.highlight i{color:var(--yellow)}
 
     @media(max-width:768px){
-      .hero-img{height:320px}
-      .info-cards-wrap{position:static;margin-top:16px}
+      /* Info cards — vertical stack below hero on mobile; no overlap */
+      /* Info cards — flat dark strip below hero, full-width, no rounded corners */
+      .info-cards-wrap{position:static;transform:none;padding:0;max-width:none;width:100%}
+      .info-card{
+        border-right:none;border-bottom:1px solid rgba(255,255,255,.08);
+        border-radius:0!important;height:auto;padding:16px 20px;
+        flex-direction:row;background:rgba(0,22,46,.92);
+      }
+      .col-md-4:first-child .info-card,
+      .col-md-4:last-child  .info-card{border-radius:0!important}
+      .col-md-4:last-child  .info-card{border-bottom:1px solid rgba(255,255,255,.11)}
+      .info-icon{flex-shrink:0;margin-right:14px;margin-bottom:0}
       .flash-bar{margin-top:0}
+      /* Chairman */
       .chairman-card{flex-direction:column}
       .chairman-img-col{flex:none;padding:28px 20px}
       .chairman-text-col{padding:28px 24px}
+      /* Gallery */
       .gallery-viewport{height:280px}
       .gallery-card{height:240px}
     }
@@ -272,14 +305,14 @@
       </div>
     </div>
 
-  </div><!-- /.hero-viewport -->
+    <!-- Dot navigation — inside viewport so it's anchored to the image, not the section -->
+    <div class="hero-dots-wrap" id="heroDots">
+      <button class="hero-dot active" data-goto="0" aria-label="Slide 1"></button>
+      <button class="hero-dot" data-goto="1" aria-label="Slide 2"></button>
+      <button class="hero-dot" data-goto="2" aria-label="Slide 3"></button>
+    </div>
 
-  <!-- Dot navigation -->
-  <div class="hero-dots-wrap" id="heroDots">
-    <button class="hero-dot active" data-goto="0" aria-label="Slide 1"></button>
-    <button class="hero-dot" data-goto="1" aria-label="Slide 2"></button>
-    <button class="hero-dot" data-goto="2" aria-label="Slide 3"></button>
-  </div>
+  </div><!-- /.hero-viewport -->
 
   <div class="container info-cards-wrap">
     <div class="row g-0">
@@ -564,9 +597,9 @@
     const dots     = [...document.querySelectorAll('#heroDots .hero-dot')];
     const INTERVAL = 5500;
     const isMob    = () => window.innerWidth < 768;
-    let cur = 0, busy = false, timer = null;
+    let cur = 0, busy = false, timer = null, isPaused = false;
 
-    /* Init: slide 0 visible, rest invisible */
+    /* Init: slide 0 visible, rest rotated off-screen */
     slides.forEach((s,i)=>{
       if(i===0){ gsap.set(s,{opacity:1,rotationY:0,zIndex:2,transformPerspective:1400}); }
       else      { gsap.set(s,{opacity:0,rotationY:isMob()?38:90,zIndex:1,transformPerspective:1400}); }
@@ -574,33 +607,27 @@
 
     function updateDots(i){ dots.forEach((d,j)=>d.classList.toggle('active',j===i)); }
 
-    function goTo(next,dir){
-      if(busy||next===cur) return;
+    function goTo(idx,dir){
+      if(busy||idx===cur) return;
       busy=true;
-      const prev=cur; cur=next; updateDots(cur);
+      const prev=cur; cur=idx; updateDots(cur);
       const out=slides[prev], inn=slides[cur];
       const rot=isMob()?38:90;
       const dur=rm?0.01:(isMob()?.68:.85);
 
-      /* Remove Ken Burns from outgoing */
       out.classList.remove('kb-active');
       const outImg=out.querySelector('.hero-bg-img');
       outImg.style.animation='none'; void outImg.offsetWidth;
 
-      /* Stage incoming */
       gsap.set(inn,{opacity:1,rotationY:dir*rot,zIndex:3,transformPerspective:1400});
       gsap.set(out,{zIndex:2});
 
       if(rm){
-        /* prefers-reduced-motion: simple crossfade */
-        gsap.to(out,{opacity:0,duration:.4});
+        gsap.to(out,{opacity:0,duration:.4,onComplete:finish});
         gsap.set(inn,{rotationY:0});
-        finish();
       } else {
-        /* 3D flip */
         gsap.to(out,{rotationY:-dir*rot,duration:dur,ease:'power2.inOut'});
         gsap.to(inn,{rotationY:0,duration:dur,ease:'power2.inOut',onComplete:finish});
-        /* Text slides up inside incoming */
         const ct=inn.querySelector('.hero-content');
         if(ct) gsap.fromTo(ct,{y:24,opacity:0},{y:0,opacity:1,duration:.5,delay:dur*.4,ease:'power3.out'});
       }
@@ -608,7 +635,6 @@
       function finish(){
         gsap.set(out,{opacity:0,rotationY:0,zIndex:1});
         gsap.set(inn,{zIndex:2});
-        /* Restart Ken Burns on incoming */
         const inImg=inn.querySelector('.hero-bg-img');
         inImg.style.animation='none'; void inImg.offsetWidth; inImg.style.animation='';
         inn.classList.add('kb-active');
@@ -616,32 +642,33 @@
       }
     }
 
-    function next(){ goTo((cur+1)%slides.length, 1); }
-    function prev(){ goTo((cur-1+slides.length)%slides.length,-1); }
+    function advanceNext(){ if(!isPaused && !busy) goTo((cur+1)%slides.length, 1); }
+    function advancePrev(){ goTo((cur-1+slides.length)%slides.length,-1); }
 
-    function startTimer(){ clearInterval(timer); if(!rm) timer=setInterval(next,INTERVAL); }
-    function stopTimer(){  clearInterval(timer); }
+    /* Timer always runs — isPaused flag controls whether tick actually advances */
+    timer = setInterval(advanceNext, INTERVAL);
 
-    startTimer();
-
-    /* Dots */
+    /* Dots: manual click resets the 5.5s window */
     dots.forEach((d,i)=>d.addEventListener('click',()=>{
-      stopTimer(); goTo(i, i>cur?1:-1); startTimer();
+      clearInterval(timer);
+      goTo(i, i>cur?1:-1);
+      timer=setInterval(advanceNext,INTERVAL);
     }));
 
-    /* Pause on hover (desktop) */
-    section.addEventListener('mouseenter',stopTimer);
-    section.addEventListener('mouseleave',startTimer);
+    /* Hover pause — pointer events only; ignore touch-simulated mouse events */
+    section.addEventListener('pointerenter',e=>{ if(e.pointerType!=='touch') isPaused=true; });
+    section.addEventListener('pointerleave',e=>{ if(e.pointerType!=='touch') isPaused=false; });
 
-    /* Touch swipe */
-    let tsx=0,tsy=0;
+    /* Touch swipe — 8s cooldown before auto-advance resumes */
+    let tsx=0,tsy=0,swipeCooldown=null;
     viewport.addEventListener('touchstart',e=>{tsx=e.changedTouches[0].clientX;tsy=e.changedTouches[0].clientY;},{passive:true});
     viewport.addEventListener('touchend',e=>{
       const dx=tsx-e.changedTouches[0].clientX,dy=Math.abs(tsy-e.changedTouches[0].clientY);
       if(Math.abs(dx)>44&&Math.abs(dx)>dy){
-        stopTimer();
-        if(dx>0) next(); else prev();
-        setTimeout(startTimer,8000); /* resume after 8s */
+        isPaused=true;
+        if(dx>0) advanceNext(); else advancePrev();
+        clearTimeout(swipeCooldown);
+        swipeCooldown=setTimeout(()=>{ isPaused=false; },8000);
       }
     },{passive:true});
   })();
