@@ -327,10 +327,20 @@
     .whyus-desc{font-size:13px;color:#627080;line-height:1.72}
     @media(max-width:991px){.whyus-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:768px){
-      .prog-card{padding:30px 22px}.prog-title{font-size:1.25rem}
-      .whyus-grid{grid-template-columns:repeat(2,1fr);gap:14px}.whyus-card{padding:22px 18px}
+      /* CRITICAL: keep padding-top:0 so card image bleeds flush to top edge */
+      .prog-card{padding:0 22px 36px}
+      .prog-img-wrap{margin:0 -22px 22px}
+      .prog-img-wrap~.prog-icon{margin-top:22px}
+      .prog-title{font-size:1.18rem}
+      .whyus-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+      .whyus-card{padding:22px 18px}
     }
-    @media(max-width:480px){.whyus-grid{grid-template-columns:1fr}}
+    @media(max-width:480px){
+      .whyus-grid{grid-template-columns:1fr}
+      /* CTA buttons stack on small phones */
+      .prog-ctas{flex-direction:column;align-items:stretch}
+      .btn-prog,.btn-prog-ghost{justify-content:center;text-align:center;width:100%}
+    }
 
     @media(max-width:768px){
       /* Info cards — vertical stack below hero on mobile; no overlap */
@@ -409,6 +419,62 @@
       .wa-float{bottom:18px;right:16px}
       .wa-btn{width:52px;height:52px;font-size:24px}
       .wa-label{display:none}
+    }
+
+    /* ═══════════════════════════════════════════
+       MOBILE & TABLET LAYOUT FIXES
+       Desktop rules above are NOT modified.
+       ═══════════════════════════════════════════ */
+
+    /* Tablet ≤1024px — reduce section vertical padding */
+    @media(max-width:1024px){
+      .welcome-section{padding:80px 0 60px}
+      .stats-section{padding:58px 0}
+      .chairman-section{padding:70px 0}
+      .gallery-section{padding:70px 0 48px}
+      .programs-section{padding:72px 0}
+      .whyus-section{padding:68px 0}
+      .recruiters-section{padding:62px 0 52px}
+      .certify-section{padding:56px 0}
+    }
+
+    /* Mobile ≤768px — tighter padding + UI element tuning */
+    @media(max-width:768px){
+      .welcome-section{padding:52px 0 38px}
+      .stats-section{padding:48px 0}
+      .chairman-section{padding:50px 0}
+      .gallery-section{padding:50px 0 32px}
+      .programs-section{padding:54px 0}
+      .whyus-section{padding:54px 0}
+      .recruiters-section{padding:48px 0 40px}
+      .certify-section{padding:44px 0}
+      /* Certify cards — smaller on mobile */
+      .certify-card{padding:10px 14px;font-size:12px}
+      .certify-card.featured{padding:12px 16px;font-size:12.5px}
+      /* Why Choose Us image height — shorter on 2-col layout */
+      .whyus-img-wrap{height:110px}
+      .whyus-title{font-size:.9rem}
+      .whyus-desc{font-size:12px;line-height:1.65}
+      /* Chairman card text */
+      .quote-mark{font-size:52px}
+      .chairman-message{font-size:14px}
+      /* Program card text */
+      .prog-sub{font-size:12px}
+      .prog-features li{font-size:13px}
+      .btn-prog{font-size:12.5px;padding:10px 20px}
+      .btn-prog-ghost{font-size:12.5px;padding:9px 16px}
+    }
+
+    /* Small phones ≤480px */
+    @media(max-width:480px){
+      /* Hero buttons — slightly smaller padding */
+      .btn-hero-primary,.btn-hero-outline{padding:11px 22px;font-size:13.5px}
+      /* Welcome stat cluster — stack to single column on tiny screens */
+      .ws-stat{min-width:100%}
+      /* Why Choose Us — single column, taller image */
+      .whyus-img-wrap{height:160px}
+      /* Program image — slightly shorter */
+      .prog-img-wrap{height:170px}
     }
   </style>
 </head>
