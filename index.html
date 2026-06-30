@@ -91,12 +91,50 @@
     /* Welcome */
     .welcome-section{padding:100px 0 80px}
     .welcome-img-wrap{position:relative}
-    .welcome-badge{position:absolute;bottom:-18px;left:-16px;background:var(--yellow);color:#000;padding:14px 20px;border-radius:var(--radius);font-weight:800;font-size:12px;text-align:center;box-shadow:var(--shadow-md);line-height:1.3}
-    .welcome-badge span{display:block;font-size:26px;font-weight:900}
-    .btn-navy{background:var(--navy);color:#fff;font-weight:700;padding:13px 28px;border-radius:4px;border:none;cursor:pointer;transition:background .3s,transform .2s;display:inline-block;margin-top:24px;margin-right:10px}
-    .btn-navy:hover{background:var(--teal);transform:translateY(-2px);color:#fff}
-    .btn-yellow{background:var(--yellow);color:#000;font-weight:700;padding:13px 28px;border-radius:4px;border:none;cursor:pointer;transition:background .3s,transform .2s;display:inline-block;margin-top:24px}
-    .btn-yellow:hover{background:#ffd700;transform:translateY(-2px)}
+
+    /* Image frame — yellow glow border + L-shaped corner accent */
+    .welcome-img-frame{position:relative;border-radius:14px;display:block;will-change:transform}
+    .welcome-img-frame::before{
+      content:'';position:absolute;inset:-3px;border-radius:16px;
+      border:2px solid rgba(253,189,0,.48);
+      box-shadow:0 0 0 1px rgba(253,189,0,.1),0 0 28px rgba(253,189,0,.16),0 18px 52px rgba(0,0,0,.2);
+      pointer-events:none;z-index:2;
+    }
+    .welcome-img-frame::after{
+      content:'';position:absolute;top:-8px;left:-8px;
+      width:50px;height:50px;
+      border-top:3px solid var(--yellow);border-left:3px solid var(--yellow);
+      border-radius:3px 0 0 0;pointer-events:none;z-index:3;
+    }
+    .welcome-img-frame img{width:100%;border-radius:12px;display:block;box-shadow:0 20px 60px rgba(0,0,0,.16);position:relative;z-index:1}
+
+    /* Floating stat cluster — glassmorphism, bottom-left of image */
+    .welcome-stats-cluster{position:absolute;bottom:-8px;left:-16px;display:flex;flex-direction:column;gap:8px;z-index:10}
+    .ws-stat{
+      background:rgba(0,22,46,.88);
+      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.12);border-radius:10px;
+      padding:10px 16px;display:flex;align-items:center;gap:12px;
+      min-width:192px;box-shadow:0 8px 28px rgba(0,0,0,.28);
+    }
+    .ws-stat-icon{font-size:17px;color:var(--yellow);width:24px;text-align:center;flex-shrink:0}
+    .ws-stat-num{font-size:1.2rem;font-weight:900;color:var(--yellow);line-height:1.1}
+    .ws-stat-label{font-size:10px;color:rgba(255,255,255,.7);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+
+    /* Fact chips */
+    .fact-chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 24px}
+    .fact-chip{
+      display:flex;align-items:center;gap:7px;
+      background:#f0f4f8;border:1px solid #dce4ef;border-radius:6px;
+      padding:8px 14px;font-size:13px;font-weight:600;color:var(--navy);
+    }
+    .fact-chip i{color:var(--teal);font-size:13px}
+
+    /* Buttons — box-shadow glow on hover */
+    .btn-navy{background:var(--navy);color:#fff;font-weight:700;padding:13px 28px;border-radius:4px;border:none;cursor:pointer;transition:background .3s,transform .2s,box-shadow .3s;display:inline-block;margin-top:24px;margin-right:10px}
+    .btn-navy:hover{background:var(--teal);transform:translateY(-2px);color:#fff;box-shadow:0 8px 24px rgba(0,51,78,.35)}
+    .btn-yellow{background:var(--yellow);color:#000;font-weight:700;padding:13px 28px;border-radius:4px;border:none;cursor:pointer;transition:background .3s,transform .2s,box-shadow .3s;display:inline-block;margin-top:24px}
+    .btn-yellow:hover{background:#ffd700;transform:translateY(-2px);box-shadow:0 8px 24px rgba(253,189,0,.45)}
 
     /* Stats */
     .stats-section{background:linear-gradient(135deg,var(--navy) 0%,var(--teal) 100%);padding:72px 0;position:relative;overflow:hidden}
@@ -154,6 +192,11 @@
 
     @media(max-width:768px){
       /* Info cards — vertical stack below hero on mobile; no overlap */
+      /* Welcome — stat cluster below image, fact chips wrap */
+      .welcome-stats-cluster{position:static;flex-direction:row;flex-wrap:wrap;margin-top:14px;gap:8px;left:auto;bottom:auto}
+      .ws-stat{min-width:calc(50% - 4px);flex:1 1 auto}
+      .welcome-img-frame::after{display:none}
+      .fact-chip{font-size:12px;padding:7px 12px}
       /* Info cards — flat dark strip below hero, full-width, no rounded corners */
       .info-cards-wrap{position:static;transform:none;padding:0;max-width:none;width:100%}
       .info-card{
@@ -337,21 +380,56 @@
 <section class="welcome-section">
   <div class="container">
     <div class="row align-items-center g-5">
-      <div class="col-lg-6 order-2 order-lg-1">
+
+      <!-- Text col -->
+      <div class="col-lg-6 order-2 order-lg-1 welcome-text-col">
         <span class="section-overline">Welcome to!</span>
         <h2 class="section-title">Fire and Industrial Safety<br>Department, ANU</h2>
         <div class="section-divider"></div>
         <p style="color:#555;line-height:1.88;font-size:15.5px;margin-bottom:14px">The Department of Fire and Industrial Safety was established on 18th September, 2025 by the esteemed personalities Sri. Dr. Gangadhara Rao Kancharla (I/c Vice Chancellor), Smt. Prof. K. Ratna Shiela Mani garu (Rector I/C), Sri Prof. G. Simhachalam garu (Registrar I/C), and Sri Suneel Mahanty (C.E.O. and Chairman), offering Bachelor Degrees in Fire and Industrial Safety on self-supporting mode.</p>
         <p style="color:#555;line-height:1.88;font-size:15.5px">Technically collaborated with the National Institute of Fire and Safety (NIFS), the department provides sophisticated classrooms, digital labs, and advanced fire safety training facilities — equipping students to achieve global standards of excellence.</p>
+        <div class="fact-chips">
+          <div class="fact-chip"><i class="fas fa-calendar-check"></i>Established Sept 2025</div>
+          <div class="fact-chip"><i class="fas fa-handshake"></i>NIFS Technical Collaboration</div>
+          <div class="fact-chip"><i class="fas fa-graduation-cap"></i>Self-Supporting Mode</div>
+        </div>
         <a href="profile" class="btn-navy">Learn More</a>
         <a href="tel:8374340999" class="btn-yellow">83743 40999</a>
       </div>
-      <div class="col-lg-6 order-1 order-lg-2 reveal-right">
+
+      <!-- Image col -->
+      <div class="col-lg-6 order-1 order-lg-2 welcome-img-col">
         <div class="welcome-img-wrap">
-          <img src="images/nifscampus.png" alt="NIFS Campus" style="width:100%;border-radius:12px;box-shadow:var(--shadow-lg)" loading="lazy">
-          <div class="welcome-badge">Est.<span>2025</span>ANU</div>
+          <div class="welcome-img-frame">
+            <img src="images/nifscampus.png" alt="NIFS Campus" loading="lazy">
+          </div>
+          <!-- Floating stat cluster -->
+          <div class="welcome-stats-cluster">
+            <div class="ws-stat">
+              <div class="ws-stat-icon"><i class="fas fa-layer-group"></i></div>
+              <div>
+                <div class="ws-stat-num" data-target="2" data-suffix="">0</div>
+                <div class="ws-stat-label">UG Programs</div>
+              </div>
+            </div>
+            <div class="ws-stat">
+              <div class="ws-stat-icon"><i class="fas fa-award"></i></div>
+              <div>
+                <div class="ws-stat-num">NAAC A+</div>
+                <div class="ws-stat-label">Accredited</div>
+              </div>
+            </div>
+            <div class="ws-stat">
+              <div class="ws-stat-icon"><i class="fas fa-briefcase"></i></div>
+              <div>
+                <div class="ws-stat-num" data-target="100" data-suffix="%">0%</div>
+                <div class="ws-stat-label">Placement Support</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -691,8 +769,58 @@
     gsap.fromTo('.chairman-card',{opacity:0,y:50,rotateX:8,transformPerspective:900},{
       opacity:1,y:0,rotateX:0,duration:1,ease:'power3.out',
       scrollTrigger:{trigger:'.chairman-card',start:'top 80%'}});
+
+    /* ── Welcome section entrance ── */
+    /* Text slides in from left */
+    gsap.fromTo('.welcome-text-col',
+      {opacity:0,x:-52},
+      {opacity:1,x:0,duration:.9,ease:'power3.out',
+       scrollTrigger:{trigger:'.welcome-section',start:'top 80%',toggleActions:'play none none none'}});
+    /* Image scales in from right with perspective rotation, 180ms stagger */
+    gsap.fromTo('.welcome-img-frame',
+      {opacity:0,x:52,scale:.92,rotationY:-8,transformPerspective:1200},
+      {opacity:1,x:0,scale:1,rotationY:0,duration:1.05,ease:'power3.out',delay:.18,
+       scrollTrigger:{trigger:'.welcome-section',start:'top 80%',toggleActions:'play none none none'}});
+
+    /* Mouse-tilt parallax on image — desktop (fine pointer) only */
+    (function(){
+      const wFrame=document.querySelector('.welcome-img-frame');
+      const wSect=document.querySelector('.welcome-section');
+      if(!wFrame||!wSect||!window.matchMedia('(pointer:fine)').matches) return;
+      let tiltOn=false;
+      wSect.addEventListener('mouseenter',()=>{ tiltOn=true; });
+      wSect.addEventListener('mouseleave',()=>{
+        tiltOn=false;
+        gsap.to(wFrame,{rotationX:0,rotationY:0,duration:.7,ease:'power2.out',overwrite:'auto'});
+      });
+      wSect.addEventListener('mousemove',e=>{
+        if(!tiltOn) return;
+        const r=wFrame.getBoundingClientRect();
+        const dx=(e.clientX-(r.left+r.width/2))/(r.width/2);
+        const dy=(e.clientY-(r.top+r.height/2))/(r.height/2);
+        gsap.to(wFrame,{rotationX:-dy*5,rotationY:dx*6,
+          transformPerspective:900,transformOrigin:'center center',
+          duration:.25,ease:'power2.out',overwrite:'auto'});
+      });
+    })();
+
+    /* Welcome stat count-up on scroll */
+    document.querySelectorAll('.ws-stat-num[data-target]').forEach(el=>{
+      const to=parseInt(el.dataset.target),sfx=el.dataset.suffix||'';
+      ScrollTrigger.create({trigger:'.welcome-stats-cluster',start:'top 88%',once:true,onEnter:()=>{
+        const t0=performance.now(),dur=1200;
+        (function tick(now){
+          const p=Math.min((now-t0)/dur,1),ease=1-Math.pow(1-p,3);
+          el.textContent=Math.round(to*ease)+sfx;
+          if(p<1) requestAnimationFrame(tick);
+        })(performance.now());
+      }});
+    });
+
   } else {
-    document.querySelectorAll('.reveal,.reveal-right,.reveal-3d,.reveal-scale').forEach(el=>{el.style.opacity='1';el.style.transform='none';});
+    /* prefers-reduced-motion fallback */
+    document.querySelectorAll('.reveal,.reveal-right,.reveal-3d,.reveal-scale,.welcome-text-col,.welcome-img-frame').forEach(el=>{el.style.opacity='1';el.style.transform='none';});
+    document.querySelectorAll('.ws-stat-num[data-target]').forEach(el=>{el.textContent=el.dataset.target+(el.dataset.suffix||'');});
   }
 
   /* Stat counters */
