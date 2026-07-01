@@ -3,10 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="images/logo-anu.png" type="image/png">
+  <link rel="canonical" href="https://nifs-nagarjuna-landing-page.vercel.app/">
   <title>ANU – Department of Fire and Industrial Safety</title>
   <meta name="description" content="Department of Fire and Industrial Safety, Acharya Nagarjuna University. B.Sc. programs in Fire and Industrial Safety. NAAC A+ accredited.">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://nifs-nagarjuna-landing-page.vercel.app/">
+  <meta property="og:title"       content="ANU – Department of Fire and Industrial Safety">
+  <meta property="og:description" content="B.Sc. & B.Sc.(Hons) programs in Fire and Industrial Safety. NAAC A+ accredited. 85+ NIFS centres. 100% Placement Assistance.">
+  <meta property="og:image"       content="https://nifs-nagarjuna-landing-page.vercel.app/images/hero-1.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:title"      content="ANU – Department of Fire and Industrial Safety">
+  <meta name="twitter:description"content="B.Sc. programs in Fire & Industrial Safety at Acharya Nagarjuna University. NAAC A+. 100% Placement.">
+  <meta name="twitter:image"      content="https://nifs-nagarjuna-landing-page.vercel.app/images/hero-1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qJNP/b==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="css/premium.css">
   <style>
     /* ── Hero ── */
@@ -40,9 +54,12 @@
     .btn-hero-outline:hover{background:rgba(255,255,255,.15);color:#fff}
 
     /* Dot navigation */
-    .hero-dots-wrap{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:12}
+    .hero-dots-wrap{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:12;align-items:center}
     .hero-dot{width:10px;height:10px;border-radius:50%;border:2px solid rgba(255,255,255,.7);background:transparent;padding:0;cursor:pointer;transition:background .25s,transform .25s,border-color .25s}
     .hero-dot.active{background:#fdbd00;border-color:#fdbd00;transform:scale(1.35)}
+    /* Pause/play button */
+    .hero-pause-btn{width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,.7);background:transparent;color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;margin-left:6px;transition:border-color .25s,background .25s}
+    .hero-pause-btn:hover{border-color:#fdbd00;background:rgba(253,189,0,.2)}
 
     @media(max-width:768px){
       .hero-viewport{height:420px}
@@ -479,6 +496,7 @@
   </style>
 </head>
 <body id="top">
+<a href="#mainContent" class="skip-link" style="position:absolute;left:-9999px;top:4px;z-index:99999;background:var(--navy,#00334e);color:#fff;padding:8px 18px;border-radius:4px;font-weight:700;font-size:14px;text-decoration:none">Skip to main content</a>
 <div class="scroll-prog" id="scrollProg"></div>
 
 <!-- ═══ LOCKED HEADER ═══ -->
@@ -501,7 +519,7 @@
   <section class="main-header">
     <div class="univ-logo"><img src="images/logo-anu.png" alt="ANU Seal"></div>
     <div class="center-titles">
-      <div class="telugu-header">ఆచార్య నాగార్జున విశ్వవిద్యాలయం</div>
+      <div class="telugu-header" lang="te">ఆచార్య నాగార్జున విశ్వవిద్యాలయం</div>
       <h1 class="english-header">DEPARTMENT OF FIRE AND INDUSTRIAL SAFETY</h1>
     </div>
     <div class="azadi-logo"><img src="images/75years.png" alt="Azadi Ka Amrit Mahotsav 75"></div>
@@ -540,7 +558,7 @@
 </div>
 
 <!-- ═══ MAIN ═══ -->
-<main>
+<main id="mainContent">
 
 <!-- Hero — 3D flip slider -->
 <section class="hero-section" id="heroSection">
@@ -559,7 +577,7 @@
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <p class="hero-tagline">Acharya Nagarjuna University</p>
-        <h1 class="hero-title">Trained for the Frontline.<br>Ready for Industry.</h1>
+        <h2 class="hero-title">Trained for the Frontline.<br>Ready for Industry.</h2>
         <p class="hero-subtext">Hands-on training with real industrial equipment for real career outcomes.</p>
         <div>
           <a href="course-offered" class="btn-hero-primary">Explore Programs</a>
@@ -588,19 +606,18 @@
       </div>
     </div>
 
-    <!-- Slide 3 (hero-3.png = sourced from "Hero 3.png") -->
+    <!-- Slide 3 (hero-3.png = industrial safety professional) -->
     <div class="hero-slide" data-slide="2">
       <div class="hero-bg-wrap">
         <picture>
-          <source srcset="images/hero-3.webp" type="image/webp">
-          <img src="images/hero-3.png" class="hero-bg-img" alt="From Classroom to Career" loading="eager">
+          <img src="images/hero-3.png" class="hero-bg-img" alt="Industrial Safety Professional" loading="eager" style="object-position:center center">
         </picture>
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <p class="hero-tagline">Acharya Nagarjuna University</p>
-        <h2 class="hero-title">From Classroom to Career —<br>100% Placement Assistance</h2>
-        <p class="hero-subtext">NAAC A+ accredited. Industry-recognized. Built for employability.</p>
+        <h2 class="hero-title">Where Safety Experts Are Built —<br>Trusted by Industry, Proven in the Field</h2>
+        <p class="hero-subtext">NAAC A+ accredited programs designed to produce certified industrial safety professionals ready for real-world challenges.</p>
         <div>
           <a href="course-offered" class="btn-hero-primary">Explore Programs</a>
           <a href="contact" class="btn-hero-outline">Get in Touch</a>
@@ -613,6 +630,9 @@
       <button class="hero-dot active" data-goto="0" aria-label="Slide 1"></button>
       <button class="hero-dot" data-goto="1" aria-label="Slide 2"></button>
       <button class="hero-dot" data-goto="2" aria-label="Slide 3"></button>
+      <button class="hero-pause-btn" id="heroPauseBtn" aria-label="Pause slideshow" aria-pressed="false">
+        <i class="fas fa-pause"></i>
+      </button>
     </div>
 
   </div><!-- /.hero-viewport -->
@@ -978,10 +998,10 @@
       </div>
       <span class="social-title">Follow Us</span>
       <div class="social-icons">
-        <a href="#" class="social-icon" aria-label="Twitter / X"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://twitter.com" class="social-icon" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+        <a href="https://facebook.com" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://youtube.com" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+        <a href="https://linkedin.com" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
       </div>
     </div>
   </div>
@@ -1006,9 +1026,9 @@
   <button class="lightbox-next" id="lbNext">&#8250;</button>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TfIKgE3Am4FeSv6W7XnS4iqV4qfKXfBJjKpBwxCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 (function(){
   const rm = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -1128,8 +1148,22 @@
     dots.forEach((d,i)=>d.addEventListener('click',()=>{
       clearInterval(timer);
       goTo(i, i>cur?1:-1);
-      timer=setInterval(advanceNext,INTERVAL);
+      if(!paused) timer=setInterval(advanceNext,INTERVAL);
     }));
+
+    /* Pause / play */
+    let paused=false;
+    const pauseBtn=document.getElementById('heroPauseBtn');
+    if(pauseBtn){
+      pauseBtn.addEventListener('click',()=>{
+        paused=!paused;
+        pauseBtn.setAttribute('aria-pressed',String(paused));
+        pauseBtn.setAttribute('aria-label',paused?'Play slideshow':'Pause slideshow');
+        pauseBtn.querySelector('i').className=paused?'fas fa-play':'fas fa-pause';
+        if(paused){ clearInterval(timer); }
+        else       { timer=setInterval(advanceNext,INTERVAL); }
+      });
+    }
 
     /* Touch swipe */
     let tsx=0,tsy=0;

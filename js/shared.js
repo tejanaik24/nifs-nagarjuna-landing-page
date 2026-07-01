@@ -10,7 +10,7 @@
   <section class="main-header">
     <div class="univ-logo"><img src="images/logo-anu.png" alt="ANU Seal"></div>
     <div class="center-titles">
-      <div class="telugu-header">ఆచార్య నాగార్జున విశ్వవిద్యాలయం</div>
+      <div class="telugu-header" lang="te">ఆచార్య నాగార్జున విశ్వవిద్యాలయం</div>
       <h1 class="english-header">DEPARTMENT OF FIRE AND INDUSTRIAL SAFETY</h1>
     </div>
     <div class="azadi-logo"><img src="images/75years.png" alt="Azadi Ka Amrit Mahotsav 75"></div>
@@ -26,7 +26,7 @@
         <ul class="dropdown-menu"><li><a href="faculty">Teaching</a></li></ul>
       </li>
       <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle">Academics</a>
-        <ul class="dropdown-menu"><li><a href="course-offered">Course Offered</a></li><li><a href="images/syllabus.pdf" target="_blank">Syllabus</a></li></ul>
+        <ul class="dropdown-menu"><li><a href="course-offered">Course Offered</a></li><li><a href="images/syllabus.pdf" target="_blank" rel="noopener noreferrer">Syllabus</a></li></ul>
       </li>
       <li class="nav-item"><a href="contact" class="nav-link">Contact us</a></li>
       <li class="nav-item"><a href="https://nagarjunauniversity.ac.in/colleges/science" class="nav-link" target="_blank" rel="noopener">Back to main page</a></li>
@@ -45,21 +45,32 @@
     </div>
     <div class="footer-column">
       <h3>Quick Links</h3>
-      <ul class="footer-links"><li><a href="./">Home</a></li><li><a href="profile">About Department</a></li><li><a href="faculty">People</a></li></ul>
+      <ul class="footer-links">
+        <li><a href="./">Home</a></li>
+        <li><a href="profile">Department Profile</a></li>
+        <li><a href="vision-mission">Vision &amp; Mission</a></li>
+        <li><a href="faculty">Faculty</a></li>
+        <li><a href="contact">Contact Us</a></li>
+      </ul>
     </div>
     <div class="footer-column">
-      <h3>Popular Links</h3>
-      <ul class="footer-links"><li><a href="./">Home</a></li><li><a href="profile">About Department</a></li><li><a href="faculty">People</a></li></ul>
+      <h3>Academics</h3>
+      <ul class="footer-links">
+        <li><a href="course-offered">Courses Offered</a></li>
+        <li><a href="images/syllabus.pdf" target="_blank" rel="noopener noreferrer">Syllabus (PDF)</a></li>
+        <li><a href="https://nagarjunauniversity.ac.in" target="_blank" rel="noopener noreferrer">ANU Main Website</a></li>
+        <li><a href="contact">Apply Now</a></li>
+      </ul>
     </div>
     <div class="footer-column">
       <h3>Newsletter</h3>
-      <div class="newsletter-form"><input type="email" placeholder="Your Email Address"><button type="button">Sign Up</button></div>
+      <div class="newsletter-form"><input type="email" id="sharedNlEmail" placeholder="Your Email Address"><button type="button" onclick="(function(){var v=document.getElementById('sharedNlEmail').value;if(!v||!v.includes('@')){alert('Please enter a valid email address');return;}window.location='mailto:anusafetydept@gmail.com?subject=Newsletter%20Subscription&body=Please%20subscribe%20me%3A%20'+encodeURIComponent(v);})()">Sign Up</button></div>
       <span class="social-title">Follow Us</span>
       <div class="social-icons">
-        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://twitter.com" class="social-icon" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+        <a href="https://facebook.com" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://youtube.com" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+        <a href="https://linkedin.com" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
       </div>
     </div>
   </div>
