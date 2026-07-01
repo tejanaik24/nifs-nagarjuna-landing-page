@@ -20,15 +20,15 @@
     <ul class="nav-list" id="navList">
       <li class="nav-item"><a href="./" class="nav-link">Home</a></li>
       <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle">About Department</a>
-        <ul class="dropdown-menu"><li><a href="profile">Department Profile</a></li><li><a href="vision-mission">Vision &amp; Mission</a></li></ul>
+        <ul class="dropdown-menu"><li><a href="profile.html">Department Profile</a></li><li><a href="vision-mission.html">Vision &amp; Mission</a></li></ul>
       </li>
       <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle">Faculty</a>
-        <ul class="dropdown-menu"><li><a href="faculty">Teaching</a></li></ul>
+        <ul class="dropdown-menu"><li><a href="faculty.html">Teaching</a></li></ul>
       </li>
       <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle">Academics</a>
-        <ul class="dropdown-menu"><li><a href="course-offered">Course Offered</a></li><li><a href="images/syllabus.pdf" target="_blank" rel="noopener noreferrer">Syllabus</a></li></ul>
+        <ul class="dropdown-menu"><li><a href="course-offered.html">Course Offered</a></li><li><a href="images/syllabus.pdf" target="_blank" rel="noopener noreferrer">Syllabus</a></li></ul>
       </li>
-      <li class="nav-item"><a href="contact" class="nav-link">Contact us</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link">Contact us</a></li>
       <li class="nav-item"><a href="https://nagarjunauniversity.ac.in/colleges/science" class="nav-link" target="_blank" rel="noopener">Back to main page</a></li>
     </ul>
   </nav>
@@ -47,19 +47,19 @@
       <h3>Quick Links</h3>
       <ul class="footer-links">
         <li><a href="./">Home</a></li>
-        <li><a href="profile">Department Profile</a></li>
-        <li><a href="vision-mission">Vision &amp; Mission</a></li>
-        <li><a href="faculty">Faculty</a></li>
-        <li><a href="contact">Contact Us</a></li>
+        <li><a href="profile.html">Department Profile</a></li>
+        <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+        <li><a href="faculty.html">Faculty</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
       </ul>
     </div>
     <div class="footer-column">
       <h3>Academics</h3>
       <ul class="footer-links">
-        <li><a href="course-offered">Courses Offered</a></li>
+        <li><a href="course-offered.html">Courses Offered</a></li>
         <li><a href="images/syllabus.pdf" target="_blank" rel="noopener noreferrer">Syllabus (PDF)</a></li>
         <li><a href="https://nagarjunauniversity.ac.in" target="_blank" rel="noopener noreferrer">ANU Main Website</a></li>
-        <li><a href="contact">Apply Now</a></li>
+        <li><a href="contact.html">Apply Now</a></li>
       </ul>
     </div>
     <div class="footer-column">

@@ -1,0 +1,24 @@
+# NIFS ANU — Fire & Industrial Safety Department
+# Apache server configuration
+
+# Enable URL rewriting (fallback if .html links don't resolve)
+Options -Indexes
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Security headers
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Cache static assets for 30 days
+<FilesMatch "\.(png|jpg|jpeg|gif|webp|svg|ico|pdf)$">
+  Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
+
+# Cache CSS and JS for 7 days
+<FilesMatch "\.(css|js)$">
+  Header set Cache-Control "max-age=604800, public"
+</FilesMatch>
