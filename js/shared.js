@@ -67,6 +67,7 @@
       <div class="newsletter-form"><input type="email" id="sharedNlEmail" placeholder="Your Email Address"><button type="button" onclick="(function(){var v=document.getElementById('sharedNlEmail').value;if(!v||!v.includes('@')){alert('Please enter a valid email address');return;}window.location='mailto:anusafetydept@gmail.com?subject=Newsletter%20Subscription&body=Please%20subscribe%20me%3A%20'+encodeURIComponent(v);})()">Sign Up</button></div>
       <span class="social-title">Follow Us</span>
       <div class="social-icons">
+        <a href="https://www.instagram.com/nifsindia/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
         <a href="https://twitter.com" class="social-icon" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
         <a href="https://facebook.com" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
         <a href="https://youtube.com" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
