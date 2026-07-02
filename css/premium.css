@@ -71,7 +71,7 @@ a{text-decoration:none;color:inherit}
 .univ-logo{flex:0 0 140px}
 .univ-logo img{max-width:100px;height:auto}
 .center-titles{flex:1;text-align:center}
-.telugu-header{color:#d10000;font-size:32px;font-weight:700;margin-bottom:5px}
+.telugu-header{color:#d10000;font-size:32px;font-weight:700;font-family:'Noto Sans Telugu',sans-serif;margin-bottom:5px}
 .english-header{color:#005b7f;font-size:38px;font-weight:800;letter-spacing:-.5px;text-transform:uppercase}
 .azadi-logo{flex:0 0 140px;text-align:right}
 .azadi-logo img{max-width:120px;height:auto;margin-left:auto}
