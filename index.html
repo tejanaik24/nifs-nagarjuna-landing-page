@@ -69,6 +69,11 @@
     @media(max-width:480px){
       .hero-viewport{height:360px}
       .hero-content{bottom:76px}
+      /* Stack hero CTA buttons vertically on small phones */
+      .hero-content>div{display:flex;flex-direction:column;align-items:center;gap:8px}
+      .btn-hero-primary,.btn-hero-outline{width:220px;text-align:center;box-sizing:border-box}
+      /* Larger tap area for slide dots */
+      .hero-dot{width:14px;height:14px;padding:8px;box-sizing:content-box}
     }
 
     /* Info cards — glassmorphism float strip */
@@ -99,6 +104,7 @@
 
     /* Flash news — margin clears the glassmorphism cards floating 50% below hero (96px / 2 + 20px gap) */
     .flash-bar{background:var(--yellow);padding:12px 0;border-bottom:2px solid rgba(0,0,0,.07);margin-top:68px}
+    @media(max-width:768px){.flash-bar{margin-top:0}}
     .flash-label{font-weight:800;font-size:12px;text-transform:uppercase;color:var(--navy);white-space:nowrap;margin-right:18px}
     .flash-scroller{flex:1;overflow:hidden}
     .flash-text{display:inline-block;font-weight:600;color:#000;padding-left:100%;animation:marquee 28s linear infinite;white-space:nowrap}
@@ -489,20 +495,22 @@
       /* Program card text */
       .prog-sub{font-size:12px}
       .prog-features li{font-size:13px}
-      .btn-prog{font-size:12.5px;padding:10px 20px}
-      .btn-prog-ghost{font-size:12.5px;padding:9px 16px}
+      .btn-prog{font-size:12.5px;padding:12px 20px;min-height:44px}
+      .btn-prog-ghost{font-size:12.5px;padding:12px 16px;min-height:44px}
     }
 
     /* Small phones ≤480px */
     @media(max-width:480px){
+      /* Hide long NAAC accreditation text on small phones — top banner stays compact */
+      .accreditation-box{display:none}
       /* Hero buttons — slightly smaller padding */
       .btn-hero-primary,.btn-hero-outline{padding:11px 22px;font-size:13.5px}
       /* Welcome stat cluster — stack to single column on tiny screens */
       .ws-stat{min-width:100%}
       /* Why Choose Us — single column */
-      .whyus-card{min-height:280px}
+      .whyus-card{height:280px}
       .whyus-overlay{padding:48px 18px 22px}
-      .whyus-icon{bottom:138px}
+      .whyus-icon{bottom:134px}
       /* Program image — slightly shorter */
       .prog-img-wrap{height:170px}
     }

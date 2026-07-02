@@ -364,6 +364,12 @@ a{text-decoration:none;color:inherit}
   .dropdown-menu{position:static;box-shadow:none;border-top:none;border-left:4px solid var(--navy);border-radius:0;margin-left:20px;background:#fff9e6}
   .nav-item.dropdown.active .dropdown-menu{display:block}
   .footer-column{min-width:100%;padding-right:0}
+  /* Newsletter form — stack input above button on mobile */
+  .newsletter-form{flex-direction:column}
+  .newsletter-form input{border-radius:4px 4px 0 0;width:100%}
+  .newsletter-form button{padding:12px 20px;border-radius:0 0 4px 4px;width:100%}
+  /* Social icons — meet 44px touch target */
+  .social-icon{width:44px;height:44px;font-size:16px}
   .page-hero{height:200px}
   .page-hero h1{font-size:1.4rem}
   /* compact state is disabled on mobile to avoid double-compact issue */
