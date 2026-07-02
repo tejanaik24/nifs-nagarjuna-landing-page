@@ -317,10 +317,10 @@
     .prog-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease}
     .prog-img-wrap::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,rgba(3,18,35,1) 0%,transparent 100%)}
     .prog-card:hover .prog-img-wrap img{transform:scale(1.05)}
-    /* whyus card image header — card padding is 30px 26px so bleed -30px top -26px sides */
-    .whyus-img-wrap{margin:-30px -26px 20px;height:140px;overflow:hidden;flex-shrink:0}
-    .whyus-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
-    .whyus-card:hover .whyus-img-wrap img{transform:scale(1.06)}
+    /* whyus image fills full card absolutely — no crop from fixed height */
+    .whyus-img-wrap{position:absolute;inset:0;margin:0;height:100%;overflow:hidden}
+    .whyus-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .55s ease}
+    .whyus-card:hover .whyus-img-wrap img{transform:scale(1.05)}
     .prog-card{background:rgba(3,18,35,.85);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:0 38px 44px;height:100%;position:relative;overflow:hidden;will-change:transform;transition:border-color .35s,box-shadow .35s;display:flex;flex-direction:column}
     .prog-card::after{content:'';position:absolute;inset:0;border-radius:20px;background:linear-gradient(135deg,rgba(253,189,0,.07) 0%,transparent 55%);opacity:0;transition:opacity .4s;pointer-events:none}
     .prog-card:hover{border-color:rgba(253,189,0,.35);box-shadow:0 28px 72px rgba(0,0,0,.5)}
@@ -344,13 +344,15 @@
     .whyus-section{padding:90px 0;background:#fff;position:relative;overflow:hidden}
     .whyus-section::before{content:'';position:absolute;top:0;right:0;width:45%;height:100%;background:radial-gradient(ellipse 80% 60% at 100% 50%,rgba(0,51,78,.033) 0%,transparent 70%);pointer-events:none}
     .whyus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px;position:relative;z-index:1}
-    .whyus-card{padding:30px 26px;border-radius:16px;background:var(--light);border:1px solid rgba(0,51,78,.07);position:relative;overflow:hidden;transition:box-shadow .35s,transform .3s,border-color .35s}
-    .whyus-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--navy),var(--yellow));transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1)}
-    .whyus-card:hover{box-shadow:0 14px 44px rgba(0,51,78,.1);transform:translateY(-5px);border-color:rgba(0,51,78,.13)}
-    .whyus-card:hover::after{transform:scaleX(1)}
-    .whyus-icon{width:50px;height:50px;border-radius:12px;margin-bottom:18px;background:linear-gradient(135deg,rgba(0,51,78,.09),rgba(0,51,78,.04));border:1px solid rgba(0,51,78,.09);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--navy)}
-    .whyus-title{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:8px;line-height:1.3}
-    .whyus-desc{font-size:13px;color:#627080;line-height:1.72}
+    .whyus-card{border-radius:16px;background:var(--navy);position:relative;overflow:hidden;aspect-ratio:3/4;padding:0;border:none;transition:box-shadow .35s,transform .3s}
+    .whyus-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--yellow) 0%,transparent 80%);z-index:4;transition:box-shadow .35s}
+    .whyus-card::after{display:none}
+    .whyus-card:hover{box-shadow:0 20px 64px rgba(0,0,0,.28);transform:translateY(-5px)}
+    .whyus-card:hover::before{box-shadow:2px 0 18px rgba(253,189,0,.45)}
+    .whyus-icon{position:absolute;right:18px;bottom:156px;z-index:3;width:46px;height:46px;border-radius:12px;background:var(--yellow);color:var(--navy);font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(0,0,0,.32);border:none;margin:0}
+    .whyus-overlay{position:absolute;bottom:0;left:0;right:0;padding:52px 20px 24px;background:linear-gradient(to top,rgba(0,14,28,.93) 55%,transparent);z-index:2}
+    .whyus-title{font-size:1rem;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.3}
+    .whyus-desc{font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.7}
     @media(max-width:991px){.whyus-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:768px){
       /* CRITICAL: keep padding-top:0 so card image bleeds flush to top edge */
@@ -359,7 +361,8 @@
       .prog-img-wrap~.prog-icon{margin-top:22px}
       .prog-title{font-size:1.18rem}
       .whyus-grid{grid-template-columns:repeat(2,1fr);gap:14px}
-      .whyus-card{padding:22px 18px}
+      .whyus-card{aspect-ratio:auto;min-height:260px}
+      .whyus-icon{bottom:128px;right:14px;width:40px;height:40px;font-size:16px}
     }
     @media(max-width:480px){
       .whyus-grid{grid-template-columns:1fr}
@@ -477,8 +480,8 @@
       /* Certify cards — smaller on mobile */
       .certify-card{padding:10px 14px;font-size:12px}
       .certify-card.featured{padding:12px 16px;font-size:12.5px}
-      /* Why Choose Us image height — shorter on 2-col layout */
-      .whyus-img-wrap{height:110px}
+      /* Why Choose Us — overlay text on mobile */
+      .whyus-overlay{padding:44px 16px 20px}
       .whyus-title{font-size:.9rem}
       .whyus-desc{font-size:12px;line-height:1.65}
       /* Chairman card text */
@@ -497,8 +500,10 @@
       .btn-hero-primary,.btn-hero-outline{padding:11px 22px;font-size:13.5px}
       /* Welcome stat cluster — stack to single column on tiny screens */
       .ws-stat{min-width:100%}
-      /* Why Choose Us — single column, taller image */
-      .whyus-img-wrap{height:160px}
+      /* Why Choose Us — single column */
+      .whyus-card{min-height:280px}
+      .whyus-overlay{padding:48px 18px 22px}
+      .whyus-icon{bottom:138px}
       /* Program image — slightly shorter */
       .prog-img-wrap{height:170px}
     }
@@ -799,38 +804,50 @@
       <div class="whyus-card">
         <div class="whyus-img-wrap"><img src="images/slide1.png" alt="ANU Department Inauguration" loading="lazy"></div>
         <div class="whyus-icon"><i class="fas fa-star"></i></div>
-        <div class="whyus-title">NAAC A+ Accredited University</div>
-        <div class="whyus-desc">Acharya Nagarjuna University holds India's highest NAAC grade — 3.46 score, first in the state in Dual Mode category.</div>
+        <div class="whyus-overlay">
+          <div class="whyus-title">NAAC A+ Accredited University</div>
+          <div class="whyus-desc">Acharya Nagarjuna University holds India's highest NAAC grade — 3.46 score, first in the state in Dual Mode category.</div>
+        </div>
       </div>
       <div class="whyus-card">
         <div class="whyus-img-wrap"><img src="images/nifscampus.png" alt="NIFS ANU Department Building" loading="lazy"></div>
         <div class="whyus-icon"><i class="fas fa-network-wired"></i></div>
-        <div class="whyus-title">85+ NIFS Centres Nationally</div>
-        <div class="whyus-desc">NIFS operates 85+ training centres across India — giving students an unmatched network for internships, mentorship, and placement.</div>
+        <div class="whyus-overlay">
+          <div class="whyus-title">85+ NIFS Centres Nationally</div>
+          <div class="whyus-desc">NIFS operates 85+ training centres across India — giving students an unmatched network for internships, mentorship, and placement.</div>
+        </div>
       </div>
       <div class="whyus-card">
         <div class="whyus-img-wrap"><img src="images/slide5.jpg" alt="Fire Safety Equipment Lab" loading="lazy"></div>
         <div class="whyus-icon"><i class="fas fa-hard-hat"></i></div>
-        <div class="whyus-title">Real Equipment, Real Training</div>
-        <div class="whyus-desc">Hands-on practice with industrial fire safety equipment — extinguishers, sprinkler systems, hazmat gear — from day one.</div>
+        <div class="whyus-overlay">
+          <div class="whyus-title">Real Equipment, Real Training</div>
+          <div class="whyus-desc">Hands-on practice with industrial fire safety equipment — extinguishers, sprinkler systems, hazmat gear — from day one.</div>
+        </div>
       </div>
       <div class="whyus-card">
         <div class="whyus-img-wrap"><img src="images/ev3.jpeg" alt="Students receiving certificates" loading="lazy"></div>
         <div class="whyus-icon"><i class="fas fa-briefcase"></i></div>
-        <div class="whyus-title">100% Placement Assistance</div>
-        <div class="whyus-desc">Dedicated placement cell with strong ties to Adani, L&amp;T, ONGC, Tata Projects, and 10+ more corporations hiring our graduates.</div>
+        <div class="whyus-overlay">
+          <div class="whyus-title">100% Placement Assistance</div>
+          <div class="whyus-desc">Dedicated placement cell with strong ties to Adani, L&amp;T, ONGC, Tata Projects, and 10+ more corporations hiring our graduates.</div>
+        </div>
       </div>
       <div class="whyus-card">
         <div class="whyus-img-wrap"><img src="images/ev1.jpeg" alt="NIFS ANU NSDC Skill India certification" loading="lazy"></div>
         <div class="whyus-icon"><i class="fas fa-certificate"></i></div>
-        <div class="whyus-title">Government Recognised Credentials</div>
-        <div class="whyus-desc">UGC-recognised, NSDC &amp; Skill India affiliated, ISO 9001:2015 certified — your degree is accepted by industry and government alike.</div>
+        <div class="whyus-overlay">
+          <div class="whyus-title">Government Recognised Credentials</div>
+          <div class="whyus-desc">UGC-recognised, NSDC &amp; Skill India affiliated, ISO 9001:2015 certified — your degree is accepted by industry and government alike.</div>
+        </div>
       </div>
       <div class="whyus-card">
         <div class="whyus-img-wrap"><img src="images/ev5.jpeg" alt="NIFS students fire safety awareness" loading="lazy"></div>
         <div class="whyus-icon"><i class="fas fa-globe-asia"></i></div>
-        <div class="whyus-title">Global Safety Standards</div>
-        <div class="whyus-desc">Curriculum aligned with industry-certified safety training frameworks and ISO 45001 — preparing you for Indian industries and global safety roles alike.</div>
+        <div class="whyus-overlay">
+          <div class="whyus-title">Global Safety Standards</div>
+          <div class="whyus-desc">Curriculum aligned with industry-certified safety training frameworks and ISO 45001 — preparing you for Indian industries and global safety roles alike.</div>
+        </div>
       </div>
     </div>
   </div>
