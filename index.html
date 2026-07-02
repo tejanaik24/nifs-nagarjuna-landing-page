@@ -232,22 +232,25 @@
     .rq-card{
       flex-shrink:0;display:flex;align-items:center;justify-content:center;
       width:110px;height:110px;background:#fff;border-radius:50%;
-      border:1px solid rgba(0,0,0,.07);box-shadow:0 2px 12px rgba(0,0,0,.08);
+      border:2px solid #fdbd00;
+      box-shadow:0 2px 14px rgba(253,189,0,.18),0 1px 4px rgba(0,0,0,.07);
       padding:0;overflow:hidden;
-      transition:box-shadow .3s,transform .3s;
+      transition:box-shadow .3s,transform .3s,border-color .3s;
+      will-change:transform;
     }
     @media(hover:hover){
-      .rq-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.15);transform:translateY(-4px)}
-      .rq-card:hover img{filter:grayscale(0%);opacity:1}
+      .rq-card:hover{
+        box-shadow:0 8px 28px rgba(253,189,0,.45),0 4px 12px rgba(0,0,0,.1);
+        transform:translateY(-4px) scale(1.08);
+        border-color:#e0a800;
+      }
       .rq-card:hover .rq-ph-initials{color:var(--navy)}
       .rq-card:hover .rq-ph-name{color:var(--teal)}
     }
-    /* Real logo image — grayscale + dim by default */
+    /* Real logo image — full colour */
     .rq-card img{
       width:100%;height:100%;
       object-fit:contain;display:block;
-      filter:grayscale(100%);opacity:.6;
-      transition:filter .35s,opacity .35s;
     }
     /* Placeholder — rendered when logo path is empty */
     .rq-ph{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%}
@@ -1444,14 +1447,14 @@
 
     if(!rm){
       /* Entrance: logos fade + scale in with stagger, then marquee starts */
-      gsap.set(origCards,{opacity:0,scale:.88,y:12});
+      gsap.set(origCards,{opacity:0,scale:.8,y:14});
       gsap.set(cloneCards,{opacity:0});
       ScrollTrigger.create({
         trigger:wrap,start:'top 88%',once:true,
         onEnter(){
           gsap.to(origCards,{
             opacity:1,scale:1,y:0,
-            duration:.52,ease:'back.out(1.4)',stagger:.048,
+            duration:.55,ease:'back.out(1.6)',stagger:.05,
             onComplete(){
               gsap.set(cloneCards,{opacity:1});
               track.classList.add('rq-scrolling');
