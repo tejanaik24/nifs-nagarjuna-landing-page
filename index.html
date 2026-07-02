@@ -193,18 +193,24 @@
 
     /* Animated Gallery — 3D scroll-driven grid */
     .gallery-section{padding:90px 0 60px;background:#fff;overflow:hidden}
-    .ag-scroll-wrap{position:relative;width:100%}
+    .ag-scroll-wrap{position:relative;width:100%;height:250vh}
     .ag-sticky{
-      height:100vh;width:100%;
+      position:sticky;top:0;
+      height:100vh;width:100%;overflow:hidden;
     }
     .ag-grid{
       display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
-      width:100%;height:100%;will-change:transform;
+      width:100%;height:100%;
       padding:8px;box-sizing:border-box;
     }
-    .ag-col{display:flex;flex-direction:column;gap:8px;will-change:transform;height:100%}
+    .ag-col{overflow:hidden;height:100%}
+    .ag-col-inner{display:flex;flex-direction:column;gap:8px;will-change:transform}
+    .ag-col-inner.ag-scrolling{animation:ag-scroll-up var(--ag-dur,28s) linear infinite}
+    @media(hover:hover){.ag-col:hover .ag-col-inner{animation-play-state:paused}}
+    @keyframes ag-scroll-up{to{transform:translateY(-50%)}}
     .ag-card{
-      position:relative;overflow:hidden;border-radius:10px;flex:1;
+      position:relative;overflow:hidden;border-radius:10px;
+      flex-shrink:0;width:100%;height:32vh;
       cursor:pointer;box-shadow:0 4px 22px rgba(0,0,0,.16);
     }
     .ag-card img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;transition:transform .45s ease}
@@ -389,7 +395,7 @@
       /* Gallery */
       .ag-sticky{height:85vh}
       .ag-grid{gap:5px;padding:5px}
-      .ag-card{border-radius:6px}
+      .ag-card{border-radius:6px;height:27vh}
       .ev-date{display:none}
     }
     /* ─── WhatsApp Floating Button ─── */
@@ -1354,50 +1360,39 @@
     }});
   });
 
-  /* ── Animated Gallery — GSAP pin + 3D tilt + column float ── */
+  /* ── Animated Gallery — infinite vertical auto-scroll per column ── */
   (function(){
-    const agSticky=document.getElementById('agSticky');
-    const grid=document.getElementById('agGrid');
-    const col1=document.getElementById('agCol1');
-    const col2=document.getElementById('agCol2');
-    const col3=document.getElementById('agCol3');
-    if(!agSticky||!grid||!col1||!col2||!col3) return;
+    const colDefs=[
+      {id:'agCol1',dur:30},
+      {id:'agCol2',dur:38},
+      {id:'agCol3',dur:24},
+    ];
+    if(!document.getElementById('agCol1')) return;
 
-    /* Col 2 sits lower at start so all 3 columns feel staggered (max 18% to avoid bleed) */
-    gsap.set(col1,{yPercent:5});
-    gsap.set(col2,{yPercent:18});
-    gsap.set(col3,{yPercent:5});
+    colDefs.forEach(({id,dur})=>{
+      const col=document.getElementById(id);
 
-    /* GSAP pins the gallery container and drives the whole animation via scrub */
-    const tl=gsap.timeline({
-      scrollTrigger:{
-        trigger:agSticky,
-        pin:true,
-        start:'top top',
-        end:'+=280%',
-        scrub:1.8,
-        invalidateOnRefresh:true,
-      }
+      /* Wrap existing cards in a scrolling inner container */
+      const inner=document.createElement('div');
+      inner.className='ag-col-inner';
+      [...col.children].forEach(c=>{
+        c.dataset.orig='1';   /* mark originals for lightbox */
+        inner.appendChild(c);
+      });
+
+      /* Duplicate the full set — the translateY(-50%) loop lands exactly here */
+      [...inner.children].forEach(c=>inner.appendChild(c.cloneNode(true)));
+
+      col.appendChild(inner);
+      inner.style.setProperty('--ag-dur',dur+'s');
+      if(!rm) inner.classList.add('ag-scrolling');
     });
 
-    /* Phase 1 — grid rotates from flat-on-table tilt to face-on view
-       transformPerspective is set on the element itself (NOT on parent via CSS) to avoid double-perspective */
-    if(!rm){
-      tl.fromTo(grid,
-        {rotateX:72,scale:1.15,transformPerspective:900,transformOrigin:'50% 0%'},
-        {rotateX:0,scale:1,ease:'none',duration:1}
-      );
-    }
-
-    /* Phase 2 — all three columns float upward at different speeds */
-    const p2=rm?0:'>';
-    tl.to(col1,{yPercent:-28,ease:'none',duration:1.8},p2);
-    tl.to(col2,{yPercent:-5,ease:'none',duration:1.8},'<');
-    tl.to(col3,{yPercent:-28,ease:'none',duration:1.8},'<');
-
-    /* Lightbox */
-    const cards=[...document.querySelectorAll('.ag-card')];
-    const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap');
+    /* Lightbox — only original cards (clones excluded via data-orig) */
+    const cards=[...document.querySelectorAll('.ag-card[data-orig]')];
+    const lb=document.getElementById('lightbox');
+    const lbImg=document.getElementById('lbImg');
+    const lbCap=document.getElementById('lbCap');
     let lbI=0;
     function openLB(i){
       lbI=i;const c=cards[i];
