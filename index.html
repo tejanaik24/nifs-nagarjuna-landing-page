@@ -222,31 +222,31 @@
       mask-image:linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%);
       -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%);
     }
-    .rq-track{display:flex;gap:16px;padding:14px 0;width:max-content}
+    .rq-track{display:flex;gap:24px;padding:14px 0;width:max-content}
     .rq-track.rq-scrolling{animation:rq-scroll 38s linear infinite}
     .rq-track.rq-paused{animation-play-state:paused!important}
     @keyframes rq-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
     /* Hover-pause — desktop (hover-capable) devices only */
     @media(hover:hover){.rq-marquee-wrap:hover .rq-track{animation-play-state:paused}}
-    /* Logo card */
+    /* Logo card — circular */
     .rq-card{
-      flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-      width:150px;height:84px;background:#fff;border-radius:12px;
-      border:1px solid rgba(0,0,0,.055);box-shadow:0 2px 10px rgba(0,0,0,.06);
-      padding:12px 16px;overflow:hidden;
+      flex-shrink:0;display:flex;align-items:center;justify-content:center;
+      width:110px;height:110px;background:#fff;border-radius:50%;
+      border:1px solid rgba(0,0,0,.07);box-shadow:0 2px 12px rgba(0,0,0,.08);
+      padding:0;overflow:hidden;
       transition:box-shadow .3s,transform .3s;
     }
     @media(hover:hover){
-      .rq-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.13);transform:translateY(-4px)}
+      .rq-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.15);transform:translateY(-4px)}
       .rq-card:hover img{filter:grayscale(0%);opacity:1}
       .rq-card:hover .rq-ph-initials{color:var(--navy)}
       .rq-card:hover .rq-ph-name{color:var(--teal)}
     }
     /* Real logo image — grayscale + dim by default */
     .rq-card img{
-      max-width:100%;max-height:48px;width:auto;height:auto;
+      width:100%;height:100%;
       object-fit:contain;display:block;
-      filter:grayscale(100%);opacity:.55;
+      filter:grayscale(100%);opacity:.6;
       transition:filter .35s,opacity .35s;
     }
     /* Placeholder — rendered when logo path is empty */
@@ -1381,20 +1381,36 @@
        the styled placeholder (initials + name).
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     const RECRUITERS=[
-      {name:'Adani Group',  abbr:'AG',   logo:''},
-      {name:'Amazon',       abbr:'AMZ',  logo:''},
-      {name:'Asian Paints', abbr:'AP',   logo:''},
-      {name:'Coca-Cola',    abbr:'CC',   logo:''},
-      {name:'GMR Group',    abbr:'GMR',  logo:''},
-      {name:'ITC Ltd.',     abbr:'ITC',  logo:''},
-      {name:'L&T',          abbr:'L&T',  logo:''},
-      {name:'MEIL',         abbr:'MEIL', logo:''},
-      {name:'Power Mech',   abbr:'PM',   logo:''},
-      {name:'NSL Group',    abbr:'NSL',  logo:''},
-      {name:'ONGC',         abbr:'ONGC', logo:''},
-      {name:'HPCL',         abbr:'HPCL', logo:''},
-      {name:'BPCL',         abbr:'BPCL', logo:''},
-      {name:'Tata Projects',abbr:'TP',   logo:''},
+      {name:'Parrys',             abbr:'PR',  logo:'images/logos/logo-parrys.png'},
+      {name:'Nicomac Taikisha',   abbr:'NT',  logo:'images/logos/logo-nicomac.png'},
+      {name:'Robomatic Precon',   abbr:'RP',  logo:'images/logos/logo-robomatic.png'},
+      {name:'Shrinath Rotopack',  abbr:'SR',  logo:'images/logos/logo-shrinath.png'},
+      {name:'Ratna',              abbr:'RT',  logo:'images/logos/logo-ratna.png'},
+      {name:'Varun Group',        abbr:'VG',  logo:'images/logos/logo-varun.png'},
+      {name:'Adani',              abbr:'AD',  logo:'images/logos/logo-adani.png'},
+      {name:'TVS',                abbr:'TVS', logo:'images/logos/logo-tvs.png'},
+      {name:'Annapurna Studios',  abbr:'AS',  logo:'images/logos/logo-annapurna.png'},
+      {name:'Ascendas',           abbr:'AC',  logo:'images/logos/logo-ascendas.png'},
+      {name:'Blend Colours',      abbr:'BC',  logo:'images/logos/logo-blend-colours.png'},
+      {name:'Amazon',             abbr:'AMZ', logo:'images/logos/logo-amazon.png'},
+      {name:'CACS',               abbr:'CAC', logo:'images/logos/logo-cacs.png'},
+      {name:'Brandix',            abbr:'BRX', logo:'images/logos/logo-brandix.png'},
+      {name:'Coromandel',         abbr:'COR', logo:'images/logos/logo-coromandel.png'},
+      {name:'Deccan',             abbr:'DEC', logo:'images/logos/logo-deccan.png'},
+      {name:'DLF',                abbr:'DLF', logo:'images/logos/logo-dlf.png'},
+      {name:'Chiripal Poly Films',abbr:'CHR', logo:'images/logos/logo-chiripal.png'},
+      {name:'G2C',                abbr:'G2C', logo:'images/logos/logo-g2c.png'},
+      {name:'HBL',                abbr:'HBL', logo:'images/logos/logo-hbl.png'},
+      {name:"Dr. Reddy's",        abbr:'DRL', logo:'images/logos/logo-drreddys.png'},
+      {name:'ITC Limited',        abbr:'ITC', logo:'images/logos/logo-itc.png'},
+      {name:'Johnson Controls',   abbr:'JC',  logo:'images/logos/logo-johnson-controls.png'},
+      {name:'India Cements',      abbr:'IC',  logo:'images/logos/logo-india-cements.png'},
+      {name:'Larsen & Toubro',    abbr:'L&T', logo:'images/logos/logo-larsen-toubro.png'},
+      {name:'Laurus Labs',        abbr:'LL',  logo:'images/logos/logo-laurus-labs.png'},
+      {name:'My Home Group',      abbr:'MHG', logo:'images/logos/logo-my-home-group.png'},
+      {name:'JSW',                abbr:'JSW', logo:'images/logos/logo-jsw.png'},
+      {name:'Pennar Industries',  abbr:'PI',  logo:'images/logos/logo-pennar.png'},
+      {name:'NCC Limited',        abbr:'NCC', logo:'images/logos/logo-ncc.png'},
     ];
 
     const wrap=document.getElementById('rqMarqueeWrap');
